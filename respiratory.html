@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>호흡계통 질환 학습자료 | 보건간호과</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  font-size: 14px; color: #1a1a1a;
+  background: #f0f6f4; word-break: keep-all;
+}
+
+/* ── 헤더 ── */
+.site-header {
+  background: linear-gradient(135deg, #065f46 0%, #059669 60%, #34d399 100%);
+  color: #fff; padding: 18px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.site-header .h1 { font-size: 20px; font-weight: 700; }
+.site-header .sub { font-size: 12px; opacity: 0.85; margin-top: 3px; }
+.badge-wrap { display: flex; gap: 8px; }
+.header-badge {
+  font-size: 11px; font-weight: 700;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 20px; padding: 4px 12px; color: #fff;
+}
+
+/* ── 탭 ── */
+.tab-nav {
+  display: flex; background: #fff;
+  border-bottom: 2px solid #059669;
+  padding: 0 24px; overflow-x: auto;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+}
+.tab-btn {
+  padding: 13px 18px; font-size: 13px; font-weight: 500;
+  font-family: inherit; color: #666;
+  background: transparent; border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px; cursor: pointer; white-space: nowrap;
+  transition: all 0.2s;
+}
+.tab-btn:hover { color: #059669; background: #f0fdf4; }
+.tab-btn.active { color: #065f46; border-bottom-color: #059669; font-weight: 700; }
+.tab-btn .num {
+  display: inline-block; width: 20px; height: 20px;
+  border-radius: 50%; background: #e8e8e8; color: #666;
+  font-size: 11px; font-weight: 700; text-align: center;
+  line-height: 20px; margin-right: 6px; transition: all 0.2s;
+}
+.tab-btn.active .num { background: #059669; color: #fff; }
+
+/* ── 페이지 ── */
+.page { display: none; padding: 24px 28px 40px; max-width: 1100px; margin: 0 auto; }
+.page.show { display: block; }
+.page-title {
+  font-size: 20px; font-weight: 700; color: #065f46;
+  margin-bottom: 16px; padding-bottom: 10px;
+  border-bottom: 2.5px solid #059669;
+  display: flex; align-items: center; gap: 10px;
+}
+.page-title::before {
+  content: ''; display: block; width: 6px; height: 24px;
+  background: #059669; border-radius: 3px;
+}
+
+/* ── 그리드 ── */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+@media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+/* ── 카드 ── */
+.card {
+  background: #fff; border: 1px solid #e0e0e0;
+  border-radius: 10px; padding: 14px 16px;
+  transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.08); }
+.card-head {
+  font-size: 13px; font-weight: 700;
+  padding-bottom: 8px; margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/* 색상 */
+.c-green  { color: #065f46; }
+.c-teal   { color: #0f766e; }
+.c-blue   { color: #1a4fa0; }
+.c-purple { color: #6d28d9; }
+.c-amber  { color: #b45309; }
+.c-coral  { color: #b91c1c; }
+.c-sky    { color: #0369a1; }
+.c-pink   { color: #9d174d; }
+.c-orange { color: #c2410c; }
+
+/* ── 리스트 ── */
+ul.dots { list-style: none; }
+ul.dots li {
+  font-size: 13px; line-height: 1.7;
+  padding-left: 14px; position: relative; color: #222; margin-bottom: 1px;
+}
+ul.dots li::before { content: '·'; position: absolute; left: 0; font-weight: 700; color: #059669; }
+ul.dots li.b::before  { color: #1a4fa0; }
+ul.dots li.t::before  { color: #0f766e; }
+ul.dots li.p::before  { color: #6d28d9; }
+ul.dots li.a::before  { color: #b45309; }
+ul.dots li.c::before  { color: #b91c1c; }
+ul.dots li.pk::before { color: #9d174d; }
+ul.dots li.or::before { color: #c2410c; }
+
+/* ── KV ── */
+.kv { display: flex; gap: 8px; margin-bottom: 6px; align-items: flex-start; }
+.kv .k {
+  font-size: 11.5px; font-weight: 700; color: #888;
+  min-width: 96px; flex-shrink: 0;
+  background: #f5f5f5; border-radius: 4px;
+  padding: 2px 6px; margin-top: 1px; text-align: center;
+}
+.kv .v { font-size: 13px; color: #222; line-height: 1.65; }
+
+/* ── 하이라이트 ── */
+.hl {
+  border-left: 4px solid #059669; background: #f0fdf4;
+  padding: 10px 14px; border-radius: 0 8px 8px 0;
+  margin: 10px 0; font-size: 13px; line-height: 1.7; color: #1a1a1a;
+}
+.hl.blue   { background: #eff6ff; border-left-color: #2563d4; }
+.hl.teal   { background: #f0fdfa; border-left-color: #0f766e; }
+.hl.amber  { background: #fffbeb; border-left-color: #b45309; }
+.hl.coral  { background: #fef2f2; border-left-color: #b91c1c; }
+.hl.purple { background: #f5f3ff; border-left-color: #6d28d9; }
+.hl.orange { background: #fff7ed; border-left-color: #c2410c; }
+.hl.pink   { background: #fdf2f8; border-left-color: #9d174d; }
+
+/* ── 단계 ── */
+.step-row { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px; }
+.step-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; flex-shrink: 0;
+  background: #d1fae5; color: #065f46;
+}
+.step-num.b  { background: #dbeafe; color: #1a4fa0; }
+.step-num.t  { background: #ccfbf1; color: #0f766e; }
+.step-num.a  { background: #fef3c7; color: #b45309; }
+.step-num.c  { background: #fee2e2; color: #b91c1c; }
+.step-num.p  { background: #ede9fe; color: #6d28d9; }
+.step-text { font-size: 13px; color: #222; line-height: 1.7; padding-top: 2px; }
+
+/* ── 비교 테이블 ── */
+.compare-wrap { overflow-x: auto; margin-top: 8px; border-radius: 10px; border: 1px solid #e0e0e0; }
+.compare-table { width: 100%; border-collapse: collapse; font-size: 12.5px; min-width: 500px; }
+.compare-table th {
+  background: #d1fae5; color: #065f46; font-weight: 700;
+  padding: 9px 12px; text-align: left; border-bottom: 2px solid #6ee7b7;
+}
+.compare-table th.b { background: #dbeafe; color: #1a4fa0; border-bottom-color: #93c5fd; }
+.compare-table th.c { background: #fee2e2; color: #991b1b; border-bottom-color: #fca5a5; }
+.compare-table th.a { background: #fef3c7; color: #78350f; border-bottom-color: #fcd34d; }
+.compare-table th.p { background: #ede9fe; color: #4c1d95; border-bottom-color: #c4b5fd; }
+.compare-table td {
+  padding: 8px 12px; border-bottom: 1px solid #eee;
+  color: #222; vertical-align: top; line-height: 1.6;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tr:nth-child(even) td { background: #fafafa; }
+.compare-table tr:hover td { background: #f0fdf4; }
+
+/* ── 태그 ── */
+.tag {
+  display: inline-block; font-size: 11px; padding: 3px 9px;
+  border-radius: 12px; margin: 2px; font-weight: 700;
+}
+.tag.g  { background: #d1fae5; color: #065f46; }
+.tag.b  { background: #dbeafe; color: #1e40af; }
+.tag.t  { background: #ccfbf1; color: #065f46; }
+.tag.a  { background: #fef3c7; color: #78350f; }
+.tag.c  { background: #fee2e2; color: #7f1d1d; }
+.tag.p  { background: #ede9fe; color: #4c1d95; }
+
+/* ── 풀카드 ── */
+.full-card {
+  background: #fff; border: 1px solid #e0e0e0;
+  border-radius: 10px; padding: 14px 18px; margin-bottom: 12px;
+}
+
+/* ── 섹션 제목 ── */
+.section-title {
+  font-size: 15px; font-weight: 700; color: #059669;
+  margin: 14px 0 8px; padding-left: 10px;
+  border-left: 3px solid #059669;
+}
+
+/* ── 체크리스트 ── */
+ul.chk { list-style: none; }
+ul.chk li {
+  font-size: 13px; line-height: 1.75;
+  padding-left: 20px; position: relative; color: #222;
+}
+ul.chk li::before { content: '✓'; position: absolute; left: 0; color: #059669; font-weight: 700; }
+ul.chk.warn li::before { content: '⚠'; color: #b91c1c; font-size: 11px; }
+
+/* ── 진행 바 ── */
+.progress-bar { height: 3px; background: #e0e0e0; position: sticky; top: 48px; z-index: 99; }
+.progress-fill { height: 100%; background: #059669; transition: width 0.3s; }
+.site-footer { text-align: center; padding: 20px; color: #aaa; font-size: 12px; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div>
+    <div class="h1">🫁 호흡계통 질환 학습자료</div>
+    <div class="sub">보건간호과 · 간호의 기초 9단원 | 2022 개정 교육과정</div>
+  </div>
+  <div class="badge-wrap">
+    <div class="header-badge">5 PAGES</div>
+    <div class="header-badge">자율학습용</div>
+  </div>
+</header>
+
+<div class="progress-bar"><div class="progress-fill" id="prog" style="width:20%"></div></div>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="show(0)"><span class="num">1</span>호흡계통 구조와 기능</button>
+  <button class="tab-btn" onclick="show(1)"><span class="num">2</span>폐렴</button>
+  <button class="tab-btn" onclick="show(2)"><span class="num">3</span>결핵</button>
+  <button class="tab-btn" onclick="show(3)"><span class="num">4</span>천식 · COPD</button>
+  <button class="tab-btn" onclick="show(4)"><span class="num">5</span>폐암 · 통증관리 · 핵심정리</button>
+</nav>
+
+<!-- ===== PAGE 1 ===== -->
+<div class="page show" id="p0">
+  <div class="page-title">호흡계통 구조와 기능</div>
+
+  <div class="hl" style="margin-bottom:12px">
+    기도와 폐로 이루어진 호흡 계통은 세포 활동에 필요한 <strong>산소를 받아들이고</strong> 몸 안에서 생긴 <strong>노폐물과 이산화탄소를 배출</strong>하는 역할을 한다.<br>
+    혈액과 폐포 내 공기 사이의 가스교환을 <strong>외호흡</strong>이라 하며, 조직 내의 세포와 혈액 사이의 교환을 <strong>내호흡</strong>이라 한다.
+  </div>
+
+  <div class="section-title">상기도 vs 하기도</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-teal">상기도 — 후두를 기준으로 상부</div>
+      <div class="kv"><span class="k">코 (비강)</span><span class="v">호흡계통의 시작점. 비강과 부비동으로 구분. 비강은 공기를 <strong>처음 접촉</strong>하는 곳. 부비동은 공기로 채워진 빈 공간으로 비강과 연결되어 <strong>발성 시 소리의 공명</strong>을 도움</span></div>
+      <div class="kv"><span class="k">인두</span><span class="v">길이 약 12cm의 근육성 관으로 음식물과 공기의 <strong>공통 통로</strong>. 비인두·구인두·후두인두로 구성</span></div>
+      <div class="kv"><span class="k">후두</span><span class="v">인두와 기관 사이. 길이 약 4cm. 공기의 통로이며, 기관으로 이물질이 들어가는 것을 막는 <strong>후두개(후두덮개)</strong>가 있음. 이물질로 막히면 질식 → 응급으로 <strong>기관절개술</strong> 시행하는 위치</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head c-blue">하기도 — 후두 아래</div>
+      <div class="kv"><span class="k">기관</span><span class="v">후두 밑에서 기관지까지 연결된 관. 공기의 통로. 식도 앞에 위치</span></div>
+      <div class="kv"><span class="k">기관지</span><span class="v">기관지분지부에서 양쪽으로 갈라져 폐까지 이어지는 공기통로</span></div>
+      <div class="kv"><span class="k">폐</span><span class="v">공기로 가득찬 크고 탄력 있는 호흡기계의 마지막 기관. <strong>우폐</strong>(상엽·중엽·하엽 3개) / <strong>좌폐</strong>(상엽·하엽 2개). 좌폐가 우폐보다 작음</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">호흡계통의 5가지 기능</div>
+  <div class="grid3">
+    <div class="card">
+      <div class="card-head c-green">① 가스교환</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">폐포와 혈액 사이, 혈액과 조직 사이에서 <strong>산소와 이산화탄소를 교환</strong></p>
+    </div>
+    <div class="card">
+      <div class="card-head c-green">② 산염기 평형</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">혈액 속 이산화탄소 농도를 바꿈으로써 <strong>혈액의 pH를 조절</strong></p>
+    </div>
+    <div class="card">
+      <div class="card-head c-green">③ 발성</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">성대를 지나는 공기의 이동에 의해 <strong>목소리를 만드는</strong> 기능</p>
+    </div>
+    <div class="card">
+      <div class="card-head c-green">④ 후각 작용</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">공기 중에 섞인 분자가 코 안으로 들어올 때 <strong>냄새를 인지</strong></p>
+    </div>
+    <div class="card">
+      <div class="card-head c-green">⑤ 선천면역작용</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">생물의 침입을 방해하고 <strong>미생물을 제거</strong>하는 기능</p>
+    </div>
+  </div>
+
+  <div class="section-title">외호흡 vs 내호흡</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-teal">외호흡 (External Respiration)</div>
+      <p style="font-size:13px;line-height:1.7;color:#222;margin-bottom:8px">혈액이 <strong>폐포와 모세혈관을 지날 때</strong> 폐포와 모세혈관 사이에서 일어나는 가스교환</p>
+      <ul class="dots">
+        <li class="t">산소는 <strong>폐포 → 모세혈관</strong> 쪽으로 이동</li>
+        <li class="t">이산화탄소는 <strong>모세혈관 → 폐포</strong> 쪽으로 이동</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-head c-blue">내호흡 (Internal Respiration)</div>
+      <p style="font-size:13px;line-height:1.7;color:#222;margin-bottom:8px">산소를 품은 혈액이 <strong>조직세포를 지날 때</strong> 모세혈관과 조직세포 사이에서 일어나는 가스교환</p>
+      <ul class="dots">
+        <li class="b">산소는 온 몸의 <strong>모세혈관 → 조직세포</strong>로 이동</li>
+        <li class="b">이산화탄소는 <strong>조직세포 → 모세혈관</strong> 쪽으로 이동</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">객혈 vs 토혈</div>
+  <div class="compare-wrap">
+    <table class="compare-table">
+      <tr><th>구분</th><th class="c">객혈 (hemoptysis)</th><th class="a">토혈</th></tr>
+      <tr><td><strong>증상</strong></td><td>기침을 하면서 나오며 목과 흉부의 통증 발생</td><td>구역 반응이 나타나며 위 불쾌감이 동반</td></tr>
+      <tr><td><strong>색</strong></td><td>밝은 붉은색</td><td>검붉은색</td></tr>
+      <tr><td><strong>거품</strong></td><td>있음</td><td>없음</td></tr>
+      <tr><td><strong>pH</strong></td><td>알칼리성 (pH 7 이상)</td><td>산성 (pH 7 이하)</td></tr>
+      <tr><td><strong>내용</strong></td><td>백혈구, 적혈구, 대식세포 포함</td><td>음식 찌꺼기</td></tr>
+      <tr><td><strong>대변</strong></td><td>정상</td><td>흑색변, 잠혈</td></tr>
+      <tr><td><strong>빈혈</strong></td><td>가끔 나타남</td><td>일반적으로 나타남</td></tr>
+    </table>
+  </div>
+
+  <div class="section-title" style="margin-top:12px">객담(가래)의 특성 — 질환별</div>
+  <div class="full-card">
+    <div class="grid2">
+      <ul class="dots">
+        <li><strong>무색·맑은 점액</strong>: 비강염성 염증</li>
+        <li><strong>녹색 화농성 객담</strong>: 세균성 감염</li>
+        <li><strong>녹슨 쇳빛 객담</strong>: 폐렴구균성 폐렴</li>
+        <li><strong>분홍빛의 점액성 객담</strong>: 폐종양</li>
+      </ul>
+      <ul class="dots">
+        <li><strong>거품이 있는 분홍색 객담</strong>: 폐부종</li>
+        <li><strong>악취나는 객담</strong>: 폐농양, 기관지 확장증, 혐기성 감염</li>
+        <li><strong>다량의 3층 객담</strong>: 기관지 확장증</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">산소공급기구의 종류</div>
+  <div class="compare-wrap">
+    <table class="compare-table">
+      <tr><th>종류</th><th>특징</th><th>산소유량</th></tr>
+      <tr><td><strong>비강캐뉼러</strong></td><td>쉽게 적용할 수 있어 가장 흔하게 사용</td><td>2~6 L/분</td></tr>
+      <tr><td><strong>단순 마스크</strong></td><td>안면에 맞닿히어 사용</td><td>5~8 L/분</td></tr>
+      <tr><td><strong>부분재호흡 마스크</strong></td><td>일부 호기 공기가 저장주머니 속으로 유입되어 재호흡</td><td>6~10 L/분</td></tr>
+      <tr><td><strong>벤추리 마스크</strong></td><td>일정한 양의 실내 공기가 섞임. 가장 정확하게 산소 전달</td><td>6~10 L/분</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===== PAGE 2: 폐렴 ===== -->
+<div class="page" id="p1">
+  <div class="page-title">폐렴 (Pneumonia)</div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-green">정의 · 원인</div>
+      <div class="kv"><span class="k">정의</span><span class="v">폐가 병원체에 감염되어 <strong>염증이 발생</strong>하는 질환. 대개 감염이 원인이지만 화학적·물리적 손상으로 일어나기도 함</span></div>
+      <div class="kv"><span class="k">고위험군</span><span class="v">소아, 흡연자, 노인, 면역이 억제된 사람에게 흔히 발생</span></div>
+      <div class="kv"><span class="k">병태생리</span><span class="v">폐의 염증 반응으로 기관지 점막이 두꺼워지고 점액이 과다 분비됨. 폐포와 흉막강 내에 염증 삼출액이 축적되면 <strong>산소 흡수가 줄어들어 호흡곤란</strong> 발생</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head c-coral">증상 · 진단 · 치료</div>
+      <div class="kv"><span class="k">증상</span><span class="v">발열, 오한 중상 나타남. 호흡수 증가. <strong>녹슨 쇳빛 객담(가래)</strong> 관찰. 기침 증가. 폐포에 수분이 있을 경우 청진 시 <strong>거품소리(수포음)</strong>. 기도의 염증과 삼출액으로 <strong>쌕쌕거리는 소리(천명음)</strong>. 흉부 불편감, 피로, 근육통, 두통, 메스꺼움</span></div>
+      <div class="kv"><span class="k">폐렴 vs 감기</span><span class="v">폐렴은 감기보다 <strong>고열</strong>이 나고 <strong>녹슨 쇳빛 객담</strong>이 많이 나오며 <strong>흉부 불편감</strong>을 느낌. 감기는 마른 기침과 하얀 객담</span></div>
+      <div class="kv"><span class="k">진단</span><span class="v">객담 그람염색 검사, 배양 검사. <strong>흉부 X선 검사</strong>: 뿌옇게 나타나는 부위(폐의 침윤)를 확인</span></div>
+      <div class="kv"><span class="k">치료</span><span class="v">원인균에 따라 <strong>항생제</strong> 선택 투여. 기관지 경련 발생 시 기관지 확장제. 치료 기간: 세균 특성에 따라 5~21일</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">폐렴 간호 보조 — 4가지</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-teal">① 호흡양상 관찰 및 호흡음 청진</div>
+      <ul class="dots">
+        <li class="t">호흡의 횟수 측정, 리듬과 깊이 관찰</li>
+        <li class="t">흉부의 움직임과 대칭 여부, 보조근 사용, 빗장뼈 움직임 확인</li>
+        <li class="t">비정상 호흡양상 관찰: <strong>쿠스마울(Kussmaul)</strong>, <strong>체인-스토크스(Cheyne-Stokes)</strong></li>
+        <li class="t">거품소리(수포음), 쌕쌕거림(천명음) 청진하여 흡인이 필요한지 결정</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-head c-teal">② 기도개방 유지 및 가스교환 증진</div>
+      <ul class="dots">
+        <li class="t">분비물을 묽게 하기 위해 <strong>충분한 수분 섭취</strong></li>
+        <li class="t">산소공급기구를 이용하여 <strong>산소 제공</strong></li>
+        <li class="t">심호흡으로 흉곽 내 압력 상승시켜 강하게 숨을 내뱉는 기침</li>
+        <li class="t">진한 분비물: <strong>타진법, 진동법</strong> 같은 흉부 물리요법으로 제거</li>
+      </ul>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-teal">③ 감염 예방</div>
+      <ul class="dots">
+        <li class="t">감염원을 확인하고 처방된 <strong>항생제</strong> 투여</li>
+        <li class="t">손 씻기 등 <strong>무균법</strong> 철저히 지키기</li>
+        <li class="t">산소공급기구를 <strong>청결히 유지</strong></li>
+        <li class="t"><strong>균형 잡힌 식이</strong>와 충분한 수분 공급으로 면역력 증진</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-head c-teal">④ 증상 조절</div>
+      <ul class="dots">
+        <li class="t">오한 관찰, 체온 측정하여 처방된 <strong>해열제</strong> 투여</li>
+        <li class="t">통증 정도를 확인하여 처방된 <strong>진통제</strong> 투여</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">흉부 물리요법</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-blue">타진법 (Percussion)</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">손을 컵 모양으로 오므리고 손목을 이용하여 <strong>속이 빈 소리가 나게 두드린다.</strong> 분비물을 묽게 만들고 기침을 자극한다.</p>
+    </div>
+    <div class="card">
+      <div class="card-head c-blue">진동법 (Vibration)</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">숨을 천천히 길게 쉬도록 하고 입술을 오므려 천천히 내쉴 때 <strong>흉벽을 진동하듯 움직여 흉부에 압력을 가해 분비물이 움직이게</strong> 하는 방법이다.</p>
+    </div>
+  </div>
+
+  <div class="section-title">비정상 호흡양상</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-amber">쿠스마울(Kussmaul) 호흡</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">항상 <strong>깊고 대부분 빠른</strong> 호흡을 의미한다. 당뇨성 케토산증 등에서 나타남.</p>
+    </div>
+    <div class="card">
+      <div class="card-head c-amber">체인-스토크스(Cheyne-Stokes) 호흡</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">빠르고 강한 호흡에 이어 <strong>무호흡이 주기적으로</strong> 보인다. 심한 뇌 손상, 심부전 등에서 나타남.</p>
+    </div>
+  </div>
+
+  <div class="hl amber">
+    <strong>수포음</strong>: 액체에 의한 공기 흐름이 원인. 기늘고, 음조가 낮거나 높으며, 기간이 짧고, 가침이 없고, 몇 초간 지속.<br>
+    <strong>천명음</strong>: 수축된 통로를 통한 공기의 흐름에 의해 발생. 고음이며 연속적이고 음악소리 같음.
+  </div>
+</div>
+
+<!-- ===== PAGE 3: 결핵 ===== -->
+<div class="page" id="p2">
+  <div class="page-title">결핵 (Tuberculosis)</div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-green">정의 · 결핵균의 특성</div>
+      <div class="kv"><span class="k">정의</span><span class="v">감염성이 높은 질환으로 결핵균이 포함된 <strong>비말핵이 공기를 통해</strong> 다른 사람의 호흡기로 흡입되어 전파되는 질환</span></div>
+      <div class="kv"><span class="k">결핵균 특성</span><span class="v"><strong>항산성 특징</strong>이 있는 Acid Fast Bacillus(AFB)라고도 함. 비이동성, 호기성을 띠고 천천히 증식. <strong>공기 매개 감염</strong>을 통해 전파</span></div>
+      <div class="kv"><span class="k">고위험군</span><span class="v">치료받지 않은 대상자와 밀접 접촉자, 면역저하·HIV 감염자, 요양시설·병원 밀집 장소 거주자, 노인, 약물·알코올 중독자, 사회 경제적 빈곤층·노숙자</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head c-coral">병태생리 — 결핵균의 성장</div>
+      <div class="kv"><span class="k">결핵균 침입</span><span class="v">면역반응이 나타나면 염증반응과 식균 작용에 의해 <strong>결절</strong>이 형성. 결절 중앙에 결핵균, 죽은 백혈구와 괴사된 폐조직이 <strong>치즈 같은 덩어리</strong>를 형성</span></div>
+      <div class="kv"><span class="k">치즈화·배농</span><span class="v">치즈화 물질들이 <strong>액화</strong>되어 기도로 들어가 객담으로 배출됨 → 이 객담은 <strong>감염력이 매우 높음</strong></span></div>
+      <div class="kv"><span class="k">공동·석회화</span><span class="v">액화된 물질이 배출된 후 결절에 공기가 차 <strong>공동</strong>이 형성되고, 결절에 칼슘이 침착하여 <strong>석회화</strong>되며 치유됨</span></div>
+      <div class="kv"><span class="k">잠복결핵</span><span class="v">결핵균에 감염되었지만 면역체계에 의해 증식이 억제되어 <strong>감염성이나 증상이 없는 상태</strong></span></div>
+    </div>
+  </div>
+
+  <div class="section-title">결핵의 진행과정</div>
+  <div class="full-card">
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+      <div class="tag g">결핵균 침입</div>
+      <span style="color:#aaa">→</span>
+      <div class="tag g">1차 결핵 (2~8주)</div>
+      <span style="color:#aaa">→</span>
+      <div class="tag g">석회화 (치유)</div>
+      <span style="color:#aaa">→</span>
+      <div class="tag a">2차 감염 또는 잠복결핵 재활성화</div>
+      <span style="color:#aaa">→</span>
+      <div class="tag c">결핵 발병</div>
+    </div>
+    <div class="grid2">
+      <div class="hl" style="margin:0">
+        <strong>1차 결핵</strong>: 처음 결핵균이 침입하여 2~8주가 되면 면역체계가 반응. 대부분 치유되어 석회화된 결절을 형성
+      </div>
+      <div class="hl amber" style="margin:0">
+        <strong>2차 감염</strong>: 새로운 결핵균이 침입하거나 1차 감염 후 결절 내 숨어있던 결핵균이 재활성화되어 발병
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">결핵의 증상 · 진단</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-amber">증상</div>
+      <p style="font-size:13px;line-height:1.7;color:#222;margin-bottom:8px">결핵의 일반적인 증상은 <strong>2주 이상 지속되는 기침</strong>할 때 점액성 또는 화농성 객담, 객혈, 가슴압박과 흉통이며, 전신증상으로 <strong>체중감소, 야간발한, 식욕감퇴, 객혈, 호흡곤란, 미열, 오한</strong> 등이 있다.</p>
+    </div>
+    <div class="card">
+      <div class="card-head c-amber">진단 3가지</div>
+      <div class="kv"><span class="k">객담 검사</span><span class="v">결핵을 확진하기 위한 중요한 검사. <strong>3회에 걸쳐</strong> 객담을 수집하여 항산균 검출 확인. 항산균 도말 검사와 배양 검사 모두 양성이면 결핵으로 확진</span></div>
+      <div class="kv"><span class="k">투베르쿨린 반응검사 (PPD, Mantoux)</span><span class="v">약물 <strong>0.1ml</strong>를 피내주사하여 <strong>48~72시간</strong> 후 주사 부위의 지름을 측정. 주사한 부위가 <strong>10mm보다 크면 양성</strong></span></div>
+      <div class="kv"><span class="k">흉부 X선 검사</span><span class="v">결핵의 병변, 공동, 침윤 확인. 단, 결핵 확진은 할 수 없음 (PPD 양성 대상자의 결핵 진단을 위함)</span></div>
+    </div>
+  </div>
+
+  <div class="hl blue">
+    <strong>피내주사(Intradermal Injection)</strong>: 표피 아래 진피에 투여하는 주사로 가장 흡수가 느리나 약물에 대한 반응을 쉽게 눈으로 확인 가능<br>
+    목적: 알레르기 반응, 항생제 반응 검사 / 용량: 0.001~0.5ml의 적은 양 / 주사각도: <strong>5~15°</strong>
+  </div>
+
+  <div class="section-title">결핵약의 종류 (1차약 vs 2차약)</div>
+  <div class="compare-wrap">
+    <table class="compare-table">
+      <tr><th>구분</th><th>약물명</th><th>주요 부작용</th></tr>
+      <tr><td rowspan="4"><strong>1차약</strong></td><td>Isoniazid (INH)</td><td>말초신경염, 간독성, 피부과민증. INH 과량 투여 시 비타민 B6 투여함</td></tr>
+      <tr><td>Ethambutol (EMB)</td><td>시신경염(시력감소), 색각 변화</td></tr>
+      <tr><td><strong>Rifampin (RFP)</strong></td><td>분비물과 소변이 <strong>오렌지색</strong>으로 변함, 위장장애, 피부과민반응, 혈소판 감소증</td></tr>
+      <tr><td>Pyrazinamide (PZA)</td><td>간독성, 요산혈증</td></tr>
+      <tr><td rowspan="4"><strong>2차약</strong></td><td>Capreomycin</td><td>제8신경 손상, 신장장애</td></tr>
+      <tr><td>Streptomycin (SM)</td><td>제8신경(청신경) 손상, 신장장애</td></tr>
+      <tr><td>Kanamycin</td><td>청각장애, 신장장애</td></tr>
+      <tr><td>Cycloserine</td><td>우울증, 정신장애, 경련, 발진</td></tr>
+    </table>
+  </div>
+
+  <div class="section-title">결핵 치료 · 간호 보조</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-blue">치료</div>
+      <ul class="dots">
+        <li class="b">약물요법이 효과적. 초기 치료에는 <strong>1차 결핵약제</strong> 사용</li>
+        <li class="b">초기 치료에 실패하는 경우 <strong>2차 결핵약제</strong> 사용</li>
+        <li class="b">결핵균을 완전히 박멸하고 저항 위험을 줄이기 위해 <strong>복합약제</strong>로 장기간 치료</li>
+        <li class="b">치료기간: <strong>6개월에서 1년 또는 그 이상</strong></li>
+        <li class="b">결핵약은 <strong>한 번에 투여</strong>하는 것이 효과적이며 특히 전용량을 <strong>아침 식전 공복</strong>에 투여</li>
+        <li class="b">항결핵제를 규칙적으로 복용하며 2주 정도 복용하면 <strong>화학적 격리 가능</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-head c-teal">간호 보조 3가지</div>
+      <div class="kv"><span class="k">① 감염 전파 예방</span><span class="v">공기 전파로 전염성이 높아 <strong>음압이 유지되는 1인실</strong>에 격리 치료. 마스크 착용, 기침이나 재채기를 할 때 입과 코를 가리며 사용한 휴지는 따로 모아 버리도록 함. 감염된 사람과 접촉한 사람 확인하여 검사 받게 함</span></div>
+      <div class="kv"><span class="k">② 투약 교육</span><span class="v">2~3주의 지속적 투약으로 증상이 호전되면 전염성은 없어지나 <strong>약물을 6개월 이상 복용</strong>해야 함 설명. 임의로 중단하거나 약물요법을 지키지 않을 경우 <strong>약물내성</strong>으로 상태가 악화할 수 있음</span></div>
+      <div class="kv"><span class="k">③ 식이</span><span class="v">적절한 영양과 철분, <strong>비타민 C가 풍부한</strong> 음식을 권장하고, <strong>고단백·고칼로리</strong>로 균형 잡힌 식이 제공</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 4: 천식·COPD ===== -->
+<div class="page" id="p3">
+  <div class="page-title">천식 · 만성폐쇄성폐질환(COPD)</div>
+
+  <div class="hl" style="margin-bottom:12px">
+    <strong>폐쇄성 폐질환</strong>: 기도의 공기 흐름이 제한되는 질환 — ① 천식 ② 만성폐쇄성폐질환(COPD)
+  </div>
+
+  <div class="section-title">① 천식 (Asthma)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-green">정의 · 병태생리</div>
+      <div class="kv"><span class="k">정의</span><span class="v">만성적인 기도 염증, 기도 과민성의 증가, <strong>가역적인 기도 폐쇄</strong>가 나타나는 폐쇄성 폐질환 → <strong>기도의 공기흐름 제한</strong></span></div>
+      <div class="kv"><span class="k">병태생리</span><span class="v">기도의 염증과 부종으로 인한 기도의 수축으로 발생. 알레르기 원인 물질 흡입 → 항체 생산 → 같은 물질 재흡입 시 항체 인지 → 면역계 활성화 → 염증 반응의 결과로 화학 물질 생산 → 기도의 염증·부종·수축 → 점액 분비 증가</span></div>
+      <div class="kv"><span class="k">원인</span><span class="v">유전적 소인 + 환경적 인자(알레르기 기반). '원인 인자': 집먼지진드기, 바퀴벌레, 곰팡이, 꽃가루, 반려동물 털·비듬 / '악화 인자': 운동, 대기오염, 담배연기, 자극성 가스, 급격한 온도·습도 변화, 찬공기, 감기·호흡기 감염</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head c-coral">증상 · 진단 · 치료</div>
+      <div class="kv"><span class="k">증상</span><span class="v">호흡곤란, 가슴 답답함, 기침, <strong>쌕쌕거림(천명음)</strong>. 다량의 점액 분비. 아토피성 또는 알레르기성 천식: 비염, 피부발진, 가려움증(소양증)과 같은 알레르기 증상<br>천식 발작 시: 구강점막과 손톱의 <strong>청색증</strong>, 호흡할 때 보조근육 사용, 호흡 사이에 <strong>다섯 단어 이상의 문장을 말하기 어려움</strong>. 저산소혈증 발생 시 의식수준 저하</span></div>
+      <div class="kv"><span class="k">진단</span><span class="v"><strong>폐기능 검사(PFT, spirometry)</strong>: 폐환량 측정으로 기관지 좁아진 정도, 호흡곤란 정도 확인. 동맥혈 가스 검사. 알레르기 피부반응 검사(아토피 여부, 원인 항원 확인). 객담 검사(호산구·IgE 농도 확인)</span></div>
+      <div class="kv"><span class="k">치료</span><span class="v">정도에 따라 <strong>기관지 확장제, 항염증제</strong> 사용. 급성 천식발작 동안 기관지 경련이 심하고 산소포화도 급격히 감소할 때 산소 제공</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">천식 간호 보조 · 대상자 교육</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-teal">간호 보조 3가지</div>
+      <div class="kv"><span class="k">① 악화인자 관리</span><span class="v">흡연, 연기, 곰팡이, 갑작스러운 기온변화 등 천식 유발요인 피하기. 먼지 없는 환경 제공. 주변인도 금연. 조리된 음식을 먹을 때는 <strong>인공조미료(MSG) 사용 금지</strong></span></div>
+      <div class="kv"><span class="k">② 이완 요법</span><span class="v">적절한 휴식과 수면, 스트레스와 불안을 감소시키기 위해 <strong>이완요법</strong> 권장</span></div>
+      <div class="kv"><span class="k">③ 대상자 교육</span><span class="v">천식은 대부분 만성적인 질환으로 자가 간호를 통해 상태를 조절하여 증상이 없는 시간을 늘리고, 발작의 빈도를 감소시킬 수 있도록 교육</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head c-teal">대상자 교육내용</div>
+      <ul class="dots">
+        <li class="t">서늘하고 건조하게 실내 유지 (습도 <strong>40~50%</strong>, 온도 <strong>18~23°C</strong>)</li>
+        <li class="t">천으로 된 침구류는 <strong>주 1회</strong> 55°C 이상의 뜨거운 물로 세탁</li>
+        <li class="t">카펫, 천소파, 커튼 등 가급적 사용하지 않기</li>
+        <li class="t">집에서 털이 있는 반려동물 키우지 않기</li>
+        <li class="t">자극적인 냄새(스프레이, 도시가스 등) 피하기</li>
+        <li class="t">황사가 심한 경우 외출 삼가고, 외출 시 <strong>보건용 마스크</strong> 착용</li>
+        <li class="t">감기에 걸리지 않도록 외출 후 손 씻기 개인위생관리 철저</li>
+        <li class="t"><strong>인플루엔자(독감) 예방 접종</strong> 권장</li>
+        <li class="t" style="color:#b91c1c">즉시 응급실: 손톱·입술이 회색/파랑, 호흡·보행·말하기 이렵고 콧구멍이 확대됨, 약물로도 증상이 조절되지 않음</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hl amber">
+    <strong>정량식흡입제(MDI, Metered Dose Inhaler)</strong>: 밀폐된 용기 안에 약물이 들어있으며, 추진제에 의해 에어로졸 상태의 약물이 분사되어 폐까지 전달되도록 만든 제품. 기관지 확장제(증상 완화제)와 스테로이드(질병 조절제)가 포함됨<br>
+    사용법: ① 흡입기 잘 흔들기 ② 숨 충분히 내쉰 후 입에 흡입구 물기 ③ 천천히 심호흡하면서 1회 용량 흡입 ④ 흡입기에서 입을 떼고 폐에 약이 도달할 수 있도록 <strong>10초 가량 숨 참기</strong> ⑤ 천천히 내쉼
+  </div>
+
+  <div class="section-title" style="margin-top:14px">② 만성폐쇄성폐질환 (COPD)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-blue">정의 · 병태생리</div>
+      <div class="kv"><span class="k">정의</span><span class="v">기도가 폐쇄되거나 좁아져서 기도의 공기 유통에 제한이 생기는 질환으로 <strong>만성 기관지염</strong>과 <strong>폐기종(폐실질 파괴)</strong>이 혼재되어 발생. 간단히 COPD라 부름</span></div>
+      <div class="kv"><span class="k">만성 기관지염</span><span class="v">감염성 자극이나 담배연기와 같은 비감염성 자극에 지속 노출되어 발생. 만성 염증으로 점액분비세포 수와 크기가 증가 → 많은 양의 진한 점액 생김 → 기관지벽 두꺼워져 공기 흐름과 가스교환 방해</span></div>
+      <div class="kv"><span class="k">폐기종</span><span class="v">폐포의 탄력성 상실과 폐포벽의 파괴로 <strong>폐의 과잉 팽창</strong> 발생. 호흡곤란, 점액성의 적은 객담 등의 증상. 보조근육을 사용하며 숨이 가빠짐</span></div>
+      <div class="kv"><span class="k">원인</span><span class="v"><strong>흡연</strong>은 COPD의 가장 큰 위험요인. 대기오염, 직업성 분진과 화학물질에 지속 노출, 호흡기계 감염 등이 악화시킴</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head c-coral">증상 비교 · 진단 · 치료</div>
+      <div class="compare-wrap" style="margin-bottom:10px">
+        <table class="compare-table" style="font-size:12px">
+          <tr><th>임상 특징</th><th class="b">만성 기관지염</th><th class="c">폐기종</th></tr>
+          <tr><td>호흡곤란</td><td>두드러지지 않거나 청색증</td><td>호흡곤란으로 저산소혈증</td></tr>
+          <tr><td>타진</td><td>공명음</td><td>과공명음</td></tr>
+          <tr><td>청진</td><td>거품소리(수포음), 쌕쌕거림(천명음)</td><td>천명음 없음</td></tr>
+          <tr><td>객담·기침</td><td>이른 아침 객담 섞인 기침</td><td>기침과 객담 적음</td></tr>
+          <tr><td>체중감소</td><td>흔하지 않음</td><td>후기에 심하게 감소</td></tr>
+        </table>
+      </div>
+      <div class="kv"><span class="k">술통형 가슴</span><span class="v">폐포가 과대팽창되고 가로막이 편평해져서 흉부의 앞뒤 길이가 증가된 모습</span></div>
+      <div class="kv"><span class="k">진단</span><span class="v">폐기능 검사(필수), 동맥혈 가스 검사(산소분압·이산화탄소분압 확인), 흉부 X선</span></div>
+      <div class="kv"><span class="k">치료</span><span class="v">금연, 인플루엔자(독감) 예방 접종. 기관지 확장제·항생제 약물요법. <strong>산소포화도 90% 이상</strong> 유지되도록 산소 제공</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">COPD 간호 보조</div>
+  <div class="full-card">
+    <div class="grid2">
+      <ul class="dots">
+        <li><strong>호흡기능 향상</strong>: 호흡 횟수 측정, 리듬과 깊이 관찰. 빗장뼈(쇄골) 움직임 확인. <strong>복식호흡</strong>과 <strong>입술 오므리기 호흡법</strong>으로 기도 허탈 예방</li>
+        <li><strong>기도개방 유지</strong>: 기관지 분비물 묽게 하여 객담 배출. 충분한 수분 공급, 흉부 물리요법. 저산소혈증이 있을 때는 <strong>저농도의 산소</strong> 제공 (고농도 산소 투여 시 호흡조절 능력 상실 가능)</li>
+      </ul>
+      <ul class="dots">
+        <li><strong>적절한 영양 섭취</strong>: 식사 30분 전 기관지확장제 사용. 하루 4~6회 식사. 고칼로리·고단백식이. 탄수화물은 50% 이내로 조정. 우유·초콜릿 등 기침 유발 음식, 카페인 음료 피하기</li>
+        <li><strong>불안 완화</strong>: 호흡곤란과 질식할 것 같은 공황을 느낄 때 입술 오므림 호흡과 복식호흡 권장</li>
+        <li><strong>활동 지속성 유지</strong>: 하루 활동량을 계획하고 활동 시 휴식시간을 갖도록 함. 에너지 소모 최소화. 걷거나 움직일 때는 말하지 않고 호흡을 참지 않도록 함</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hl teal">
+    <strong>복식호흡(Abdominal breathing)</strong>: 횡경막을 최대한 사용하는 호흡. 코를 통해 천천히 깊게 공기를 들이마시고 복부를 최대한 팽창시킴<br>
+    <strong>입술 오므리기 호흡(Pursed lips breathing)</strong>: 코를 통해 천천히 숨을 들이쉰 후 입술을 오므리고 근육에 힘을 주면서 입으로 천천히 숨을 내쉼
+  </div>
+</div>
+
+<!-- ===== PAGE 5: 폐암·통증관리·핵심정리 ===== -->
+<div class="page" id="p4">
+  <div class="page-title">폐암 · 통증관리 · 단원 핵심 정리</div>
+
+  <div class="section-title">① 폐암 (Lung Cancer)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-coral">정의 · 위험요인 · 종류</div>
+      <div class="kv"><span class="k">정의</span><span class="v">폐에 발생하는 악성종양이며 흡연을 많이 하고 흡연을 시작한 나이가 어릴수록 발생률이 높음</span></div>
+      <div class="kv"><span class="k">종류</span><span class="v">기관지의 편평상피에 발생하는 <strong>편평상피암</strong>, 폐포나 기관지의 선세포에 생기는 <strong>선암</strong>, 폐의 말초에 생기는 <strong>대세포암종</strong>, 폐문 부근의 굵은 기관지에 생기는 <strong>소세포암종</strong></span></div>
+      <div class="kv"><span class="k">위험요인</span><span class="v">흡연(가장 큰 원인), 간접 흡연, 석면 노출, <strong>미세먼지(1급 발암물질)</strong>, 만성 폐쇄성 폐질환, 폐섬유화증, 폐암 가족력</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head c-coral">치료 · 일상생활 관리</div>
+      <div class="kv"><span class="k">치료</span><span class="v">병기에 따라, 환자 개인의 전신 상태와 치료 적응도에 따라 요법의 선택과 조합이 달라짐. <strong>수술, 항암화학요법, 방사선요법</strong> 등</span></div>
+      <div class="kv"><span class="k">일상생활</span><span class="v">심호흡이나 기침을 자주 하고 가벼운 운동도 함으로써 남아 있는 폐의 기능을 살리고 수술 부위에 공기와 액체가 차지 않도록 함</span></div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:8px">② 통증 관리</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-purple">통증 평가</div>
+      <div class="kv"><span class="k">통증의 성질</span><span class="v">날카로운지, 둔한지, 욱신욱신 쑤시는지 등</span></div>
+      <div class="kv"><span class="k">방시통</span><span class="v">어느 부위에서 통증이 느껴지는지. 통증 부위가 한 곳 이상일 수 있으므로 신체 그림에 표시하는 방법을 사용</span></div>
+      <div class="kv"><span class="k">강도(NRS)</span><span class="v">0~10점 숫자 평가 척도(Numeral Rating Scale). 통증을 객관적으로 평가할 수 있다는 장점</span></div>
+      <div class="kv"><span class="k">완화 요인</span><span class="v">진통제, 마사지, 휴식, 수면, 냉찜질, 온찜질 등</span></div>
+      <div class="kv"><span class="k">악화 요인</span><span class="v">자세, 기침, 움직임, 배뇨 등</span></div>
+      <div class="kv"><span class="k">암 환자 통증</span><span class="v">암 환자에게 있어 통증은 <strong>제5의 활력징후</strong>라 할 수 있다</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head c-purple">WHO 3단계 진통제 사다리</div>
+      <div class="step-row"><div class="step-num p">1</div><div class="step-text"><strong>경한 통증</strong> (NRS 1~3점): 비마약성 진통제(아스피린, 타이레놀, 비스테로이드성 항염증제) ± 진통보조제 우선 사용</div></div>
+      <div class="step-row"><div class="step-num p">2</div><div class="step-text"><strong>중등도 통증</strong> (NRS 4~6점): 약한 마약성 진통제(코데인, 트라마돌) + 비마약성 진통제 ± 진통보조제</div></div>
+      <div class="step-row"><div class="step-num p">3</div><div class="step-text"><strong>중증 통증</strong> (NRS 7~10점): 강한 마약성 진통제(모르핀, 옥시코돈, 펜타닐) + 비마약성 진통제 ± 진통보조제</div></div>
+      <div class="hl purple" style="font-size:12px;margin-top:8px">
+        <strong>비약물요법</strong>: 방사선 치료, 신경 블록(Nerve block), 상상 요법, 기분 전환, 마사지나 지압, 냉찜질·온찜질, 심호흡과 이완 요법
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">③ 통증의 종류</div>
+  <div class="grid3">
+    <div class="card">
+      <div class="card-head c-blue">급성 통증</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">신체 조직이 손상되는 것이 신호로 나타남. 심한 통증이 비교적 <strong>짧은 시간 지속</strong>되다가 조직 손상이 치유되면 일반적으로 사라짐</p>
+    </div>
+    <div class="card">
+      <div class="card-head c-blue">만성 통증</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">급성 질환의 일반적인 과정을 넘어서 <strong>3개월 이상 지속</strong>되는 통증. 진행될수록 점차 심해지는 특징. 통증의 범위는 경한 정도에서 중증까지 나타날 수 있음</p>
+    </div>
+    <div class="card">
+      <div class="card-head c-blue">돌발성 통증</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">평상시의 통증을 넘어서 일시적으로 악화된 통증. 만성 통증이 있어서 규칙적으로 적정량의 통증 조절약을 복용하고 있는 중에도 나타남</p>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:8px">단원 핵심 암기 포인트</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-green">✅ 빈출 개념 체크리스트</div>
+      <ul class="chk">
+        <li>외호흡: <strong>폐포 ↔ 모세혈관</strong> / 내호흡: <strong>조직세포 ↔ 모세혈관</strong></li>
+        <li>호흡계통 기능 4가지: <strong>가스교환·산염기평형·발성·후각·선천면역</strong></li>
+        <li>객혈: 알칼리성(pH 7↑), 밝은 붉은색, 거품 있음</li>
+        <li>토혈: 산성(pH 7↓), 검붉은색, 거품 없음, 흑색변</li>
+        <li>폐렴 특유 객담: <strong>녹슨 쇳빛</strong> / 청진: <strong>수포음, 천명음</strong></li>
+        <li>타진법: <strong>컵 모양 손</strong>으로 두드려 분비물 묽게 만들기</li>
+        <li>결핵균: <strong>AFB (Acid Fast Bacillus)</strong>, 공기 매개 감염</li>
+        <li>투베르쿨린 검사(PPD): 0.1ml 피내주사, 48~72시간 후 판정, <strong>10mm↑ = 양성</strong></li>
+        <li>피내주사 주사각도: <strong>5~15°</strong></li>
+        <li>결핵약 Rifampin 부작용: <strong>분비물이 오렌지색</strong>으로 변함</li>
+        <li>결핵 치료 기간: <strong>6개월~1년 이상</strong>, 복합약제</li>
+        <li>천식 = 폐쇄성, <strong>가역적</strong> 기도 폐쇄 / COPD = 폐쇄성, 비가역적</li>
+        <li>COPD 산소 포화도 목표: <strong>90% 이상</strong></li>
+        <li>COPD 저산소혈증 시 산소: <strong>저농도</strong> (고농도 → 호흡조절 능력 상실)</li>
+        <li>MDI 사용 후 숨 참기: <strong>10초 가량</strong></li>
+        <li>통증은 암 환자의 <strong>제5의 활력징후</strong></li>
+        <li>NRS 1~3 = 비마약성 / 4~6 = 약한 마약성 / <strong>7~10 = 강한 마약성(모르핀)</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-head c-amber">⚠ 자주 틀리는 선지 주의</div>
+      <ul class="chk warn">
+        <li>후두개(후두덮개): 기관으로 <strong>이물질이 들어가는 것을 막음</strong></li>
+        <li>우폐 3엽(상·중·하) / 좌폐 2엽(상·하) — <strong>좌폐가 우폐보다 작음</strong></li>
+        <li>타진법 목적: <strong>분비물을 묽게 만들고 기침 자극</strong> (산소 공급 ×)</li>
+        <li>결핵 = 공기 매개 감염 → <strong>음압 1인실</strong> 격리</li>
+        <li>결핵 증상 호전되어도 <strong>약물 6개월 이상</strong> 복용 필수</li>
+        <li>투베르쿨린 양성: 현재 결핵 감염인, 잠복결핵, BCG 접종 받은 경우 포함</li>
+        <li>천식 침구류: 55°C 이상의 <strong>뜨거운 물</strong>로 세탁 (찬물 ×)</li>
+        <li>천식 대상자: <strong>인플루엔자 예방접종 권장</strong> (금지 ×)</li>
+        <li>COPD 저산소혈증 → <strong>저농도 산소</strong> (고농도 산소 = 호흡조절 능력 상실)</li>
+        <li>COPD 식이: 탄수화물 <strong>50% 이내</strong>로 조정 (CO₂ 생성 많기 때문)</li>
+        <li>폐기능 검사(PFT): <strong>폐쇄성과 제한성 폐질환</strong>을 구분할 때 유용</li>
+        <li>WHO 3단계 사다리: 통증 <strong>강도</strong>에 따라 단계적으로 진통제 조절</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  간호의 기초 9단원 · 호흡계통 질환 학습자료 | 보건간호과 자율학습용
+</footer>
+
+<script>
+const tabs = document.querySelectorAll('.tab-btn');
+const pages = document.querySelectorAll('.page');
+const prog = document.getElementById('prog');
+const pct = [20, 40, 60, 80, 100];
+function show(i) {
+  tabs.forEach((t, j) => t.classList.toggle('active', i === j));
+  pages.forEach((p, j) => p.classList.toggle('show', i === j));
+  prog.style.width = pct[i] + '%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

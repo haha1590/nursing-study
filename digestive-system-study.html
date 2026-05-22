@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>소화계통 질환 학습자료 | 보건간호과</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  font-size: 14px; color: #1a1a1a;
+  background: #f4f6f4; word-break: keep-all;
+}
+
+/* ── 헤더 ── */
+.site-header {
+  background: linear-gradient(135deg, #7c3a00 0%, #b45309 55%, #f59e0b 100%);
+  color: #fff; padding: 18px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+.site-header h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+.site-header .sub { font-size: 12px; opacity: 0.85; margin-top: 3px; }
+.badge-wrap { display: flex; gap: 8px; }
+.header-badge {
+  font-size: 11px; font-weight: 700;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 20px; padding: 4px 12px; color: #fff;
+}
+
+/* ── 탭 ── */
+.tab-nav {
+  display: flex; background: #fff;
+  border-bottom: 2px solid #b45309;
+  padding: 0 24px; overflow-x: auto;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  scrollbar-width: thin;
+}
+.tab-btn {
+  padding: 13px 16px; font-size: 13px; font-weight: 500;
+  font-family: inherit; color: #666;
+  background: transparent; border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px; cursor: pointer; white-space: nowrap;
+  transition: all 0.2s;
+}
+.tab-btn:hover { color: #b45309; background: #fff7ed; }
+.tab-btn.active { color: #b45309; border-bottom-color: #b45309; font-weight: 700; }
+.tab-btn .num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 19px; height: 19px; font-size: 11px; font-weight: 700;
+  background: #b45309; color: #fff; border-radius: 50%; margin-right: 6px;
+}
+.tab-btn.active .num { background: #7c3a00; }
+
+/* ── 진행 바 ── */
+.progress-bar { height: 3px; background: #e5e7eb; position: sticky; top: 48px; z-index: 99; }
+.progress-fill { height: 100%; background: #b45309; transition: width 0.3s; }
+
+/* ── 페이지 ── */
+.page { display: none; padding: 20px 24px 40px; max-width: 960px; margin: 0 auto; }
+.page.show { display: block; }
+
+/* ── 페이지 제목 ── */
+.page-title {
+  font-size: 17px; font-weight: 700; color: #7c3a00;
+  padding: 10px 16px; margin-bottom: 16px;
+  background: linear-gradient(90deg, #fff7ed, #fff);
+  border-left: 4px solid #f59e0b; border-radius: 0 8px 8px 0;
+}
+
+/* ── 섹션 제목 ── */
+.sec-title {
+  font-size: 14px; font-weight: 700; color: #b45309;
+  padding-left: 10px; border-left: 3px solid #b45309;
+  margin: 16px 0 8px;
+}
+
+/* ── 그리드 ── */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+@media(max-width: 640px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+/* ── 카드 ── */
+.card {
+  background: #fff; border: 1px solid #e5e7eb; border-radius: 10px;
+  padding: 14px 16px; margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.card-title {
+  font-size: 13px; font-weight: 700; color: #7c3a00;
+  margin-bottom: 8px; padding-bottom: 6px;
+  border-bottom: 1px solid #fde68a;
+}
+.card-title.blue { color: #1e40af; border-bottom-color: #bfdbfe; }
+.card-title.green { color: #065f46; border-bottom-color: #a7f3d0; }
+.card-title.red { color: #991b1b; border-bottom-color: #fecaca; }
+.card-title.purple { color: #5b21b6; border-bottom-color: #ddd6fe; }
+
+/* ── 하이라이트 박스 ── */
+.hl { border-radius: 8px; padding: 11px 14px; margin-bottom: 10px; }
+.hl.orange { background: #fff7ed; border: 1px solid #fed7aa; }
+.hl.red    { background: #fff1f2; border: 1px solid #fecaca; }
+.hl.blue   { background: #eff6ff; border: 1px solid #bfdbfe; }
+.hl.green  { background: #f0fdf4; border: 1px solid #a7f3d0; }
+.hl.yellow { background: #fefce8; border: 1px solid #fde047; }
+.hl.purple { background: #f5f3ff; border: 1px solid #ddd6fe; }
+.hl.gray   { background: #f9fafb; border: 1px solid #e5e7eb; }
+
+/* ── 텍스트 ── */
+.hl-title { font-size: 12px; font-weight: 700; margin-bottom: 6px; color: #92400e; }
+.hl-title.red { color: #991b1b; }
+.hl-title.blue { color: #1e40af; }
+.hl-title.green { color: #065f46; }
+.hl-title.purple { color: #5b21b6; }
+
+ul.dot { list-style: none; }
+ul.dot li {
+  font-size: 13px; line-height: 1.85;
+  padding-left: 18px; position: relative; color: #222;
+}
+ul.dot li::before { content: '•'; position: absolute; left: 0; color: #b45309; font-weight: 700; }
+ul.dot.red li::before { color: #dc2626; }
+ul.dot.blue li::before { color: #2563eb; }
+ul.dot.green li::before { color: #059669; }
+ul.dot.purple li::before { color: #7c3aed; }
+
+ul.chk { list-style: none; }
+ul.chk li {
+  font-size: 13px; line-height: 1.85;
+  padding-left: 20px; position: relative; color: #222;
+}
+ul.chk li::before { content: '✓'; position: absolute; left: 0; color: #059669; font-weight: 700; }
+ul.chk.warn li::before { content: '⚠'; color: #dc2626; font-size: 11px; }
+
+p.body { font-size: 13px; line-height: 1.85; color: #333; }
+
+/* ── 배지 ── */
+.badge {
+  display: inline-block; font-size: 11px; font-weight: 700;
+  padding: 2px 9px; border-radius: 12px; margin: 2px;
+}
+.badge.or  { background: #ffedd5; color: #7c2d12; }
+.badge.rd  { background: #fee2e2; color: #7f1d1d; }
+.badge.bl  { background: #dbeafe; color: #1e3a8a; }
+.badge.gr  { background: #dcfce7; color: #14532d; }
+.badge.pu  { background: #ede9fe; color: #3b0764; }
+.badge.gry { background: #f3f4f6; color: #374151; }
+
+/* ── 비교표 ── */
+.cmp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 12px; }
+.cmp-table th {
+  background: #92400e; color: #fff;
+  padding: 8px 10px; text-align: center; font-weight: 700;
+}
+.cmp-table th.sub1 { background: #b45309; }
+.cmp-table th.sub2 { background: #1e40af; }
+.cmp-table th.sub3 { background: #065f46; }
+.cmp-table th.sub4 { background: #6d28d9; }
+.cmp-table td {
+  padding: 8px 10px; border: 1px solid #e5e7eb;
+  vertical-align: top; line-height: 1.7;
+}
+.cmp-table tr:nth-child(even) td { background: #fafafa; }
+.cmp-table tr:hover td { background: #fff7ed; }
+.cmp-table .row-hd {
+  background: #fef3c7; font-weight: 700; color: #78350f;
+  text-align: center; width: 90px;
+}
+
+/* ── 흐름 ── */
+.flow-wrap { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; margin: 8px 0; }
+.flow-box {
+  background: #fff7ed; border: 1px solid #fcd34d;
+  border-radius: 6px; padding: 5px 11px;
+  font-size: 12px; font-weight: 600; color: #78350f; white-space: nowrap;
+}
+.flow-box.blue { background: #eff6ff; border-color: #93c5fd; color: #1e3a8a; }
+.flow-box.green { background: #f0fdf4; border-color: #6ee7b7; color: #065f46; }
+.flow-box.red { background: #fff1f2; border-color: #fca5a5; color: #7f1d1d; }
+.flow-arr { font-size: 14px; color: #b45309; font-weight: 700; }
+
+/* ── 시험 포인트 ── */
+.exam-wrap { background: #fff; border: 2px solid #f59e0b; border-radius: 10px; padding: 14px 16px; margin-top: 10px; }
+.exam-title { font-size: 13px; font-weight: 700; color: #92400e; margin-bottom: 8px; }
+.exam-item { font-size: 13px; line-height: 1.9; padding-left: 22px; position: relative; color: #111; }
+.exam-item::before { content: '★'; position: absolute; left: 0; color: #f59e0b; font-size: 12px; }
+
+/* ── 암기 포인트 ── */
+.memo-box {
+  background: linear-gradient(135deg, #7c3a00, #b45309);
+  color: #fff; border-radius: 10px; padding: 14px 16px; margin-bottom: 12px;
+}
+.memo-box .memo-title { font-size: 13px; font-weight: 700; margin-bottom: 8px; opacity: 0.9; }
+.memo-box ul { list-style: none; }
+.memo-box ul li { font-size: 13px; line-height: 1.9; padding-left: 16px; position: relative; }
+.memo-box ul li::before { content: '→'; position: absolute; left: 0; opacity: 0.8; }
+
+/* ── 구분선 ── */
+.divider { border: none; border-top: 1px solid #e5e7eb; margin: 14px 0; }
+
+/* ── 풀카드 ── */
+.full-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px 18px; margin-bottom: 12px; }
+
+/* ── 푸터 ── */
+.site-footer { text-align: center; padding: 20px; color: #9ca3af; font-size: 12px; margin-top: 20px; }
+
+/* ── 강조 텍스트 ── */
+em { font-style: normal; font-weight: 700; color: #b45309; }
+em.rd { color: #dc2626; }
+em.bl { color: #1d4ed8; }
+em.gr { color: #059669; }
+em.pu { color: #7c3aed; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div>
+    <h1>🍽️ 소화계통 질환 요약 학습자료</h1>
+    <div class="sub">보건간호과 · 간호의 기초 10단원 | 2022 개정 교육과정</div>
+  </div>
+  <div class="badge-wrap">
+    <div class="header-badge">5 PAGES</div>
+    <div class="header-badge">자율학습용</div>
+  </div>
+</header>
+
+<div class="progress-bar"><div class="progress-fill" id="prog" style="width:20%"></div></div>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="show(0)"><span class="num">1</span>소화기계 구조·기능</button>
+  <button class="tab-btn" onclick="show(1)"><span class="num">2</span>식도·위 질환</button>
+  <button class="tab-btn" onclick="show(2)"><span class="num">3</span>장·간 질환</button>
+  <button class="tab-btn" onclick="show(3)"><span class="num">4</span>담낭·췌장 질환</button>
+  <button class="tab-btn" onclick="show(4)"><span class="num">5</span>소화기계 암·단원정리</button>
+</nav>
+
+<!-- ===================== PAGE 1 ===================== -->
+<div class="page show" id="p0">
+  <div class="page-title">📌 Page 1 — 소화기계 구조와 기능</div>
+
+  <div class="sec-title">① 소화기관 구조</div>
+  <div class="full-card">
+    <div class="card-title">소화관 경로 (입 → 항문)</div>
+    <div class="flow-wrap">
+      <div class="flow-box">구강</div><div class="flow-arr">→</div>
+      <div class="flow-box">식도</div><div class="flow-arr">→</div>
+      <div class="flow-box">위</div><div class="flow-arr">→</div>
+      <div class="flow-box">십이지장</div><div class="flow-arr">→</div>
+      <div class="flow-box">소장<br><span style="font-size:10px;font-weight:400">(공장·회장)</span></div><div class="flow-arr">→</div>
+      <div class="flow-box">대장<br><span style="font-size:10px;font-weight:400">(맹장·결장·직장)</span></div><div class="flow-arr">→</div>
+      <div class="flow-box">항문</div>
+    </div>
+    <hr class="divider">
+    <div class="grid3">
+      <div class="hl orange">
+        <div class="hl-title">위 (Stomach)</div>
+        <ul class="dot">
+          <li>음식물 + 위액 혼합 → <em>미즙</em> 생성</li>
+          <li>상복부 왼쪽 오른쪽 아래에 위치</li>
+          <li>미즙을 십이지장으로 보냄</li>
+        </ul>
+      </div>
+      <div class="hl blue">
+        <div class="hl-title blue">소장 (작은창자)</div>
+        <ul class="dot blue">
+          <li>용모로 <em class="bl">영양소 흡수</em></li>
+          <li>공장·회장으로 구성</li>
+          <li>대부분의 소화·흡수 담당</li>
+        </ul>
+      </div>
+      <div class="hl green">
+        <div class="hl-title green">대장 (큰창자)</div>
+        <ul class="dot green">
+          <li><em class="gr">수분 흡수</em>, 변 형성</li>
+          <li>맹장·결장·직장으로 구성</li>
+          <li>남은 찌꺼기 → 대변 형성</li>
+        </ul>
+      </div>
+    </div>
+    <div class="grid3">
+      <div class="hl orange">
+        <div class="hl-title">간 (Liver)</div>
+        <ul class="dot">
+          <li>영양소 분해·합성</li>
+          <li>담즙 생성 → 담낭에 저장</li>
+          <li>해독 작용</li>
+        </ul>
+      </div>
+      <div class="hl blue">
+        <div class="hl-title blue">담낭 (Gallbladder)</div>
+        <ul class="dot blue">
+          <li>담즙 농축·저장</li>
+          <li>식후 → 십이지장으로 분비</li>
+          <li><em class="bl">지방 소화 촉진</em> (유화 작용)</li>
+        </ul>
+      </div>
+      <div class="hl green">
+        <div class="hl-title green">췌장 (Pancreas)</div>
+        <ul class="dot green">
+          <li>소화효소 분비 → 십이지장</li>
+          <li>아밀레이스·라이페이스·트립신</li>
+          <li>인슐린·글루카곤 분비</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-title">② 복부 사분면 (4분면)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">RUQ (우상복부)</div>
+      <ul class="dot">
+        <li>간, 담낭, 상행결장, 십이지장</li>
+        <li><em>담낭 촉진</em> 위치</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title blue">LUQ (좌상복부)</div>
+      <ul class="dot blue">
+        <li>위, 비장, 하행결장, 소장 일부</li>
+        <li><em class="bl">췌장</em> 위치</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title green">RLQ (우하복부)</div>
+      <ul class="dot green">
+        <li>맹장, 충수돌기, 난소(여)</li>
+        <li><em class="gr">McBurney's point</em> (충수돌기염 압통점)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title purple">LLQ (좌하복부)</div>
+      <ul class="dot purple">
+        <li>하행결장, S자 결장</li>
+        <li>자궁(여), 난소(여)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">③ 소화기계 기능</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">소화의 종류</div>
+      <div class="hl orange" style="margin-bottom:8px">
+        <div class="hl-title">기계적 소화</div>
+        <ul class="dot">
+          <li>물질의 <em>화학적 성질은 변화시키지 않고</em> 물리적 운동으로 음식물을 잘게 부수거나 소화액과 섞는 것</li>
+          <li><em>연동 운동</em>: 소화관을 따라 아래로 이동</li>
+          <li><em>분절 운동</em>: 수축과 이완으로 음식물·소화액 혼합 (소장에서만 일어남)</li>
+        </ul>
+      </div>
+      <div class="hl blue">
+        <div class="hl-title blue">화학적 소화</div>
+        <ul class="dot blue">
+          <li>소화효소에 의해 크기가 큰 영양소를 <em class="bl">화학적으로 작게 분해</em>하는 것</li>
+          <li>녹말 → 엿당 → 포도당</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title blue">소화효소 분비와 작용</div>
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th>영양소</th><th>효소</th><th>분비 장소</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-hd" rowspan="4">탄수화물</td>
+            <td>프티알린</td><td>침샘</td>
+          </tr>
+          <tr>
+            <td>아밀레이스</td><td>췌장</td>
+          </tr>
+          <tr>
+            <td>말테이스</td><td>창자 점막</td>
+          </tr>
+          <tr>
+            <td>락테이스</td><td>창자 점막</td>
+          </tr>
+          <tr>
+            <td class="row-hd" rowspan="2">단백질</td>
+            <td>펩신</td><td>위 점막</td>
+          </tr>
+          <tr>
+            <td>트립신</td><td>췌장</td>
+          </tr>
+          <tr>
+            <td class="row-hd">지방</td>
+            <td>라이페이스</td><td>췌장</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="hl yellow" style="margin-top:6px">
+        <span style="font-size:12px;font-weight:700;color:#78350f">⚠ 담즙</span>
+        <span style="font-size:12px;color:#444"> — 소화효소 <em>아님</em>! 지방 소화를 위한 <em>유화 작용</em></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-title">④ 대변 형성 과정</div>
+  <div class="full-card">
+    <div class="flow-wrap">
+      <div class="flow-box.blue" style="background:#eff6ff;border:1px solid #93c5fd;border-radius:6px;padding:5px 11px;font-size:12px;font-weight:600;color:#1e3a8a">소장에서 찌꺼기<br>결장으로 상승</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">죽 같은 상태<br>(수분·비타민B·염소이온 흡수)</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box">반유동체 상태</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box red">결장 끝: 점막 점액으로 수분 유지<br>→ 고체화</div>
+      <div class="flow-arr">→</div>
+      <div class="flow-box red">직장 통과 → 배출<br>(부피 60% = 세균, 나머지 = 식이섬유)</div>
+    </div>
+    <hr class="divider">
+    <div class="hl-title" style="margin-bottom:6px;color:#78350f">대변 모양과 의미</div>
+    <div class="grid2">
+      <ul class="dot">
+        <li><em>딱딱한 알갱이</em> — 변비, 수분 부족</li>
+        <li><em>바나나 모양</em> — 건강한 대변</li>
+        <li><em>묽은 대변</em> — 설사, 소화·흡수 이상</li>
+        <li><em>가늘고 긴 대변</em> — 영양 부족</li>
+      </ul>
+      <ul class="dot">
+        <li><em>황갈색</em> — 정상</li>
+        <li><em>검은색(흑색변)</em> — 상부 위장관 출혈 의심</li>
+        <li><em>붉은색</em> — 하부 위장관 출혈 (혈변), 항문 근처 출혈</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">⑤ 복부 청진</div>
+  <div class="hl orange">
+    <ul class="dot">
+      <li>청진기 <em>판막형</em> 사용 → 우하복부에서 시작 → 우상복부 → 좌상복부 → 좌하복부 순(시계 방향)</li>
+      <li><em>타진·촉진 전에 청진!</em> (타진·촉진 자극이 연동 활동을 변화시키기 때문)</li>
+      <li>정상 장음: 꾸르륵, 1분에 <em>5~30회</em>, 고음</li>
+      <li>과도 장음 → 위장염 / 과소 장음 → 복부 수술 후 / 장음 소실 → 마비성 장폐쇄</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===================== PAGE 2 ===================== -->
+<div class="page" id="p1">
+  <div class="page-title">📌 Page 2 — 식도·위 질환</div>
+
+  <!-- 역류성 식도염 -->
+  <div class="sec-title">① 역류성 식도염 (Reflux Esophagitis)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">정의 & 병태생리</div>
+      <ul class="dot">
+        <li>위산을 포함한 위 내용물이 <em>식도 쪽으로 역류</em>하여 식도 점막을 자극하는 질환</li>
+        <li>식도와 위 사이 <em>분문(식도 괄약근)</em>의 조임 힘이 약해져 발생</li>
+        <li>높은 위산이 식도 점막을 지속적으로 자극</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title red">증상</div>
+      <ul class="dot red">
+        <li><em class="rd">가슴앓이</em> — 흉골 하부~턱 부위까지 타는 느낌</li>
+        <li>소화불량, 기침, 호흡곤란</li>
+        <li>쉰 목소리, 질식감, 가슴 통증</li>
+      </ul>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title blue">진단</div>
+      <ul class="dot blue">
+        <li>식도조영 검사, 상부 위장관 내시경</li>
+        <li><em class="bl">24시간 식도 산도(pH) 감시법</em></li>
+        <li>정상 pH <em class="bl">6.5~7.0</em> → 산 역류 있으면 <em class="rd">pH 4.0 이하</em>로 감소</li>
+        <li>생검·세포학적 검사 (바렛식도·위암·식도암 감별)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title green">간호 보조</div>
+      <ul class="chk">
+        <li>침상 머리 <em class="gr">30° 상승</em> (중력으로 위 자연스럽게 비워지게)</li>
+        <li>식사 후 <em class="gr">2~3시간</em> 동안 눕지 않기</li>
+        <li>탄산음료, 빼대로 음료수 마시기, 가스발생 음식 <em class="rd">제한</em></li>
+        <li>식후 몸을 앞으로 구부리거나 무거운 물건 들기 <em class="rd">금지</em></li>
+      </ul>
+    </div>
+  </div>
+  <div class="hl yellow">
+    <div class="hl-title" style="color:#78350f">📋 위-식도 역류장애 vs 덤핑 증후군 체위 비교</div>
+    <table class="cmp-table" style="margin-top:6px">
+      <thead>
+        <tr><th></th><th class="sub1">위-식도 역류장애</th><th class="sub2">덤핑 증후군</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-hd">체위</td>
+          <td><em>좌위</em> (앉는 자세)</td>
+          <td><em>앙와위</em> (누운 자세)</td>
+        </tr>
+        <tr>
+          <td class="row-hd">식이</td>
+          <td>저지방, 고섬유식 / 식사 시 물과 함께</td>
+          <td>고단백, 고지방, 저탄수화물 / 식전 1~2시간 수분 섭취 제한</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 위염 -->
+  <div class="sec-title">② 위염 (Gastritis)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">정의 & 병태생리</div>
+      <ul class="dot">
+        <li>위 점막의 염증</li>
+        <li>정상 위 점막 장벽에 이상 → 염산과 펩신이 위 조직 자극</li>
+        <li>원인: 과식, 스트레스, 알코올, 지나친 카페인</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title red">증상 & 진단</div>
+      <ul class="dot red">
+        <li><em class="rd">식욕부진</em>, 오심과 구토, 상복부 압통</li>
+        <li>복부 팽만감</li>
+      </ul>
+      <hr class="divider">
+      <ul class="dot blue">
+        <li>위내시경으로 위염 분류</li>
+        <li>원인 감별 필요 시 <em class="bl">조직 검사</em></li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title green">간호 보조</div>
+    <div class="grid2">
+      <ul class="chk">
+        <li>약물 치료 (위 점막 손상 감소)</li>
+        <li>비위관 간호 → 출혈 관찰 or 위 내부 세척</li>
+        <li>맑은 유동식 → 부드러운 음식 → 고형식 <em class="gr">점진적으로</em> 섭취</li>
+      </ul>
+      <ul class="chk warn">
+        <li>지극적 음식, 카페인, 과식 <em class="rd">금지</em></li>
+        <li>위염은 <em class="rd">위암으로 발전</em> 가능 (4단계 자연 발생)</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 소화성 궤양 -->
+  <div class="sec-title">③ 소화성 궤양 (Peptic Ulcer) — 위 점막 + 근육층까지 손상</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">정의 & 병태생리</div>
+      <ul class="dot">
+        <li>위장 점막이 손상되어 나타나는 질환</li>
+        <li>위산·펩신 분비 vs 점막 방어기전 <em>불균형</em>으로 발생</li>
+        <li><em>헬리코박터 파일로리균</em> 감염 / NSAIDs 복용으로 점막 방어 손상</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title red">증상</div>
+      <ul class="dot red">
+        <li>궤양 부위에 위산이 닿으면 <em class="rd">평활근 수축 → 통증</em></li>
+        <li>둔하거나 찌르는 듯한 느낌, 쓰린 통증</li>
+        <li>구토 — 유문 근육 경련 및 <em class="rd">기계적 폐쇄</em>로 발생</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">위궤양 vs 십이지장 궤양 비교</div>
+    <table class="cmp-table">
+      <thead>
+        <tr><th style="width:90px">구분</th><th class="sub1">위궤양</th><th class="sub2">십이지장 궤양</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-hd">발생 부위</td>
+          <td>위 기저부~유문부의 연결 부위</td>
+          <td>유문부로부터 0.5~2.5cm</td>
+        </tr>
+        <tr>
+          <td class="row-hd">산 분비</td>
+          <td>정상, 또는 감소</td>
+          <td><em>증가</em></td>
+        </tr>
+        <tr>
+          <td class="row-hd">발생 연령</td>
+          <td>45~54세</td>
+          <td>25~50세</td>
+        </tr>
+        <tr>
+          <td class="row-hd">남녀 비율</td>
+          <td>남:여 = 2:1</td>
+          <td>남:여 = 3:1</td>
+        </tr>
+        <tr>
+          <td class="row-hd">통증</td>
+          <td>식사에 의해 악화 / 제산제로 완화</td>
+          <td>위가 비었을 때 / 식사 2~3시간이나 새벽 1~2시에 발생 / 음식·제산제로 완화</td>
+        </tr>
+        <tr>
+          <td class="row-hd">출혈 양상</td>
+          <td><em>토혈</em>이 많다</td>
+          <td><em>흑색변</em>이 많다</td>
+        </tr>
+        <tr>
+          <td class="row-hd">위험 요인</td>
+          <td>위염, 알코올, 흡연, 스트레스, H. pylori</td>
+          <td>만성 폐쇄성 폐질환, 만성 신장 기능상실, 강경화, 알코올, 흡연, H. pylori</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title blue">진단</div>
+      <ul class="dot blue">
+        <li>상부 위장관 내시경 + 생검</li>
+        <li><em class="bl">요소호기 검사</em> — H. pylori 감염 여부 확인 (요소 → 암모니아 + 이산화탄소로 변환 능력 이용)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title green">간호 보조</div>
+      <ul class="chk">
+        <li>항궤양성 약물 <em class="rd">급하게 중단 금지</em> (위산 심하게 분비될 위험)</li>
+        <li>아스피린·NSAIDs 위궤양·위궤양 발생 → <em class="rd">피할 것</em></li>
+        <li>커피·차·콜라 → 통증 유발 / 알코올 → 위산 분비 촉진 / 흡연 → 궤양 재발률 증가</li>
+        <li>소량씩 자주 일정한 간격으로 섭취</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hl red">
+    <div class="hl-title red">⚠ 덤핑 증후군 (Dumping Syndrome)</div>
+    <ul class="dot red">
+      <li>위 대부분 절제 또는 <em class="rd">유문괄약근 제거 수술</em> 직접 결과로 나타남</li>
+      <li>위 내용물이 소장으로 빨리 내려감 → 고삼투압 음식으로 소장 내 수분 이동 → 혈장량 감소 → 장 팽만</li>
+      <li>증상: 식사 후 <em class="rd">15~30분 후</em> 발생 / 허약, 발한, 심계항진, 현기증</li>
+      <li>치료: 앙와위, 고단백·고지방·저탄수화물, 식전 1~2시간 수분 섭취 제한</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===================== PAGE 3 ===================== -->
+<div class="page" id="p2">
+  <div class="page-title">📌 Page 3 — 충수돌기염·간 질환</div>
+
+  <!-- 충수돌기염 -->
+  <div class="sec-title">① 충수돌기염 (Appendicitis)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">정의 & 병태생리</div>
+      <ul class="dot">
+        <li>맹장 하부에 연결된 <em>충수에 염증</em> 발생</li>
+        <li>축적된 변에 의한 <em>충수관 폐색</em>으로 나타남</li>
+      </ul>
+      <hr class="divider">
+      <div class="card-title red">증상</div>
+      <ul class="dot red">
+        <li>식욕부진, 오심, 구토 뒤따르는 통증으로 <em class="rd">배꼽 주위</em>에서 시작</li>
+        <li>지속적이며 <em class="rd">우하복부(RLQ)</em>로 이동</li>
+        <li><em class="rd">McBurney's point</em> — 배꼽과 오른쪽 장골능 잇는 선상의 중간점</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title blue">진단 징후</div>
+      <table class="cmp-table">
+        <thead><tr><th>징후</th><th class="sub2">설명</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><em>반동 압통</em></td>
+            <td>압박 후 빨리 손 뗄 때 통증</td>
+          </tr>
+          <tr>
+            <td><em>McBurney 징후</em></td>
+            <td>배꼽에서 우측 전상장골극에 압통·강직</td>
+          </tr>
+          <tr>
+            <td><em>Rovsing 징후</em></td>
+            <td>McBurney's point 반대(좌측) 압박 시 McBurney's point 통증</td>
+          </tr>
+          <tr>
+            <td><em>요근 징후</em></td>
+            <td>앙와위 뒤로 과신전 시 우하 사분면 통증</td>
+          </tr>
+          <tr>
+            <td><em>폐쇄근 징후</em></td>
+            <td>앙와위 굴곡 후 안쪽으로 회전 시 통증</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="hl yellow" style="margin-top:8px">
+        <span style="font-size:12px;font-weight:700;color:#78350f">진단:</span>
+        <span style="font-size:12px"> 신체검진, 초음파, CT 스캔</span><br>
+        <span style="font-size:12px;font-weight:700;color:#dc2626">치료:</span>
+        <span style="font-size:12px"> 하제나 관장은 연동 운동 증가 → 충수 파열 위험 → <em>금지!</em></span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 간염 -->
+  <div class="sec-title">② 간염 (Hepatitis)</div>
+  <div class="card">
+    <div class="card-title">정의 & 병태생리</div>
+    <div class="grid2">
+      <div>
+        <p class="body">간염 바이러스에 의한 <em>급격한 간세포 장애</em></p>
+        <br>
+        <ul class="dot">
+          <li>세포독성 <em>시토카인</em>과 <em>자연살해세포(NK cell)</em>가 감염된 간세포 용해 → 간 손상</li>
+          <li>항원-항체 복합체가 전신 순환 → 보체 활성화 → 발진, 혈관부종, 관절염, 고열, 권태감</li>
+        </ul>
+      </div>
+      <div class="hl blue">
+        <div class="hl-title blue">용어 설명</div>
+        <ul class="dot blue" style="font-size:12px">
+          <li><em class="bl">시토카인</em>: 세포·주로 백혈구에서 분비되는 단백활성 물질</li>
+          <li><em class="bl">자연살해세포</em>: 바이러스에 감염된 세포나 암세포를 직접 파괴하는 면역세포</li>
+          <li><em class="bl">보체</em>: 산선한 혈액·림프액 속에 함유된 효소 모양의 단백질의 일종</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">A형·B형·C형 간염 비교</div>
+    <table class="cmp-table">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th class="sub1">A형 간염</th>
+          <th class="sub2">B형 간염</th>
+          <th class="sub3">C형 간염</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-hd">법정 감염병</td>
+          <td>2급</td>
+          <td>3급</td>
+          <td>3급</td>
+        </tr>
+        <tr>
+          <td class="row-hd">예방 접종</td>
+          <td><em>있음</em></td>
+          <td><em>있음</em></td>
+          <td><em class="rd">없음</em></td>
+        </tr>
+        <tr>
+          <td class="row-hd">동의어</td>
+          <td>전염성 간염</td>
+          <td>혈청성 간염</td>
+          <td>non-A, non-B</td>
+        </tr>
+        <tr>
+          <td class="row-hd">잠복기</td>
+          <td>15~50일 (평균 28일)</td>
+          <td>45~180일 (평균 56~96일)</td>
+          <td>14~180일 (평균 56일)</td>
+        </tr>
+        <tr>
+          <td class="row-hd">감염 경로</td>
+          <td>대소변 오염 물·음식물, 혈액<br>→ 식기 구별, 음식 같이 먹지 않기</td>
+          <td>수혈, 혈액제제, 성적 접촉, 오염된 주사기·바늘, 수직 감염, 문신</td>
+          <td>혈액, 바늘·주사기, 감염자와의 성적 활동, 수직 감염</td>
+        </tr>
+        <tr>
+          <td class="row-hd">전염성</td>
+          <td>증상 발현 전 2주간 / 증상 발현 후 1~2주</td>
+          <td>증상 발현 전후 4~6개월 전염성, 보균자는 평생 전염성</td>
+          <td>증상 발현 전 1~2주 / <em class="rd">75~85%는 만성 C형 간염으로 발전</em></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="hl yellow" style="margin-top:8px">
+      <span style="font-size:12px;font-weight:700;color:#78350f">★ B형 간염 검사 결과:</span>
+      <span style="font-size:12px"> HBsAg(항원) (-) + HBsAb(항체) (-) → <em>항체 형성 없음</em> → <em>B형 간염 예방 접종 필요!</em></span>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">증상</div>
+      <ul class="dot">
+        <li>한 달~4개월 잠복기 동안: 권태감, 식욕부진, 체중감소</li>
+        <li>피로, 오심, 간헐적 구토, 복부 불편감</li>
+        <li>발열, 황달, 소양증, 간수치 상승</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title green">치료 및 간호</div>
+      <ul class="chk">
+        <li>절대안정, 수분 섭취 증가</li>
+        <li><em class="gr">고탄수화물·고단백·고비타민·저지방·저염 식이</em></li>
+        <li>저지방·고탄수화물·적정 단백식이를 소량씩 자주 제공</li>
+        <li>추가적인 간 손상 방지 → <em class="gr">휴식</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 간경변증 -->
+  <div class="sec-title">③ 간경변증 (간경화증, Liver Cirrhosis)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">정의 & 병태생리</div>
+      <ul class="dot">
+        <li>만성적인 염증으로 <em>정상 간 조직이 섬유화</em>되어 간 기능 저하</li>
+        <li>간염 → 간경변 → 간암 진행 가능</li>
+      </ul>
+      <hr class="divider">
+      <div class="card-title red">증상</div>
+      <ul class="dot red">
+        <li>간염 증상, 비장 비대</li>
+        <li><em class="rd">복수</em>, 핍뇨</li>
+        <li>위장·식도 출혈, 저알부민혈증</li>
+        <li>하지 부종, 심하면 <em class="rd">간성혼수</em></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title green">치료 및 간호</div>
+      <ul class="chk">
+        <li>식이: <em class="gr">고단백</em> (간성혼수 시 단백질 제한), 고탄수화물, 저지방, 저염</li>
+        <li>복수·부종 시 수분과 염분 제한</li>
+        <li>다량의 비타민B 복합제 투여</li>
+        <li>소량씩 자주 섭취</li>
+        <li>매일 체중·수분 섭취량·배설량 측정</li>
+        <li>소양증 완화 피부 간호</li>
+        <li>금연, 금주, 침상 안정, 출혈 예방</li>
+        <li>복수 시 <em class="gr">복수 천자</em></li>
+        <li>항히스타민제, 이뇨제 처방 약물 투여</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hl red">
+    <div class="hl-title red">⚠ 간성뇌증 (간성혼수)</div>
+    <div class="grid2">
+      <ul class="dot red">
+        <li>간기능 장애로 <em class="rd">의식 저하</em>, 행동 변화</li>
+        <li>원인: 단백질 분해 시 <em class="rd">암모니아</em> 과다 / 변비 / 위장관 출혈</li>
+        <li>증상: 혼수, 착란증, 경련, 사지 떨림, 현기증, 호흡 시 단 냄새, 혈중 암모니아 증가</li>
+      </ul>
+      <ul class="chk">
+        <li>반드시 <em class="gr">저단백 식이</em></li>
+        <li><em class="gr">락툴로오즈(듀파락)</em> 복용</li>
+        <li>같은 용액으로 <em class="gr">정체관장</em> 시행 → 암모니아 배출</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 황달 -->
+  <div class="sec-title">④ 황달 종류</div>
+  <div class="full-card">
+    <table class="cmp-table">
+      <thead>
+        <tr><th style="width:110px">종류</th><th>원인</th><th>특징적 증상</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-hd">폐쇄성 황달</td>
+          <td>담도 폐쇄</td>
+          <td>황달 + 소양증 + <em>회백색 대변</em></td>
+        </tr>
+        <tr>
+          <td class="row-hd">비폐쇄성 황달</td>
+          <td>간세포 손상 → 담즙 생산 저하</td>
+          <td>황달 (대변 색깔 크게 변하지 않음)</td>
+        </tr>
+        <tr>
+          <td class="row-hd">용혈성 황달</td>
+          <td>적혈구 파괴</td>
+          <td>황달 + 빈혈 증상</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="hl orange" style="margin-top:8px;font-size:13px">
+      혈액 내 <em>담즙색소(빌리루빈)</em> 농도가 비정상적으로 증가 → 피부·점막이 노랗게 됨 / 피부에 담즙산염 쌓임 → <em>소양증</em> 발생
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 4 ===================== -->
+<div class="page" id="p3">
+  <div class="page-title">📌 Page 4 — 담낭·췌장 질환</div>
+
+  <!-- 담낭염 -->
+  <div class="sec-title">① 담낭염 (Cholecystitis)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">정의 & 병태생리</div>
+      <ul class="dot">
+        <li>담석이나 침전물에 의한 <em>폐쇄</em>로 나타남</li>
+        <li>급성기: 담낭이 붓고 충혈 → 담즙이나 농으로 팽창</li>
+        <li>담낭관이 침범되어 <em>폐쇄</em>될 수 있음</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title red">증상</div>
+      <table class="cmp-table">
+        <thead><tr><th class="sub1">임상 증상</th><th>원인</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><em>폐쇄성 황달</em></td>
+            <td>십이지장으로 담즙이 흐르지 않아 발생</td>
+          </tr>
+          <tr>
+            <td><em>소양증</em></td>
+            <td>피부조직에 담즙산염이 침착</td>
+          </tr>
+          <tr>
+            <td><em>출혈 경향</em></td>
+            <td>비타민K 흡수 감소 → 프로트롬빈 생성 감소</td>
+          </tr>
+          <tr>
+            <td><em>지방변</em></td>
+            <td>담즙 흐름 폐쇄 → 지방이 십이지장으로 분비 안 됨 → 지방 소화 안 됨</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="hl orange" style="margin-top:6px;font-size:12.5px">
+        <em>오른쪽 어깨·견갑골로 방사되는 우상복부 통증</em>, 발열, 황달
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title blue">진단</div>
+      <ul class="dot blue">
+        <li>복부 초음파, CT</li>
+        <li>담관 조영술</li>
+        <li><em class="bl">ERCP</em> (내시경적 역행성 담췌관 조영술): 담도·췌장 질환 진단·치료에 이용</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title green">치료 & 간호</div>
+      <ul class="chk">
+        <li><em class="gr">체외 충격파 쇄석술</em> — 체외에서 높은 에너지 충격파로 결석 분쇄</li>
+        <li><em class="gr">복부 담낭절제술</em></li>
+        <li>통증기전 설명, 통증 없을 때 휴식</li>
+        <li>구토·팽만 경감 → 비위관 삽입 → 수분·전해질 균형 유지</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hl yellow">
+    <div class="hl-title" style="color:#78350f">📋 담석증 (Cholelithiasis) 추가</div>
+    <ul class="dot">
+      <li>콜레스테롤, 빌리루빈, 칼슘 등으로 구성된 담석이 <em>담낭·담관 내에서 형성</em></li>
+      <li>담석 자체만으론 해롭지 않지만 담관을 막으면 → 소화불량, 지방 대사 이상, 황달, 소양증</li>
+      <li>치료: 저지방식이, 안정, 진통제 투여, 수술 (체외 충격파 쇄석술, 개복수술)</li>
+    </ul>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 췌장염 -->
+  <div class="sec-title">② 췌장염 (Pancreatitis)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">정의 & 병태생리</div>
+      <ul class="dot">
+        <li>췌장의 <em>급성 염증</em></li>
+        <li>십이지장으로 배설되지 못한 췌장 소화효소가 <em>췌장 안에서 활성화</em> → 췌장 스스로 소화되는 급성 염증성 질환</li>
+        <li>원인: 만성 알코올 중독증, 담석증</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title red">증상</div>
+      <ul class="dot red">
+        <li>지속적이고 쥐어짜는 듯한 <em class="rd">상복부 통증</em></li>
+        <li>가슴, 배꼽 사이 또는 배꼽 주위 → 옆구리·하복부로 <em class="rd">방사통</em></li>
+        <li>오심, 구토, 미열, 백혈구 증가, 저혈압, 빈맥, 황달</li>
+        <li><em class="rd">터너 징후 (Grey Turner's sign)</em> — 옆구리 푸르스름한 변색</li>
+        <li><em class="rd">쿨렌 징후 (Cullen's sign)</em> — 배꼽 주위 푸르스름한 변색</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title blue">진단</div>
+      <ul class="dot blue">
+        <li>혈청 <em class="bl">아밀라아제</em>: 24~72시간 동안 상승 (다른 질환에서도 상승 가능)</li>
+        <li>→ 급성 췌장염에서는 <em class="bl">혈청 리파아제</em>가 더 중요한 검사</li>
+        <li>복부 초음파, X-선 검사법, CT 스캔</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title green">간호 보조</div>
+      <ul class="chk">
+        <li>복부 팽만 감소 → <em class="gr">비위관 흡인</em></li>
+        <li>복부 팽만으로 인한 압력 완화 → <em class="gr">반좌위</em></li>
+        <li>저단백, 저지방, 탄수화물 식이를 <em class="gr">소량씩 자주</em></li>
+        <li>고지방식·고열량식이 → 위액 분비 자극 → <em class="rd">제한</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hl red">
+    <div class="hl-title red">⚠ 췌장염 점상 출혈 징후 2가지 암기!</div>
+    <div class="grid2">
+      <div>
+        <span class="badge rd">터너 징후 (Grey Turner's sign)</span><br>
+        <span style="font-size:13px;line-height:2">→ <em class="rd">옆구리</em>의 푸르스름한 변색<br>순환하는 트립신에 의한 혈관 손상</span>
+      </div>
+      <div>
+        <span class="badge rd">쿨렌 징후 (Cullen's sign)</span><br>
+        <span style="font-size:13px;line-height:2">→ <em class="rd">배꼽 주위</em>의 푸르스름한 변색<br>복막 뒤 출혈이 배꼽 쪽으로 전파</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 과민성 대장 증후군 -->
+  <div class="sec-title">③ 과민성 대장 증후군 (IBS)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">정의 & 진단 기준</div>
+      <ul class="dot">
+        <li>대장 내시경·X선 검사로 확인되는 특정 질환은 없지만 식사나 가벼운 스트레스 후 복통, 복부 팽만감 같은 불쾌한 소화기 증상이 <em>반복</em>되는 만성 질환</li>
+      </ul>
+      <hr class="divider">
+      <div class="hl yellow">
+        <div class="hl-title" style="color:#78350f">진단 기준</div>
+        <p class="body">지난 3개월간 평균 주 1회 이상 반복적인 복통이 있고, 다음 3가지 중 <em>2가지 이상</em>의 증상이 나타날 때:</p>
+        <ul class="dot" style="margin-top:6px">
+          <li>복통이 배변과 연관성이 있다</li>
+          <li>복통과 연관하여 배변 횟수가 변한다</li>
+          <li>복통과 연관하여 대변의 형태(굳기)가 변한다</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title green">치료 방법</div>
+      <ul class="chk">
+        <li>대변 배출 규칙적으로 → <em class="gr">식이섬유 20g</em> 함유 식이 매일 섭취</li>
+        <li>변의 양을 증가시키는 약품 처방</li>
+        <li>증상에 초점 → 대상자에게 증상·식이·스트레스 상황에 대한 <em class="gr">일기 작성</em></li>
+        <li>무엇이 과민성 대장증후군 증상을 유발하는지 구분할 수 있도록 도움</li>
+      </ul>
+      <hr class="divider">
+      <div class="card-title blue">진단</div>
+      <ul class="dot blue">
+        <li>철저한 병력사정·신체검진 필수</li>
+        <li>대변 검사, X-선, 대장경 검사 → 다른 질환 없음 확인</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE 5 ===================== -->
+<div class="page" id="p4">
+  <div class="page-title">📌 Page 5 — 소화기계 암 & 단원 정리</div>
+
+  <div class="sec-title">① 소화기계 관련 암</div>
+  <div class="grid2">
+    <!-- 위암 -->
+    <div class="card">
+      <div class="card-title red">위암 (Gastric Cancer)</div>
+      <ul class="dot red">
+        <li><em class="rd">40세 이상 남성</em>에서 발병률 높음</li>
+        <li>위험 요인: <em class="rd">H. pylori</em>, 흡연, 가족력, 짠 음식, 훈제 식품, 과거 위 수술</li>
+      </ul>
+      <hr class="divider">
+      <ul class="dot">
+        <li><em>증상</em>: 식욕 상실, 몸무게 감소, 구토, 팽만, 식사 후 지나친 배부름</li>
+        <li>위 출혈 시 토혈, <em>흑색변</em>, 빈혈</li>
+        <li><em>진단</em>: 내시경 생검 or 바륨 검사</li>
+        <li><em>치료</em>: 위 절제술 (가장 일반적) → 수술 후 연동 운동 돌아오면 소량 맑은 유동식 → 유동식 → 고형식 순으로 증가</li>
+      </ul>
+    </div>
+    <!-- 대장암 -->
+    <div class="card">
+      <div class="card-title blue">대장암 (Colorectal Cancer)</div>
+      <ul class="dot blue">
+        <li><em class="bl">50세 이상</em>에서 가장 흔함, 남녀 모두 발생</li>
+        <li>위험 요인: 가족력, 노화, 흡연, 붉은 가공육 다 섭취, 식이섬유 섭취 부족, 운동 부족, 과음</li>
+      </ul>
+      <hr class="divider">
+      <ul class="dot">
+        <li><em>증상</em>: 배변 습관·대변 굳기 변화, 대변에 점액·혈액, 흑색변, 복통, 빈혈, 몸무게 감소</li>
+        <li><em>진단</em>: 바륨 검사, CT, 내시경, 종양 표지자 검사</li>
+        <li><em>치료</em>: 종양 크기·전이 따라 수술 + 화학요법</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <!-- 간암 -->
+    <div class="card">
+      <div class="card-title green">간암 (Liver Cancer)</div>
+      <ul class="dot green">
+        <li>원인: 만성 바이러스 간염, 간경화증, 독소 노출</li>
+        <li><em>증상</em>: 복통, 몸무게 감소, 구토, 황달, 배 안쪽 덩어리감</li>
+        <li><em>진단</em>: 초음파, CT 촬영, 생검</li>
+        <li><em>치료</em>: 종양 제거 수술, 화학요법, 방사선요법, 간이식</li>
+        <li><em class="gr">예후</em>: 암의 전이 여부에 달려 있음</li>
+      </ul>
+    </div>
+    <!-- 췌장암 -->
+    <div class="card">
+      <div class="card-title purple">췌장암 (Pancreatic Cancer)</div>
+      <ul class="dot purple">
+        <li>암 진단 후 5년 <em class="pu">생존율이 가장 낮은 암</em></li>
+        <li>원인: 흡연, 만성 췌장염, 당뇨병, 과다 음주, 고지방식이</li>
+        <li><em>증상</em>: 좌측 상복부 갉아먹는 통증 (낮보다 <em class="pu">밤에 더 심함</em>), 황달, 회백색 대변, 소변 변화, 당뇨 발생·악화</li>
+        <li><em>진단</em>: 혈액 리파아제·아밀라아제 수치, <em class="pu">CEA·CA19-9</em> 상승</li>
+        <li><em>치료</em>: 절제 수술 (암 크기·위치에 따라) / 수술 후 조기 이상·잦은 체위 변경</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 담낭암 -->
+  <div class="hl purple" style="margin-bottom:12px">
+    <div class="hl-title purple">담낭암 (Gallbladder Cancer)</div>
+    <ul class="dot purple">
+      <li>남성보다 <em class="pu">여성에서 4배</em> 높게 나타남, 50세 이상 발생</li>
+      <li>증상: 체중 감소, 식욕감퇴, 오심·구토, 허약, 우상복부 통증</li>
+      <li>체액·전해질 균형 유지, 통증 완화 위해 진정제 투여 가능</li>
+      <li>담낭절제술 시행 → 저지방식이 / 수술 4~6주 후부터 지방 섭취 가능</li>
+    </ul>
+  </div>
+
+  <hr class="divider">
+
+  <div class="sec-title">② 위장관 출혈 비교</div>
+  <div class="card">
+    <table class="cmp-table">
+      <thead>
+        <tr><th style="width:90px">구분</th><th class="sub1">상부 위장관 출혈</th><th class="sub2">하부 위장관 출혈</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-hd">발생 부위</td>
+          <td>식도, 위, 십이지장</td>
+          <td>공장, 회장, 결장, 직장 출혈</td>
+        </tr>
+        <tr>
+          <td class="row-hd">원인</td>
+          <td>식도 정맥류, 식도염, 소화성 궤양, 출혈성 위염, 스트레스성 궤양, 위암</td>
+          <td>결장 직장암, 용종, 감염성 설사, 궤양성 대장염, 크론병, 항문 직장 누공</td>
+        </tr>
+        <tr>
+          <td class="row-hd">증상</td>
+          <td><em>토혈</em></td>
+          <td>혈변, 잠혈, 반유, 검사, 시, 대변이 선홍색에서 <em>검은색</em>으로 다량 출혈</td>
+        </tr>
+        <tr>
+          <td class="row-hd">간호</td>
+          <td>활력 증상 측정, 섭취량·배설량 측정, 영양 불균형 관찰, 소화·흡수 과정 변화 확인, 복부 팽만·경련·오심·구토 확인</td>
+          <td>대변 색깔 확인 (장의 출혈 위치 확인), 소변 검사, 환자의 불안 상태 사정, 정서적 지지 및 안정감 유지</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 빈출 암기 포인트 -->
+  <div class="sec-title">③ 빈출 암기 포인트 🔥</div>
+  <div class="memo-box">
+    <div class="memo-title">✦ 자주 나오는 핵심 암기</div>
+    <ul>
+      <li>역류성 식도염 체위 = <strong>좌위</strong> / 덤핑 증후군 체위 = <strong>앙와위</strong></li>
+      <li>충수돌기염 압통점 = <strong>McBurney's point</strong> (RLQ) — 하제·관장 <em style="color:#fde68a">금지!</em></li>
+      <li>췌장염 점상 출혈 → <strong>터너 징후(옆구리)</strong> + <strong>쿨렌 징후(배꼽)</strong></li>
+      <li>췌장염 진단 = 혈청 <strong>리파아제</strong>가 아밀라아제보다 더 중요 (급성)</li>
+      <li>담즙 = 소화효소 <em style="color:#fde68a">아님!</em> → 지방 <strong>유화 작용</strong></li>
+      <li>간성뇌증 치료 → <strong>저단백 식이</strong> + <strong>락툴로오즈(듀파락)</strong> + 정체관장</li>
+      <li>B형 간염: 항원(-) + 항체(-) → <strong>예방 접종 필요</strong></li>
+      <li>C형 간염 = 예방 접종 <em style="color:#fde68a">없음</em> / 75~85% 만성 C형으로 발전</li>
+      <li>담낭암 = 여성에서 <strong>4배</strong> 높음 / 췌장암 = <strong>5년 생존율 가장 낮음</strong></li>
+      <li>위내시경 전 금식 <strong>8~12시간</strong> / 검사 후 구역질 반사 회복까지 금식</li>
+    </ul>
+  </div>
+
+  <!-- 자주 틀리는 선지 -->
+  <div class="sec-title">④ 자주 틀리는 선지 ⚠</div>
+  <div class="grid2">
+    <div class="hl red">
+      <div class="hl-title red">틀리기 쉬운 것들</div>
+      <ul class="chk warn">
+        <li>기계적 소화 = 소화효소에 의해 화학적으로 분해 → ❌ (화학적 소화가 맞음)</li>
+        <li>분절 운동은 소장·대장 모두에서 발생 → ❌ (<em class="rd">소장에서만</em>)</li>
+        <li>복부 청진 순서 = 시진→타진→청진→촉진 → ❌ (<em class="rd">시진→청진→타진→촉진</em>)</li>
+        <li>담즙은 소화효소이다 → ❌ (유화 작용만 함)</li>
+        <li>충수돌기염 치료 시 하제나 관장 시행 → ❌ (<em class="rd">파열 위험</em>)</li>
+        <li>간성혼수 시 고단백 식이 → ❌ (<em class="rd">저단백 식이</em>)</li>
+        <li>역류성 식도염 환자 = 앙와위(누운 자세) → ❌ (<em class="rd">좌위</em> / 머리 30° 상승)</li>
+      </ul>
+    </div>
+    <div class="hl blue">
+      <div class="hl-title blue">단원 평가 해설 포인트</div>
+      <div class="exam-wrap" style="border-color:#93c5fd">
+        <div class="exam-title" style="color:#1e3a8a">주요 단원 평가 문항 답</div>
+        <div class="exam-item" style="color:#1e40af">1번: LUQ = <em class="bl">위, 간</em> (⑤ 담낭 아님 → 담낭은 RUQ)</div>
+        <div class="exam-item" style="color:#1e40af">2번: 기계적 소화는 물질 화학적 성질 변화 ❌ → <em class="bl">⑤번</em> 정답</div>
+        <div class="exam-item" style="color:#1e40af">3번: 역류성 식도염 진단 → <em class="bl">24시간 식도 산도 검사법</em></div>
+        <div class="exam-item" style="color:#1e40af">4번: 소화성 궤양 병태생리 → <em class="bl">⑤ 위산·펩신 분비와 점막 방어기전 불균형</em></div>
+        <div class="exam-item" style="color:#1e40af">5번: 담낭염 → <em class="bl">① 지방변</em></div>
+        <div class="exam-item" style="color:#1e40af">6번: A형 간염 → <em class="bl">③ 오염된 음식 섭취</em></div>
+        <div class="exam-item" style="color:#1e40af">7번: 충수돌기염 진단 → <em class="bl">⑤ McBurney 징후</em></div>
+        <div class="exam-item" style="color:#1e40af">8번: 췌장염 점상 출혈 징후 2개 → <em class="bl">② 터너 징후</em> + <em class="bl">④ 쿨렌 징후</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hl green" style="margin-top:4px">
+    <div class="hl-title green">📖 교과서 페이지 안내</div>
+    <p class="body">소화기계 구조(pp.118~121) → 역류성 식도염(p.123) → 위염(p.124) → 소화성 궤양(p.125~126) → 충수돌기염(p.126~127) → 간염(p.127~128) → 담낭염(p.128~129) → 췌장염(p.129~130) → 소화기계 암(p.131~133) | <strong>단원평가 해설: 308p</strong></p>
+  </div>
+</div>
+
+<footer class="site-footer">
+  간호의 기초 10단원 · 소화계통 질환 요약 학습자료 | 보건간호과 자율학습용
+</footer>
+
+<script>
+const tabs = document.querySelectorAll('.tab-btn');
+const pages = document.querySelectorAll('.page');
+const prog = document.getElementById('prog');
+const pct = [20, 40, 60, 80, 100];
+
+function show(i) {
+  tabs.forEach((t, j) => t.classList.toggle('active', i === j));
+  pages.forEach((p, j) => p.classList.toggle('show', i === j));
+  prog.style.width = pct[i] + '%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

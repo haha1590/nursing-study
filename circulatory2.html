@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>순환계통 질환 심화 학습자료 | 보건간호과</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  font-size: 14px; color: #1a1a1a;
+  background: #f0f4f8; word-break: keep-all;
+}
+
+/* ── 헤더 ── */
+.site-header {
+  background: linear-gradient(135deg, #7c2d8e 0%, #a855c8 60%, #c084e0 100%);
+  color: #fff; padding: 18px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.site-header .h1 { font-size: 20px; font-weight: 700; }
+.site-header .sub { font-size: 12px; opacity: 0.85; margin-top: 3px; }
+.badge-wrap { display: flex; gap: 8px; }
+.header-badge {
+  font-size: 11px; font-weight: 700;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 20px; padding: 4px 12px; color: #fff;
+}
+
+/* ── 탭 ── */
+.tab-nav {
+  display: flex; background: #fff;
+  border-bottom: 2px solid #a855c8;
+  padding: 0 24px; overflow-x: auto;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+}
+.tab-btn {
+  padding: 13px 18px; font-size: 13px; font-weight: 500;
+  font-family: inherit; color: #666;
+  background: transparent; border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px; cursor: pointer; white-space: nowrap;
+  transition: all 0.2s;
+}
+.tab-btn:hover { color: #a855c8; background: #fdf4ff; }
+.tab-btn.active { color: #7c2d8e; border-bottom-color: #a855c8; font-weight: 700; }
+.tab-btn .num {
+  display: inline-block; width: 20px; height: 20px;
+  border-radius: 50%; background: #e8e8e8; color: #666;
+  font-size: 11px; font-weight: 700; text-align: center;
+  line-height: 20px; margin-right: 6px; transition: all 0.2s;
+}
+.tab-btn.active .num { background: #a855c8; color: #fff; }
+
+/* ── 페이지 ── */
+.page { display: none; padding: 24px 28px 40px; max-width: 1100px; margin: 0 auto; }
+.page.show { display: block; }
+
+.page-title {
+  font-size: 20px; font-weight: 700; color: #7c2d8e;
+  margin-bottom: 16px; padding-bottom: 10px;
+  border-bottom: 2.5px solid #a855c8;
+  display: flex; align-items: center; gap: 10px;
+}
+.page-title::before {
+  content: ''; display: block;
+  width: 6px; height: 24px;
+  background: #a855c8; border-radius: 3px;
+}
+
+/* ── 그리드 ── */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+@media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+/* ── 카드 ── */
+.card {
+  background: #fff; border: 1px solid #e0e0e0;
+  border-radius: 10px; padding: 14px 16px;
+  transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.08); }
+.card-head {
+  font-size: 13px; font-weight: 700;
+  padding-bottom: 8px; margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/* 색상 */
+.c-purple { color: #7c2d8e; }
+.c-blue   { color: #1a4fa0; }
+.c-teal   { color: #0f766e; }
+.c-amber  { color: #b45309; }
+.c-coral  { color: #b91c1c; }
+.c-green  { color: #166534; }
+.c-sky    { color: #0369a1; }
+.c-pink   { color: #9d174d; }
+.c-orange { color: #c2410c; }
+
+/* ── 리스트 ── */
+ul.dots { list-style: none; }
+ul.dots li {
+  font-size: 13px; line-height: 1.7;
+  padding-left: 14px; position: relative; color: #222; margin-bottom: 1px;
+}
+ul.dots li::before { content: '·'; position: absolute; left: 0; font-weight: 700; color: #a855c8; }
+ul.dots li.b::before  { color: #1a4fa0; }
+ul.dots li.t::before  { color: #0f766e; }
+ul.dots li.a::before  { color: #b45309; }
+ul.dots li.c::before  { color: #b91c1c; }
+ul.dots li.g::before  { color: #166534; }
+ul.dots li.pk::before { color: #9d174d; }
+ul.dots li.or::before { color: #c2410c; }
+
+/* ── KV ── */
+.kv { display: flex; gap: 8px; margin-bottom: 6px; align-items: flex-start; }
+.kv .k {
+  font-size: 11.5px; font-weight: 700; color: #888;
+  min-width: 96px; flex-shrink: 0;
+  background: #f5f5f5; border-radius: 4px;
+  padding: 2px 6px; margin-top: 1px; text-align: center;
+}
+.kv .v { font-size: 13px; color: #222; line-height: 1.65; }
+
+/* ── 하이라이트 ── */
+.hl {
+  border-left: 4px solid #a855c8; background: #fdf4ff;
+  padding: 10px 14px; border-radius: 0 8px 8px 0;
+  margin: 10px 0; font-size: 13px; line-height: 1.7; color: #1a1a1a;
+}
+.hl.blue   { background: #eff6ff; border-left-color: #2563d4; }
+.hl.teal   { background: #f0fdfa; border-left-color: #0f766e; }
+.hl.amber  { background: #fffbeb; border-left-color: #b45309; }
+.hl.coral  { background: #fef2f2; border-left-color: #b91c1c; }
+.hl.green  { background: #f0fdf4; border-left-color: #166534; }
+.hl.orange { background: #fff7ed; border-left-color: #c2410c; }
+
+/* ── 단계 ── */
+.step-row { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px; }
+.step-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; flex-shrink: 0;
+  background: #f3e8ff; color: #7c2d8e;
+}
+.step-num.b  { background: #dbeafe; color: #1a4fa0; }
+.step-num.t  { background: #ccfbf1; color: #0f766e; }
+.step-num.a  { background: #fef3c7; color: #b45309; }
+.step-num.c  { background: #fee2e2; color: #b91c1c; }
+.step-num.g  { background: #dcfce7; color: #166534; }
+.step-text { font-size: 13px; color: #222; line-height: 1.7; padding-top: 2px; }
+
+/* ── 비교 테이블 ── */
+.compare-wrap { overflow-x: auto; margin-top: 8px; border-radius: 10px; border: 1px solid #e0e0e0; }
+.compare-table { width: 100%; border-collapse: collapse; font-size: 12.5px; min-width: 500px; }
+.compare-table th {
+  background: #f3e8ff; color: #5b21b6; font-weight: 700;
+  padding: 9px 12px; text-align: left; border-bottom: 2px solid #c084e0;
+}
+.compare-table th.b { background: #dbeafe; color: #1a4fa0; border-bottom-color: #93c5fd; }
+.compare-table th.t { background: #ccfbf1; color: #0f766e; border-bottom-color: #6ee7b7; }
+.compare-table th.c { background: #fee2e2; color: #991b1b; border-bottom-color: #fca5a5; }
+.compare-table td {
+  padding: 8px 12px; border-bottom: 1px solid #eee;
+  color: #222; vertical-align: top; line-height: 1.6;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tr:nth-child(even) td { background: #fafafa; }
+.compare-table tr:hover td { background: #fdf4ff; }
+
+/* ── 태그 ── */
+.tag {
+  display: inline-block; font-size: 11px; padding: 3px 9px;
+  border-radius: 12px; margin: 2px; font-weight: 700;
+}
+.tag.p  { background: #f3e8ff; color: #5b21b6; }
+.tag.b  { background: #dbeafe; color: #1e40af; }
+.tag.t  { background: #ccfbf1; color: #065f46; }
+.tag.a  { background: #fef3c7; color: #78350f; }
+.tag.c  { background: #fee2e2; color: #7f1d1d; }
+.tag.g  { background: #dcfce7; color: #14532d; }
+.tag.or { background: #ffedd5; color: #9a3412; }
+
+/* ── 풀카드 ── */
+.full-card {
+  background: #fff; border: 1px solid #e0e0e0;
+  border-radius: 10px; padding: 14px 18px; margin-bottom: 12px;
+}
+
+/* ── 섹션 제목 ── */
+.section-title {
+  font-size: 15px; font-weight: 700; color: #a855c8;
+  margin: 14px 0 8px; padding-left: 10px;
+  border-left: 3px solid #a855c8;
+}
+
+/* ── 체크리스트 ── */
+ul.chk { list-style: none; }
+ul.chk li {
+  font-size: 13px; line-height: 1.75;
+  padding-left: 20px; position: relative; color: #222;
+}
+ul.chk li::before { content: '✓'; position: absolute; left: 0; color: #a855c8; font-weight: 700; }
+ul.chk.warn li::before { content: '⚠'; color: #b91c1c; font-size: 11px; }
+
+/* ── 진행 바 ── */
+.progress-bar { height: 3px; background: #e0e0e0; position: sticky; top: 48px; z-index: 99; }
+.progress-fill { height: 100%; background: #a855c8; transition: width 0.3s; }
+
+.site-footer { text-align: center; padding: 20px; color: #aaa; font-size: 12px; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div>
+    <div class="h1">💊 순환계통 질환 심화 학습자료</div>
+    <div class="sub">보건간호과 · 간호의 기초 8단원 심화 | 저혈압 ~ 빈혈 · 수혈</div>
+  </div>
+  <div class="badge-wrap">
+    <div class="header-badge">5 PAGES</div>
+    <div class="header-badge">자율학습용</div>
+  </div>
+</header>
+
+<div class="progress-bar"><div class="progress-fill" id="prog" style="width:20%"></div></div>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="show(0)"><span class="num">1</span>저혈압</button>
+  <button class="tab-btn" onclick="show(1)"><span class="num">2</span>죽상동맥경화증 · 심부전</button>
+  <button class="tab-btn" onclick="show(2)"><span class="num">3</span>협심증 · 심근경색</button>
+  <button class="tab-btn" onclick="show(3)"><span class="num">4</span>대사증후군 · 빈혈</button>
+  <button class="tab-btn" onclick="show(4)"><span class="num">5</span>수혈·채혈 간호 · 핵심정리</button>
+</nav>
+
+<!-- ===== PAGE 1: 저혈압 ===== -->
+<div class="page show" id="p0">
+  <div class="page-title">저혈압 (Hypotension)</div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-purple">정의</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">일반적으로 <strong>수축기압이 90mmHg보다 낮은 상태</strong>를 말한다.</p>
+      <div class="hl" style="margin-top:10px">
+        대표 증상: 실신, 호흡곤란, 창백, 어지러움, 두통, 피로감, <strong>차고 축축한 피부</strong>, 가슴 답답함, 미열, 메스꺼움, 구토, 목마름
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head c-blue">진단</div>
+      <ul class="dots">
+        <li class="b">병력 문진, 맥박, 호흡, 혈압 측정</li>
+        <li class="b">원인을 찾기 위해 <strong>누워 있을 때와 서 있을 때 모두 혈압 측정</strong></li>
+        <li class="b">혈당 검사, 심전도, 심초음파 검사 시행</li>
+      </ul>
+      <div class="hl blue" style="margin-top:8px">
+        <strong>간호 보조</strong>: 급성·기립성 저혈압은 원인을 찾아 치료. 패혈성 쇼크는 항균제 투약. 원인 질환 치료가 어려운 경우 천천히 일어나는 습관화 또는 <strong>탄력 스타킹</strong> 착용
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">저혈압의 병태생리 — 5가지 종류</div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-teal">① 1차성 저혈압</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">인구의 <strong>1~2%</strong>에서 발견되며, 평소에도 혈압이 낮은 상태. <strong>치료가 필요하지 않다.</strong></p>
+    </div>
+    <div class="card">
+      <div class="card-head c-coral">② 급성 저혈압 (쇼크, Shock)</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">갑자기 발생하며 <strong>다량의 출혈, 화상, 구토, 설사</strong> 등에 의해 체액 감소. 온몸에 균이 퍼진 <strong>패혈성 쇼크</strong> 등이 있다.</p>
+      <div class="hl coral" style="font-size:12px;margin-top:8px">
+        <strong>패혈성 쇼크</strong>: 패혈증(세균이 혈류로 침입해 전신 반응)에 더하여 혈압이 매우 낮아 사망 위험이 높은 상태
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-amber">③ 기립성 저혈압</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">앉거나 누운 자세에서 일어서면 <strong>중력에 의해 혈액이 아래로 몰리면서</strong> 순간적으로 혈압이 낮아지고 <strong>뇌 혈류가 부족</strong>해져 어지러운 증상이 나타난다.</p>
+      <div class="hl amber" style="font-size:12px;margin-top:8px">
+        <strong>기립경검사</strong>: ① 테이블에 누운상태에서 혈압·심전도 관찰 ② 천천히 일으켜 올린 후 혈압·심전도 관찰 ③ 약물 투여하면서 재시행하며 증상 관찰
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head c-blue">기립성 저혈압 진단 기준</div>
+      <div class="hl blue" style="margin:0">
+        충분한 시간 누운상태에서 안정된 혈압 측정 후, 일어난 즉시 1분 간격으로 혈압을 3번 측정하여 <strong>3분 이내에 수축기 혈압이 20mmHg, 이완기 혈압이 10mmHg 이상 떨어지는지</strong> 확인
+      </div>
+      <ul class="dots" style="margin-top:10px">
+        <li class="b">갑작스럽게 일어나는 것 피하기</li>
+        <li class="b">일어날 때 천천히, 중간에 한번씩 쉬어주며 일어나기</li>
+        <li class="b">충분한 수분과 적절한 염분 섭취</li>
+        <li class="b">장기간 서 있는 경우 다리 정맥혈의 정체를 막기 위해 <strong>압박 스타킹</strong> 착용</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-purple">④ 식후 저혈압</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">소화기(위, 소장, 대장 등)에 들어온 음식을 소화시키기 위해 혈액이 소화기계로 더 많이 공급되고, 상대적으로 <strong>다른 장기에는 혈액 공급이 감소</strong>되어 발생한다.</p>
+    </div>
+    <div class="card">
+      <div class="card-head c-purple">⑤ 약물에 의한 저혈압</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">주로 <strong>고혈압약(항고혈압제)</strong>에 의해 발생한다.</p>
+      <div class="hl" style="margin-top:10px;font-size:12px">
+        최근 복용하기 시작한 약물에 의해 기립성 저혈압 증상이 있으면 담당의사와 약물에 대하여 상의한다.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">저혈압 5종류 요약 비교</div>
+  <div class="compare-wrap">
+    <table class="compare-table">
+      <tr><th>종류</th><th>핵심 원인</th><th>치료 여부</th></tr>
+      <tr><td><strong>① 1차성</strong></td><td>체질적으로 혈압이 낮은 상태 (1~2%)</td><td>치료 불필요</td></tr>
+      <tr><td><strong>② 급성(쇼크)</strong></td><td>다량 출혈, 화상, 구토, 설사, 패혈성 쇼크</td><td>원인 치료 + 항균제</td></tr>
+      <tr><td><strong>③ 기립성</strong></td><td>갑자기 일어설 때 혈액이 아래로 몰림</td><td>천천히 일어나기, 압박 스타킹</td></tr>
+      <tr><td><strong>④ 식후</strong></td><td>소화기계로 혈액 집중 → 타 장기 혈액 감소</td><td>식사 후 안정</td></tr>
+      <tr><td><strong>⑤ 약물성</strong></td><td>주로 고혈압약 복용에 의해 발생</td><td>담당의사와 약물 상의</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===== PAGE 2: 죽상동맥경화증·심부전 ===== -->
+<div class="page" id="p1">
+  <div class="page-title">죽상동맥경화증 · 울혈성 심부전</div>
+
+  <div class="section-title">① 죽상동맥경화증 (Atherosclerosis)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-orange">정의 · 원인</div>
+      <div class="kv"><span class="k">정의</span><span class="v">주로 혈관의 <strong>중간층</strong>에 퇴행성 변화가 일어나서 섬유화가 진행되고 혈관의 탄성이 줄어드는 노화 현상의 일종. 수축기 고혈압 초래 → 심장 비대</span></div>
+      <div class="kv"><span class="k">동맥경화증</span><span class="v">동맥이 탄력성을 잃고 내강이 좁아지는 상태. 주로 말초동맥</span></div>
+      <div class="kv"><span class="k">원인</span><span class="v">고콜레스테롤혈증, 높은 중성지방, 고혈압, 흡연, 당뇨병, 가족력, 고령, 운동 부족, 비만</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head c-orange">동맥의 구조 · 증상 · 치료</div>
+      <div class="kv"><span class="k">동맥 구조</span><span class="v">내막(부드러운 탄력조직) / 중막(탄력섬유와 평활근, 수축·이완으로 혈관 직경 조절) / 외막(튼튼한 결합조직)</span></div>
+      <div class="kv"><span class="k">증상</span><span class="v">진행 정도에 따라 관상동맥질환, 뇌경색 등 다양한 증상. 혈관 내부가 <strong>70% 이상</strong> 막히면 혈류 흐름이 방해되어 증상 나타남</span></div>
+      <div class="kv"><span class="k">치료·간호</span><span class="v">체중 조절·금주·금연, 걷기 운동(혈액순환 촉진·근육 강화), 말초혈관 질환 예방, 약물요법(항응고제·혈관확장제·콜레스테롤저하제)</span></div>
+    </div>
+  </div>
+  <div class="hl orange">
+    <strong>뇌로 가는 혈관이 막히면</strong>: 뇌졸중(stroke), 뇌경색(cerebral infarction) — 마비, 감각 이상, 언어 장애, 시력 이상, 어지럼증, 두통 등의 증상
+  </div>
+
+  <div class="section-title" style="margin-top:14px">② 울혈성 심부전 (Congestive Heart Failure, CHF)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-blue">정의 · 원인</div>
+      <div class="kv"><span class="k">정의</span><span class="v">인체가 휴식하거나 운동할 때 필요한 대사 요구를 충족시킬 만큼 충분한 혈액을 심장이 <strong>펌프해내지 못하는 상태</strong></span></div>
+      <div class="kv"><span class="k">원인</span><span class="v">심장 혈관 질환(관상동맥 질환), 심장 근육 질환(심근병증), 고혈압, 판막 질환, 만성 폐쇄성 폐질환</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head c-coral">증상 · 치료</div>
+      <div class="kv"><span class="k">좌심부전</span><span class="v">전신혈관속으로 동맥혈을 충분히 박출하지 못하는 상태 → 심박출량 감소, 폐정맥압 상승 → <strong>폐울혈, 호흡곤란, 기침, 폐부종</strong>, 흉부 X선상 심장 확대, 비정상 심음, 기립성 저혈압</span></div>
+      <div class="kv"><span class="k">우심부전</span><span class="v">폐순환계속으로 정맥혈을 충분히 박출하지 못하는 상태 → <strong>전신 울혈, 체중 증가, 하지 부종, 요흔성(pitting edema) 부종, 간비대</strong></span></div>
+      <div class="kv"><span class="k">치료</span><span class="v">염분 및 수분 제한, 이뇨제, 강심제 투여</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">심부전 대상자 교육</div>
+  <div class="full-card">
+    <div class="grid2">
+      <ul class="dots">
+        <li class="b">적절한 휴식과 안정</li>
+        <li class="b">강심제(digitalis, catecholamine 등) 투여 시 주의점 교육</li>
+        <li class="b">나트륨 및 수분 제한</li>
+      </ul>
+      <ul class="dots">
+        <li class="b">운동 프로그램 실행</li>
+        <li class="b">심부전의 재발 증상 관찰</li>
+      </ul>
+    </div>
+    <div class="hl blue" style="margin-top:10px">
+      <strong>강심제(디기탈리스) 투여 시 주의점</strong><br>
+      ① 투약 전 K⁺ 농도 측정 — 저칼륨혈증 시 독성 증가<br>
+      ② 투약 전 <strong>1분간 심첨 맥박 측정</strong> — 서맥(60회 이하) 시 투약 중지<br>
+      ③ 심첨 맥박 측정 위치: 제5늑간과 좌측 쇄골 중앙선이 만나는 부위<br>
+      ④ 제산제나 이뇨제와 함께 투여하지 않는다
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 3: 협심증·심근경색 ===== -->
+<div class="page" id="p2">
+  <div class="page-title">협심증 · 심근경색</div>
+
+  <div class="hl blue" style="margin-bottom:12px">
+    심장으로 혈액을 공급하는 혈관을 <strong>관상동맥</strong>이라 하며, 협심증과 심근경색은 관상동맥이 <strong>좁아지거나 막혔을 때</strong> 발생하는 질환이다.
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-amber">협심증 (Angina Pectoris)</div>
+      <div class="kv"><span class="k">정의</span><span class="v">관상동맥이 동맥경화증으로 <strong>좁아져</strong> 발생. 운동할 때와 같이 심장 근육이 많은 일을 해야 하는 상황에서 심장 근육에 충분한 혈액 공급이 이루어지지 않을 때 주로 발생 → <strong>허혈 상태</strong></span></div>
+      <div class="kv"><span class="k">원인</span><span class="v">심근의 산소 공급 저하 + 심근의 산소 요구량 증가</span></div>
+      <div class="kv"><span class="k">통증</span><span class="v">짓누르는 것 같은 가슴 통증. 흉골 하부나 심방 부위에서 시작. 왼쪽 팔 안쪽 → 손목 → 4~5번째 손가락으로 방사. <strong>지속 15분 이내, 안정하면 사라짐</strong></span></div>
+      <div class="kv"><span class="k">유발 상황</span><span class="v">운동, 추운 날씨, 흥분했을 때</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head c-coral">심근경색 (Myocardial Infarction)</div>
+      <div class="kv"><span class="k">정의</span><span class="v">좁아져 있던 혈관이나 혈전에 의해 관상동맥이 <strong>폐색</strong>되어 발생. 심장 근육으로의 혈액 공급이 차단되어 <strong>심근세포가 괴사</strong>되고, 죽은 심근 세포는 정상 상태로 회복 불가</span></div>
+      <div class="kv"><span class="k">증상</span><span class="v">평소에 아무런 증상 없다가 갑자기 발생. 가슴이 찢어지는 것 같거나 숨이 멎을 것 같은 <strong>격렬하고 쥐어짜는 분쇄성 통증이 30분 이상 지속</strong></span></div>
+      <div class="kv"><span class="k">위험요인</span><span class="v">당뇨, 고혈압, 흡연, 고콜레스테롤, 비만, 동맥경화</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">협심증 vs 심근경색 비교표</div>
+  <div class="compare-wrap">
+    <table class="compare-table">
+      <tr><th>구분</th><th class="b">협심증</th><th class="c">심근경색</th></tr>
+      <tr><td><strong>관상동맥 상태</strong></td><td>혈류가 <strong>좁아짐</strong> (부분 차단)</td><td>혈관이 <strong>막힘</strong> (완전 차단)</td></tr>
+      <tr><td><strong>심근 혈액 공급</strong></td><td>소량 공급</td><td>완전 차단 → 심근 괴사</td></tr>
+      <tr><td><strong>증상</strong></td><td>흉통 (왼쪽 아래 전방)</td><td>심한 가슴 통증, 식은땀, 구토</td></tr>
+      <tr><td><strong>통증 지속 시간</strong></td><td>보통 2~3분, 긴 경우 <strong>15분 이내</strong></td><td><strong>30분 이상</strong> 지속</td></tr>
+      <tr><td><strong>완화 요인</strong></td><td>휴식 또는 <strong>NTG에 의해 완화</strong></td><td>휴식이나 NTG <strong>효과 없음</strong></td></tr>
+    </table>
+  </div>
+
+  <div class="section-title" style="margin-top:14px">협심증 · 심근경색 치료 및 간호</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-amber">협심증 치료</div>
+      <ul class="dots">
+        <li class="a">금연·체중 조절, 육체적 피로 예방, 따뜻한 상태 유지</li>
+        <li class="a">폭식, 다량의 카페인 섭취 금지</li>
+        <li class="a"><strong>NTG(니트로글리세린)</strong>, 칼슘 통로 차단제, 베타 교감 신경 차단제 투여</li>
+        <li class="a">약물, 관상동맥 확장술, 스텐트 삽입술, 관상동맥 우회술</li>
+        <li class="a">처방된 약물은 <strong>꾸준히 복용</strong> — 임의 중단 시 혈전에 의한 심근경색 발생 가능</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-head c-coral">심근경색 환자 간호</div>
+      <ul class="dots">
+        <li class="c">급성기 <strong>산소 비강으로 투여</strong></li>
+        <li class="c"><strong>절대 안정</strong></li>
+        <li class="c">지속적인 V/S(활력징후) 체크</li>
+        <li class="c">심전도 모니터링</li>
+        <li class="c">변완화제 투여</li>
+        <li class="c"><strong>모르핀 IV로 투여</strong> — 흉통감소, 심박동·혈압·정맥환류 저하, 심장부담·산소요구량 저하</li>
+        <li class="c">막힌 관상동맥을 뚫어주는 <strong>관상동맥 확장 성형술</strong>이 대표적 치료</li>
+        <li class="c">당뇨·고혈압·흡연·고콜레스테롤·비만·동맥경화 등 위험 요소 조절</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">NTG (니트로글리세린) — 설하 투여</div>
+  <div class="full-card">
+    <div class="grid2">
+      <div>
+        <p style="font-size:13px;line-height:1.7;color:#222;margin-bottom:8px">복용하면 <strong>산화질소</strong>가 발생하여 혈관의 근육을 이완시키고, 심장에 산소를 공급하는 혈관도 확장되어 심장 발작을 막는다.</p>
+        <ul class="dots">
+          <li>침에 의해 용해되어 흡수</li>
+          <li>혈관 이완제 (혈압 하강, 심장 부담 감소, 관상 순환 혈량 증가)</li>
+        </ul>
+      </div>
+      <div class="hl amber" style="margin:0">
+        <strong>NTG 투여 방법</strong>: 5분 간격으로 3회까지 투여 가능<br><br>
+        <strong>협심증 분류</strong><br>
+        1. 안정형 협심증(stable): 흉통 양상이 비교적 안정적<br>
+        2. 불안정형 협심증(unstable): 발작성 흉통 발생<br>
+        3. 이형적 협심증(variant): 비특이적
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">허혈(Ischemic) vs 경색(Infarct)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-blue">허혈 (Ischemia)</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">신체 조직에 필요한 혈액의 공급이 <strong>부족</strong>해 조직이 제대로 기능하지 못하는 것 → <strong>협심증</strong></p>
+    </div>
+    <div class="card">
+      <div class="card-head c-coral">경색 (Infarct)</div>
+      <p style="font-size:13px;line-height:1.7;color:#222">조직에 필요한 혈액의 공급이 <strong>막혀</strong> 조직이 괴사되는 것 → <strong>심근경색</strong></p>
+    </div>
+  </div>
+  <div class="hl coral">
+    <strong>⚠ 중요</strong>: 두 질환 중 응급으로 치료해도 사망할 확률이 높은 질환은 <strong>심근경색</strong> — 심근세포는 한번 괴사되면 회복 불가
+  </div>
+</div>
+
+<!-- ===== PAGE 4: 대사증후군·빈혈 ===== -->
+<div class="page" id="p3">
+  <div class="page-title">대사증후군 · 빈혈</div>
+
+  <div class="section-title">① 대사증후군 (Metabolic Syndrome)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-orange">정의 · 병태생리</div>
+      <div class="kv"><span class="k">정의</span><span class="v">동맥경화, 고혈압, 비만, 당뇨, 고지혈증 등 위험한 질환이 <strong>한 사람에게 동시에 나타나는</strong> 현상. 관상동맥 질환의 주요 위험요인</span></div>
+      <div class="kv"><span class="k">병태생리</span><span class="v">과체중(비만), 신체활동 저하, 유전적 요인이 원인. 복부 내장지방이 분비하는 물질들은 혈압을 올리고 <strong>인슐린의 역할을 방해</strong> → 근육과 지방세포가 포도당을 잘 받아들이지 못하게 됨 → 더 많은 인슐린 분비 → 심혈관 질환 위험↑</span></div>
+      <div class="kv"><span class="k">간호 보조</span><span class="v">체지방(특히 내장지방)을 줄이는 것이 우선. 식사 조절, 규칙적 운동, 금연, 절주. 생활 습관 개선 후에도 상태가 나쁜 경우 각 질환에 대한 약물 복용</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head c-orange">진단 기준 — 3가지 이상 해당 시</div>
+      <div class="compare-wrap" style="margin-top:6px">
+        <table class="compare-table">
+          <tr><th>구분</th><th>기준</th></tr>
+          <tr><td>허리둘레</td><td>남자 <strong>90cm 이상</strong>, 여자 <strong>85cm 이상</strong></td></tr>
+          <tr><td>중성지방</td><td><strong>150mg/dL 이상</strong></td></tr>
+          <tr><td>고밀도지방</td><td>남자 <strong>40mg/dL 미만</strong>, 여자 <strong>50mg/dL 미만</strong></td></tr>
+          <tr><td>혈압</td><td><strong>130/85mmHg 이상</strong> 혹은 고혈압약 복용 중</td></tr>
+          <tr><td>공복 혈당</td><td><strong>100mg/L 이상</strong> 혹은 혈당조절제 복용 중</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:14px">② 빈혈 (Anemia)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-purple">정의 · 증상</div>
+      <div class="kv"><span class="k">정의</span><span class="v">체내의 적혈구가 부족한 상태</span></div>
+      <div class="kv"><span class="k">대표 증상</span><span class="v"><strong>피로</strong>가 대표적. 쇠약감, 창백한 피부, 불규칙한 심장박동, 가슴 통증, 어지러움, 팔다리 저린 감각과 차가움, 두통</span></div>
+      <div class="kv"><span class="k">헤모글로빈 정상</span><span class="v">남성 <strong>13.0~17.0g/dL</strong>, 여성 <strong>12.0~16.0g/dL</strong></span></div>
+      <div class="kv"><span class="k">진단</span><span class="v">병력, 신체 검사, 혈액 검사, <strong>전체혈구계산(CBC, Complete Blood Count)</strong> 등으로 진단</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head c-purple">빈혈 간호 보조</div>
+      <ul class="dots">
+        <li>철분, 비타민 C, B12, 엽산의 섭취를 늘린 식이</li>
+        <li>철분제는 <strong>최소 6개월간</strong> 복용 (정상치로 회복되지 않으면 추가 복용)</li>
+        <li>철분제는 <strong>비타민 C와 함께</strong> 복용하면 흡수 ↑</li>
+        <li>우유, 커피, 차 등은 철분 흡수를 방해 → 철분제와 함께 먹지 않는다</li>
+        <li>철분제 복용 시 <strong>대변이 까만색</strong>으로 변함 (정상)</li>
+        <li>액상 철분제는 오렌지 주스와 섞어서 빨대로 복용 (치아 착색 방지)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">빈혈의 종류 — 4가지</div>
+  <div class="compare-wrap">
+    <table class="compare-table">
+      <tr><th>구분</th><th>철분결핍성 빈혈</th><th>악성 빈혈 (비타민결핍)</th><th>재생불량성 빈혈</th><th>용혈성 빈혈</th></tr>
+      <tr><td><strong>정의</strong></td><td>신체의 철 함유량이 정상보다 저하된 상태</td><td>적혈구 생성에 관여하는 <strong>비타민 B12 부족</strong>으로 나타나는 만성 빈혈</td><td><strong>골수의 조혈기능이 저하</strong>되고 조혈 조직이 지방화하는 상태</td><td>적혈구의 파괴 속도가 빨라 적혈구량이 부족하여 일어나는 빈혈</td></tr>
+      <tr><td><strong>호발</strong></td><td>치질로 인한 만성 출혈 환자</td><td>40~45세</td><td>10~30세, 화학약품 사용자</td><td>순환혈액 내 물리적·화학적·면역학적 손상자</td></tr>
+      <tr><td><strong>원인</strong></td><td>불충분한 식사, 혈액소실(적혈구 감소)</td><td>원인 불명, 비타민 B12 결핍</td><td>세균성 독소, 화학적 물질, 독소 및 방사선 물질</td><td>적혈구 내적 결함, 적혈구 외적 요인(감염)</td></tr>
+      <tr><td><strong>증상</strong></td><td>혀의 통증, 윤기없는 피부·머리털, 숟가락 모양의 손톱</td><td>전신 쇠약, 창백, 호흡곤란, 심계항진, 머리털 일찍 희어짐, 소화기 장애, 황달</td><td>창백, 혈뇨, 구강 괴사, 월경 과다, 생식기 출혈</td><td>황달, 비장 비대, 간비대, 담석증</td></tr>
+      <tr><td><strong>치료·간호</strong></td><td>균형있는 식사, 철분제 투여, 비타민C 처방(철분 흡수 도움)</td><td>비타민 B12 주사, 수혈</td><td>수혈, 구강간호, 안정, 보온, 육류와 채소·과일 식사(생고기·생과일 금지), 감염방지</td><td>용혈 원인 제거, 수분·전해질 균형 유지, 신장기능 유지, 수혈</td></tr>
+      <tr><td><strong>예후</strong></td><td>—</td><td><strong>위암이 잘 발생</strong>. 수시로 대변검사로 잠혈 통한 위암 조기 발견</td><td>—</td><td>—</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===== PAGE 5: 수혈·채혈·핵심정리 ===== -->
+<div class="page" id="p4">
+  <div class="page-title">수혈 · 채혈 시의 간호 · 핵심 정리</div>
+
+  <div class="section-title">① 수혈 (Blood Transfusion) 시의 간호</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-blue">수혈 적응증 · 원칙</div>
+      <div class="kv"><span class="k">수혈이란</span><span class="v">한 사람의 혈액을 다른 사람에게 이식하는 것</span></div>
+      <div class="kv"><span class="k">적응증</span><span class="v">출혈이 심한 급성 빈혈, 산소 결핍증, 혈색소 수치가 낮은 빈혈, 화상으로 탈수 심한 경우, 혈액응고 인자 부족</span></div>
+      <div class="kv"><span class="k">핵심 원칙</span><span class="v">수혈 시 급성 용혈 방지를 위해 반드시 <strong>수여자와 공혈자의 혈액형이 일치</strong>하는지 혈액형 검사와 교차시험 검사 필수</span></div>
+      <div class="kv"><span class="k">주삿바늘</span><span class="v"><strong>17~19게이지</strong> 사용하여 적혈구의 용혈 방지</span></div>
+      <div class="kv"><span class="k">혈액 온도</span><span class="v">체온만큼 높여서 수혈</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head c-blue">수혈 환자 간호 절차</div>
+      <div class="step-row"><div class="step-num b">1</div><div class="step-text">의사 및 <strong>2명의 간호사</strong>가 수혈자의 이름, 혈액형, 날짜, 혈액의 종류를 확인하고 수혈백과 환자 의무기록지에 서명</div></div>
+      <div class="step-row"><div class="step-num b">2</div><div class="step-text">수혈용 혈액을 환자에게 가져온 후 <strong>수혈할 것임을 설명</strong></div></div>
+      <div class="step-row"><div class="step-num b">3</div><div class="step-text">수혈자는 <strong>가장 편안한 자세</strong>로 위치</div></div>
+      <div class="step-row"><div class="step-num b">4</div><div class="step-text">수혈 시작 후 <strong>처음 15분 동안은 대상자와 함께</strong> 관찰</div></div>
+      <div class="step-row"><div class="step-num b">5</div><div class="step-text">수혈을 하다 남은 혈액은 <strong>가온해서는 안 됨</strong>. 즉시 사용 안 할 경우 혈액은행에 보관 의뢰</div></div>
+    </div>
+  </div>
+
+  <div class="hl coral">
+    <strong>⚠ 수혈 이상 반응 발생 시 즉시 수혈 중지 후 간호사·의사에게 보고</strong><br>
+    용혈 반응, 알레르기 반응, 공기색전증, 오한, 호흡곤란, 두드러기, 요의 감소, 발열, <strong>혈압 하강, 맥박 수 증가</strong>, 두통, 혈뇨 등<br>
+    ※ 부작용 발생 시: 나타난 후 <strong>첫 소변</strong>과 <strong>수혈하지 않은 쪽의 팔</strong>에서 혈액을 뽑아 검사실로 보냄 (혈액형 판정과 교차 시험을 위해)
+  </div>
+
+  <div class="section-title" style="margin-top:12px">② 채혈 (Blood Collection) 시의 간호</div>
+  <div class="full-card">
+    <div class="grid2">
+      <ul class="dots">
+        <li>공혈자가 채혈 경험이 없는 경우 당황하기 쉬우므로 <strong>편안하고 안정</strong>할 수 있도록 도움</li>
+        <li>공혈자는 침상에 편안히 눕도록 하고 채혈 용기를 <strong>보이지 않는 곳</strong>에 두는 것이 좋음</li>
+        <li>채혈은 <strong>상박와</strong>에서 보통 실시</li>
+      </ul>
+      <ul class="dots">
+        <li>필요한 양의 혈액이 채혈되면 <strong>지혈대를 풀어주고</strong> 손을 이완하도록 함</li>
+        <li>주삿바늘을 뽑은 후 환자를 <strong>앙와위로 눕게 하고 15~30분 가량 휴식</strong>. 이때 침대의 발치를 약간 올려주면 좋음</li>
+        <li>휴식 후 공혈자를 관찰하여 이상이 있으면 다시 휴식시키면서 보고</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">단원 핵심 암기 포인트</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head c-green">✅ 빈출 개념 체크리스트</div>
+      <ul class="chk">
+        <li>저혈압 정의: 수축기압 <strong>90mmHg 미만</strong></li>
+        <li>1차성 저혈압: 인구 <strong>1~2%</strong>, <strong>치료 불필요</strong></li>
+        <li>기립성 저혈압 기준: <strong>3분 이내 수축기 20mmHg↓, 이완기 10mmHg↓</strong></li>
+        <li>식후 저혈압: 소화기계로 혈액 집중 → 타 장기 혈액 감소</li>
+        <li>협심증: 관상동맥 <strong>좁아짐</strong>, 통증 <strong>15분 이내 완화</strong>, NTG 효과 있음</li>
+        <li>심근경색: 관상동맥 <strong>막힘</strong>, 통증 <strong>30분 이상</strong>, NTG <strong>효과 없음</strong></li>
+        <li>심근경색 간호: 절대안정, 산소 투여, <strong>모르핀 IV</strong></li>
+        <li>강심제 투여 전: <strong>1분간 심첨 맥박 측정</strong>, 서맥 시 투약 중지</li>
+        <li>대사증후군: <strong>5가지 기준 중 3가지 이상</strong> 해당 시</li>
+        <li>악성 빈혈: 비타민 <strong>B12 결핍</strong>, <strong>위암</strong>이 잘 발생</li>
+        <li>수혈 시: <strong>17~19게이지</strong> 사용, 처음 <strong>15분 동안</strong> 함께 관찰</li>
+        <li>수혈 이상반응: 즉시 <strong>수혈 중지</strong> → 간호사·의사에게 보고</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-head c-amber">⚠ 자주 틀리는 선지 주의</div>
+      <ul class="chk warn">
+        <li>1차성 저혈압 = <strong>치료 불필요</strong> (1차성 고혈압과 반대)</li>
+        <li>기립성 저혈압 예방 = <strong>천천히 일어나기</strong>, 압박 스타킹</li>
+        <li>협심증 = 혈관 좁아짐(허혈) / 심근경색 = 혈관 막힘(괴사)</li>
+        <li>협심증 통증 = NTG로 완화 / 심근경색 통증 = NTG <strong>효과 없음</strong></li>
+        <li>심근경색 모르핀: 흉통 감소 + <strong>심장 부담/산소요구량 저하</strong></li>
+        <li>강심제 투여 전 서맥(60회↓) → <strong>투약 중지</strong></li>
+        <li>철분제: <strong>최소 6개월</strong> 복용, 비타민C와 함께 복용</li>
+        <li>철분제 복용 시 <strong>대변 까만색</strong> = 정상 (비정상 ×)</li>
+        <li>악성 빈혈 예후: <strong>위암</strong>이 잘 발생 → 대변 잠혈 검사 필요</li>
+        <li>수혈 남은 혈액: <strong>가온 금지</strong> → 혈액은행에 보관</li>
+        <li>수혈 이상반응 후: 첫 소변 + <strong>수혈하지 않은 쪽 팔</strong>에서 채혈</li>
+        <li>채혈 후: 앙와위, <strong>15~30분 휴식</strong>, 발치 약간 올림</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  간호의 기초 8단원 심화 · 순환계통 질환 학습자료 | 보건간호과 자율학습용
+</footer>
+
+<script>
+const tabs = document.querySelectorAll('.tab-btn');
+const pages = document.querySelectorAll('.page');
+const prog = document.getElementById('prog');
+const pct = [20, 40, 60, 80, 100];
+function show(i) {
+  tabs.forEach((t, j) => t.classList.toggle('active', i === j));
+  pages.forEach((p, j) => p.classList.toggle('show', i === j));
+  prog.style.width = pct[i] + '%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
