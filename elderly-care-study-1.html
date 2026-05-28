@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>노인 간호 보조 Part 1 | 보건간호과</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:14px;color:#1a1a1a;background:#f4f8f4;word-break:keep-all;}
+.site-header{background:linear-gradient(135deg,#1a5c2e 0%,#2d8f4e 55%,#4caf70 100%);color:#fff;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,0.18);}
+.site-header h1{font-size:20px;font-weight:700;}
+.site-header .sub{font-size:12px;opacity:.85;margin-top:3px;}
+.badge-wrap{display:flex;gap:8px;}
+.header-badge{font-size:11px;font-weight:700;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:4px 12px;color:#fff;}
+.tab-nav{display:flex;background:#fff;border-bottom:2px solid #2d8f4e;padding:0 24px;overflow-x:auto;position:sticky;top:0;z-index:100;box-shadow:0 2px 6px rgba(0,0,0,0.07);scrollbar-width:thin;}
+.tab-btn{padding:13px 15px;font-size:13px;font-weight:500;font-family:inherit;color:#666;background:transparent;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;cursor:pointer;white-space:nowrap;transition:all .2s;}
+.tab-btn:hover{color:#2d8f4e;background:#f0fdf4;}
+.tab-btn.active{color:#2d8f4e;border-bottom-color:#2d8f4e;font-weight:700;}
+.tab-btn .num{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;font-size:11px;font-weight:700;background:#2d8f4e;color:#fff;border-radius:50%;margin-right:6px;}
+.tab-btn.active .num{background:#1a5c2e;}
+.progress-bar{height:3px;background:#e5e7eb;position:sticky;top:48px;z-index:99;}
+.progress-fill{height:100%;background:#2d8f4e;transition:width .3s;}
+.page{display:none;padding:20px 24px 40px;max-width:960px;margin:0 auto;}
+.page.show{display:block;}
+.page-title{font-size:17px;font-weight:700;color:#1a5c2e;padding:10px 16px;margin-bottom:16px;background:linear-gradient(90deg,#f0fdf4,#fff);border-left:4px solid #4caf70;border-radius:0 8px 8px 0;}
+.sec-title{font-size:14px;font-weight:700;color:#2d8f4e;padding-left:10px;border-left:3px solid #2d8f4e;margin:16px 0 8px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;}
+@media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px 16px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.card-title{font-size:13px;font-weight:700;color:#1a5c2e;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid #a7f3d0;}
+.card-title.red{color:#991b1b;border-bottom-color:#fecaca;}
+.card-title.blue{color:#1e40af;border-bottom-color:#bfdbfe;}
+.card-title.orange{color:#92400e;border-bottom-color:#fde68a;}
+.card-title.purple{color:#5b21b6;border-bottom-color:#ddd6fe;}
+.hl{border-radius:8px;padding:11px 14px;margin-bottom:10px;}
+.hl.green{background:#f0fdf4;border:1px solid #a7f3d0;}
+.hl.red{background:#fff1f2;border:1px solid #fecaca;}
+.hl.blue{background:#eff6ff;border:1px solid #bfdbfe;}
+.hl.yellow{background:#fefce8;border:1px solid #fde047;}
+.hl.purple{background:#f5f3ff;border:1px solid #ddd6fe;}
+.hl.gray{background:#f9fafb;border:1px solid #e5e7eb;}
+.hl.orange{background:#fff7ed;border:1px solid #fed7aa;}
+.hl-title{font-size:12px;font-weight:700;margin-bottom:6px;color:#1a5c2e;}
+.hl-title.red{color:#991b1b;}
+.hl-title.blue{color:#1e40af;}
+.hl-title.purple{color:#5b21b6;}
+.hl-title.orange{color:#92400e;}
+ul.dot{list-style:none;}
+ul.dot li{font-size:13px;line-height:1.85;padding-left:18px;position:relative;color:#222;}
+ul.dot li::before{content:'•';position:absolute;left:0;color:#2d8f4e;font-weight:700;}
+ul.dot.red li::before{color:#dc2626;}
+ul.dot.blue li::before{color:#2563eb;}
+ul.dot.purple li::before{color:#7c3aed;}
+ul.dot.orange li::before{color:#d97706;}
+ul.chk{list-style:none;}
+ul.chk li{font-size:13px;line-height:1.85;padding-left:20px;position:relative;color:#222;}
+ul.chk li::before{content:'✓';position:absolute;left:0;color:#059669;font-weight:700;}
+ul.chk.warn li::before{content:'⚠';color:#dc2626;font-size:11px;}
+p.body{font-size:13px;line-height:1.85;color:#333;}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:12px;margin:2px;}
+.badge.gr{background:#dcfce7;color:#14532d;}
+.badge.rd{background:#fee2e2;color:#7f1d1d;}
+.badge.bl{background:#dbeafe;color:#1e3a8a;}
+.badge.pu{background:#ede9fe;color:#3b0764;}
+.badge.or{background:#ffedd5;color:#7c2d12;}
+.cmp-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:12px;}
+.cmp-table th{background:#1a5c2e;color:#fff;padding:8px 10px;text-align:center;font-weight:700;}
+.cmp-table th.sub1{background:#2d8f4e;}
+.cmp-table th.sub2{background:#1e40af;}
+.cmp-table th.sub3{background:#b45309;}
+.cmp-table td{padding:8px 10px;border:1px solid #e5e7eb;vertical-align:top;line-height:1.7;}
+.cmp-table tr:nth-child(even) td{background:#fafafa;}
+.cmp-table tr:hover td{background:#f0fdf4;}
+.cmp-table .row-hd{background:#d1fae5;font-weight:700;color:#1a5c2e;text-align:center;width:100px;}
+.divider{border:none;border-top:1px solid #e5e7eb;margin:14px 0;}
+.full-card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px 18px;margin-bottom:12px;}
+.memo-box{background:linear-gradient(135deg,#1a5c2e,#2d8f4e);color:#fff;border-radius:10px;padding:14px 16px;margin-bottom:12px;}
+.memo-box .memo-title{font-size:13px;font-weight:700;margin-bottom:8px;opacity:.9;}
+.memo-box ul{list-style:none;}
+.memo-box ul li{font-size:13px;line-height:1.9;padding-left:16px;position:relative;}
+.memo-box ul li::before{content:'→';position:absolute;left:0;opacity:.8;}
+.site-footer{text-align:center;padding:20px;color:#9ca3af;font-size:12px;margin-top:20px;}
+em{font-style:normal;font-weight:700;color:#2d8f4e;}
+em.rd{color:#dc2626;}
+em.bl{color:#1d4ed8;}
+em.pu{color:#7c3aed;}
+em.or{color:#d97706;}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div>
+    <h1>👴 노인 간호 보조 학습자료 Part 1</h1>
+    <div class="sub">보건간호과 · 대상자별 간호보조 III단원 | 2022 개정 교육과정</div>
+  </div>
+  <div class="badge-wrap">
+    <div class="header-badge">5 PAGES</div>
+    <div class="header-badge">자율학습용</div>
+  </div>
+</header>
+<div class="progress-bar"><div class="progress-fill" id="prog" style="width:20%"></div></div>
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="show(0)"><span class="num">1</span>노인 이해·인구 특성</button>
+  <button class="tab-btn" onclick="show(1)"><span class="num">2</span>노화에 따른 신체 변화 I</button>
+  <button class="tab-btn" onclick="show(2)"><span class="num">3</span>노화에 따른 신체 변화 II</button>
+  <button class="tab-btn" onclick="show(3)"><span class="num">4</span>심리·사회적 변화</button>
+  <button class="tab-btn" onclick="show(4)"><span class="num">5</span>단원평가·빈출 암기</button>
+</nav>
+
+<!-- PAGE 1 -->
+<div class="page show" id="p0">
+  <div class="page-title">📌 Page 1 — 노인 이해·인구 특성</div>
+
+  <div class="sec-title">① 노화(aging)의 개념</div>
+  <div class="full-card">
+    <ul class="dot">
+      <li><em>노화(aging)</em> — 나이가 많아지는 <em>가령 현상</em> (질병이나 사고 없이 시간의 흐름에 따라 생체 구조가 쇠퇴하는 현상)</li>
+      <li><em>넓은 의미</em>: 출생 후 시간의 경과에 따라 정상적으로 일어나는 모든 변화의 총체, <em>출생과 동시에 시작</em></li>
+      <li><em>노화의 부정적 측면</em>: 신체적·심리적·정신적·사회적 기능 저하</li>
+      <li><em>노화의 긍정적 측면</em>: 경험과 지혜의 축적, 숙련도 향상, 활동 능력 확대</li>
+      <li><em>노화의 고유성</em>: 피할 수 없지만 반드시 연령과 일치하지 않는 <em>개인차</em>가 있음</li>
+    </ul>
+  </div>
+
+  <div class="sec-title">② UN의 고령화 사회 분류 (65세 이상 인구 비율 기준)</div>
+  <div class="grid3">
+    <div class="hl green">
+      <div class="hl-title">① 고령화 사회 (aging society)</div>
+      <p class="body" style="font-size:13px"><em>7% 이상 ~ 14% 미만</em></p>
+      <p class="body" style="font-size:12px;margin-top:4px">한국: 2000년 진입</p>
+    </div>
+    <div class="hl blue">
+      <div class="hl-title blue">② 고령 사회 (aged society)</div>
+      <p class="body" style="font-size:13px"><em class="bl">14% 이상 ~ 20% 미만</em></p>
+      <p class="body" style="font-size:12px;margin-top:4px">한국: 2017년 진입</p>
+    </div>
+    <div class="hl red">
+      <div class="hl-title red">③ 초고령 사회 (super-aged society)</div>
+      <p class="body" style="font-size:13px"><em class="rd">20% 이상</em></p>
+      <p class="body" style="font-size:12px;margin-top:4px">한국: 2026년 예측</p>
+    </div>
+  </div>
+
+  <div class="sec-title">③ 국가별 고령화 속도 비교</div>
+  <div class="card">
+    <table class="cmp-table">
+      <thead>
+        <tr><th>구분</th><th class="sub1">7% (고령화)</th><th class="sub1">14% (고령)</th><th class="sub1">20% (초고령)</th><th class="sub2">7→14% 소요 연수</th><th class="sub2">14→20% 소요 연수</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="row-hd">일본</td><td>1970</td><td>1994</td><td>2006</td><td>24년</td><td>12년</td></tr>
+        <tr><td class="row-hd">프랑스</td><td>1864</td><td>1976</td><td>2018</td><td>112년</td><td>42년</td></tr>
+        <tr><td class="row-hd">영국</td><td>1929</td><td>1975</td><td>2028</td><td>46년</td><td>53년</td></tr>
+        <tr><td class="row-hd">미국</td><td>1942</td><td>2014</td><td>2032</td><td>72년</td><td>18년</td></tr>
+        <tr><td class="row-hd" style="background:#fef9c3;color:#854d0e">한국</td><td><strong>2000</strong></td><td><strong>2017</strong></td><td><strong>2026</strong></td><td><em class="rd">17년</em></td><td><em class="rd">9년</em></td></tr>
+      </tbody>
+    </table>
+    <div class="hl yellow" style="font-size:12.5px">한국은 서구 사회에 비해 <em>매우 빠른 고령화</em> 속도 (7→20% 고령화까지 26년)</div>
+  </div>
+
+  <div class="sec-title">④ 노인 인구의 특성</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">주요 특성</div>
+      <ul class="dot">
+        <li><em>평균 수명 증가</em> — 의료기술 발달, 위생 개선</li>
+        <li>여성 노인: 평균 수명 남성보다 길어 경제적 어려움, 독거 기간 길어짐</li>
+        <li><em>만성 질환 유병률</em> — 고혈압(56.7%)>관절염>당뇨병>요통·좌골통>고지혈증>골다공증 순</li>
+        <li>심장 질환으로 인한 사망률 감소, 암으로 인한 사망률 증가</li>
+        <li>노인 인구 의료비 증가율 > 전체 인구 의료비 증가율</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">노년 부양비 & 노령화 지수</div>
+      <ul class="dot">
+        <li><em>노년 부양비</em> = 65세 이상 인구 ÷ 15~64세 인구 × 100</li>
+        <li><em>노령화 지수</em> = 65세 이상 인구 ÷ 0~14세 인구 × 100</li>
+        <li>노령화 지수 증가 → 노년 부양비 증가</li>
+        <li>2015년: 생산 가능 인구 <em>5.7명</em>이 고령자 1명 부양</li>
+        <li>2030년 전망: 생산 가능 인구 <em>2.6명</em>이 고령자 1명 부양</li>
+      </ul>
+      <hr class="divider">
+      <div class="card-title" style="margin-top:4px">소외와 외로움 문제</div>
+      <ul class="dot">
+        <li>은퇴 후 중심 역할 상실, 사회적 관계망 축소 → 심리적 소외감</li>
+        <li>자녀와 떨어져 살고 배우자 사별 후 독거 → 역할 상실·소외감 심화</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p1">
+  <div class="page-title">📌 Page 2 — 노화에 따른 신체 변화 I (세포·근골격·순환·호흡·소화)</div>
+
+  <div class="sec-title">① 세포 변화</div>
+  <div class="hl green">
+    <ul class="dot">
+      <li>세포 수 감소 → 기능하는 세포 수 감소, 세포·뼈의 질량 감소</li>
+      <li>세포 외액은 일정하게 유지, 세포 내액 감소 → <em>총 체액량 감소</em> → <em class="rd">탈수</em> 위험</li>
+    </ul>
+  </div>
+
+  <div class="sec-title">② 근골격계 변화</div>
+  <div class="card">
+    <ul class="dot">
+      <li><em>척추후만증</em>, 관절 비대, 근육 처짐, 신장 감소</li>
+      <li>근육량·근력·기능 감소 — 비활동적인 노인에게 주로 → <em>운동 필요</em></li>
+      <li>건(腱)이 위축·딱딱해져 건반사 감소·소실, 그러나 <em>무릎 반사는 유지</em></li>
+      <li><em>골 흡수량 > 골 생성량</em> → 칼슘 밀도 낮아짐 → <em>골다공증·골절 발생 쉬움</em></li>
+      <li>장골이 짧아지지는 않지만 <em>얇아진 디스크 + 짧아진 척추뼈</em> → 척추 길이 짧아지고 <em>키 줄어듦</em></li>
+      <li>관절 연골 표면 퇴화, 끝이 뾰족하거나 돌출 → 관절 움직임·동작에 제약</li>
+    </ul>
+    <div class="hl yellow" style="margin-top:8px">
+      노인 권장 근력 강화 운동: <em>수영, 팔굽혀 펴기, 윗몸 일으키기, 가벼운 아령·모래주머니·고무 밴드</em>
+    </div>
+  </div>
+
+  <div class="sec-title">③ 순환기계 변화</div>
+  <div class="card">
+    <ul class="dot">
+      <li>심장 크기: 노화보다 <em>심장 질환</em>으로 비대, 두드러진 활동 부족은 <em>심장 위축</em></li>
+      <li><em>방실판(atrioventricular valves)</em> — 경화·섬유화로 두꺼워지고 강직</li>
+      <li>판막 불완전 폐쇄 → <em>수축기·이완기의 잡음</em></li>
+      <li><em>심박출량·일회 박출량 감소</em> + 심내막·좌심실 섬유화 → <em>체위성 저혈압</em> 유발</li>
+      <li>심장 박동 수: 스트레스 시 증가하나 청년보다 증가 정도 적음, 정상으로 돌아오는 속도 느림</li>
+      <li>혈관 내막의 섬유화·칼슘·지방 축적·세포 증식 → <em>죽상동맥 경화증</em>으로 발전</li>
+      <li>압력 수용기 기능 장애 + 말초 저항 증가 → <em>수축기 혈압 증가</em></li>
+      <li>혈관 탄력 감소 + 피하 지방 감소 → 머리·목·사지 혈관 돌출</li>
+    </ul>
+  </div>
+
+  <div class="sec-title">④ 호흡기계 변화</div>
+  <div class="card">
+    <ul class="dot">
+      <li>코 끝이 아래로 처지고 비중격 만곡증 → <em>코골이·수면 무호흡증</em></li>
+      <li>늑연골 석회화 → 기도·흉곽 강직, <em>가슴 전후경(AP diameter) 증가</em>, 척추후만증, 호흡 근력 약화</li>
+      <li>폐의 섬모 수 감소 + 기관지 점액샘 비대 → <em>가래·분비물 배출 능력 약화</em></li>
+      <li>폐포 탄력성 감소, 폐 강직성 심해짐, 기저막 팽창 불충분 → <em>이물질 배출 능력 감소</em></li>
+      <li>폐의 비효과적 호기 → <em>잔기량 증가</em>, <em>폐활량 감소</em> → 부동 시 <em>호흡기 감염 고위험군</em></li>
+      <li>지구력 트레이닝은 노인의 <em>폐활량 증가</em> 가능</li>
+    </ul>
+  </div>
+
+  <div class="sec-title">⑤ 소화기계 변화</div>
+  <div class="card">
+    <ul class="dot">
+      <li><em>치아</em>: 치주 질환 빈도 증가, 치아 상실 시 의치 사용 → 불편감 / 식욕·소화 기능 감퇴</li>
+      <li><em>혀</em>: 위축·만성 자극으로 미각 서서히 약화, 특히 <em>단맛 기능이 다른 맛보다 많이 둔해짐</em></li>
+      <li>노인은 성인에 비해 약 <em>1/3</em>의 침 생성 → <em>구내 건조증</em> 흔히 발생</li>
+      <li>식도 운동성 저하, 약간 늘어남, 식도 하부 조임근 이완 → 흡인 위험</li>
+      <li>소장·대장: 전반적 위축, 소장벽 영양 흡수 세포 감소, 대장 점액분비·직장벽 탄력 감소</li>
+      <li>노화로 인한 <em>대장 운동력 변화는 발생하지 않지만</em> 섬유소·수분 부족, 운동 부족 → <em>변비</em> 자주 발생</li>
+      <li>간의 크기 감소, 손상된 간세포 재생력 저하, 비효율적 콜레스테롤 대사 → 담석 발생 빈도 증가, 약물 중독 가능성 높아짐</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p2">
+  <div class="page-title">📌 Page 3 — 노화에 따른 신체 변화 II (비뇨·생식·내분비·신경·감각·피부)</div>
+
+  <div class="sec-title">① 비뇨기계 변화</div>
+  <div class="card">
+    <ul class="dot">
+      <li>네프론 수 감소 → 신장 조직 손실 → <em>사구체 여과율 감소</em></li>
+      <li>세뇨관 기능 감소 → 물질 교환 능력, 물·나트륨 보존 능력 저하, 당 재흡수 감소 → <em>단백뇨</em></li>
+      <li>방광 근육 약화·기능 감소 → <em>빈뇨·긴박뇨·야뇨증</em></li>
+      <li>다산한 여성: 골반 근육 약화 → <em>긴장성 요실금</em></li>
+    </ul>
+  </div>
+
+  <div class="sec-title">② 생식기계 변화</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">남성</div>
+      <ul class="dot">
+        <li>정낭의 세포액 유지 능력 감소, 정세관의 정자 수 감소</li>
+        <li>오르가즘·사정 강도 줄어들지만 <em>발기·사정 능력은 유지</em></li>
+        <li>보편적으로 <em>전립선 비대</em> (대부분 양성, 악성 발전 위험 → 정기 검사)</li>
+        <li>65세 이상의 3/4은 전립샘증 → <em>빈뇨</em> 원인</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">여성</div>
+      <ul class="dot">
+        <li>호르몬 변화 → 외음부 위축, 피하지방·음모 감소, 음순 위축</li>
+        <li>질 내부: 건조하고 알칼리화 → 균 무리·분비물 감소</li>
+        <li>자궁 크기 감소, 자궁내막 위축 (호르몬 반응 지속)</li>
+        <li>에스트로겐 감소 → 골반 저부 근육 약화 → <em>복압 증가 시 불수의적 소변 배출</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">③ 내분비계·신경계 변화</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">내분비계</div>
+      <ul class="dot">
+        <li>갑상샘 기능 저하 → <em>기초대사량 감소</em></li>
+        <li>생식선 분비 감소 → 테스토스테론·에스트로겐·프로게스테론 점진적 감소</li>
+        <li>인슐린에 대한 세포 민감성 감소 → 인슐린 분비 지연·비효과적 방출 → <em>당 대사 능력 감소</em></li>
+        <li>노인에게서 <em>혈당이 높게 측정</em>되는 경우 흔함 (당뇨병이 아닌 경우)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">신경계</div>
+      <ul class="dot">
+        <li>뇌세포: 오랜 시간에 걸쳐 감소, 특히 <em>55세 이후</em> 뇌의 크기·무게 감소</li>
+        <li>신경전도 속도 느려짐 → <em>반사 느려짐</em>, 인지·반응 지연, <em>단기기억능력</em> 많이 감소</li>
+        <li>균형 반응 느려짐 → <em>낙상</em> 원인</li>
+        <li>수면 양상 변화: 전체 수면 시간 짧아짐</li>
+        <li><em>REM 수면</em>: 일정하게 유지 / <em>NREM 수면</em>: 짧아짐</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">④ 감각 기계 변화</div>
+  <div class="card">
+    <table class="cmp-table">
+      <thead><tr><th style="width:70px">감각</th><th>주요 변화</th><th class="sub2">간호 고려사항</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="row-hd">시각</td>
+          <td>40대 이후 노안 시작, 50대 백내장 / 간상세포·로돕신 감소 → 어두운 곳에서 시력 저하 / 수정체 황변 → 파란색·녹색·보라색 구별 어려움 / 깊이 지각 왜곡 / 눈물 분비 감소 → 안구 건조 / 노인환(각막 주위 지방 축적)</td>
+          <td>글씨 크게, 간접 조명 / 대비색 활용 / 커튼으로 눈부심 차단 / 노크하고 시야 내에서 간호 / 야맹증 시 밤 운전 자제 / 난간 잡고 걷기</td>
+        </tr>
+        <tr>
+          <td class="row-hd">청각</td>
+          <td>내이 변화 → 청력 상실 / <em>2,000Hz 이상 고주파</em>가 가장 먼저 소실 / 귀지 케라틴 증가 → 청각 영향 / 전정 구조 퇴화 → 평형 감각 변화</td>
+          <td>소음 제한, 조용한 환경 / 밝은 곳에서 마주보고 / 고음 피하고 천천히 / 필요 시 글로 표현</td>
+        </tr>
+        <tr>
+          <td class="row-hd">후각</td>
+          <td>노인의 절반 정도 후각 상실 / 80세 → 최상의 기능보다 절반 감소 / 남성이 더 많이 감소</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td class="row-hd">미각</td>
+          <td>전체적 미각 감소 / 혀 <em>뒤쪽 쓴맛·신맛 기능 증가</em> / 앞쪽 <em>단맛 기능 감소</em> → 노인 충치 발생 원인</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td class="row-hd">촉각</td>
+          <td>누르는 힘·동통·온도 감지 능력 감소 → 환경에 대한 잘못된 인식 → <em>안전 위협</em></td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-title">⑤ 피부계 변화</div>
+  <div class="card">
+    <ul class="dot">
+      <li>피부 탄력성 감소, 건조, 푸석푸석해짐, 피하 지방 감소 → 주름·처짐</li>
+      <li><em>노인성 반점(검버섯)</em> — 멜라닌 세포가 뭉쳐 있는 것</li>
+      <li>피부 면역 기능 감소 → 피부 감염에 쉽게 노출</li>
+      <li>두피·치골·겨드랑이 털: 얇아지고 회색, 그러나 <em>코·귀의 털은 더 두꺼워짐</em></li>
+      <li>손톱: 성장 느려지고 깨지거나 부서지기 쉬움, <em>세로선</em> 발달, 손톱 반달 크기 감소</li>
+      <li>땀샘 수·기능 감소 → 발한 약간 줄어듦</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p3">
+  <div class="page-title">📌 Page 4 — 심리·사회적 변화</div>
+
+  <div class="sec-title">① 에릭슨(Erikson)의 노년기 발달 과업</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">통합성 (integrity) 성취</div>
+      <ul class="dot">
+        <li>자신의 인생 경험을 <em>긍정적으로 보며</em> 과거와 현재의 인생을 수용</li>
+        <li>성숙함 보임, 과거의 생활 유형 수용, 평온</li>
+        <li>자아 실현 계속하면서 <em>죽음을 수용</em>할 수 있게 됨</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title red">통합성 미성취</div>
+      <ul class="dot red">
+        <li>과거에 대한 <em class="rd">후회와 원망</em></li>
+        <li>비현실적이고 도달하기 어려운 목표 설정</li>
+        <li>죽음에 대한 <em class="rd">공포와 절망</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">② 노년기 성격 변화의 특징 (7가지)</div>
+  <div class="card">
+    <div class="grid2">
+      <ul class="dot">
+        <li><em>조심성 증가</em>: 정확성 중시, 결정에 자신감 결여</li>
+        <li><em>경직성 증가</em>: 새로운 변화 싫어하고 융통성 없어짐</li>
+        <li><em>우울 성향 증가</em>: 신체 질병, 배우자 사망, 경제 사정 악화, 사회 고립</li>
+        <li><em>생애에 대한 회고 경향</em>: 해결하지 못한 것 찾아 새로운 해결 시도</li>
+      </ul>
+      <ul class="dot">
+        <li><em>친근한 사물에 대한 애착심 증가</em>: 과거 회상, 마음의 안정</li>
+        <li><em>성역할 지각 변화</em>: 남성 → 친밀감·의존성 증가 / 여성 → 공격성·자기주장 증가</li>
+        <li><em>의존성 증가</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">③ 노인의 심리·사회적 변화와 적응 방법</div>
+  <div class="card">
+    <table class="cmp-table">
+      <thead><tr><th>생활 사건</th><th class="sub1">심리·사회적 변화</th><th class="sub2">적응 방법</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>생활형태·가족 유대 변화<br>(자녀 성장, 핵가족화)</td>
+          <td>심리적 상실감, 역할 변화 (부모→조부모)</td>
+          <td>조부모 역할로 만족감 / 정기적 부모-자녀 접촉</td>
+        </tr>
+        <tr>
+          <td>은퇴(퇴직)</td>
+          <td>역할 상실, 수입 감소, 사회 생활 축소</td>
+          <td>퇴직을 자유·기회·성장의 시기로 이해 / 여가 선용 / 감소된 수입 현명하게 관리</td>
+        </tr>
+        <tr>
+          <td>배우자의 죽음, 의미 있는 사람의 죽음</td>
+          <td>애도 및 상실 과정 (심리적), 독신 생활 (사회적)</td>
+          <td>배우자 의존도 높았던 남성에게 더 적응 어려움 / 친구·지역 모임 활용</td>
+        </tr>
+        <tr>
+          <td>건강 상태 변화 (기능 쇠약) → 질병과 무능력</td>
+          <td>자신의 신체상·자아 개념 변화, 죽음에 대한 두려움</td>
+          <td>신체 기능 감퇴 이해, 최대한 독립성·위엄을 지니며 목표 세움</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-title">④ 노인의 시각 변화에 따른 간호</div>
+  <div class="grid2">
+    <div class="hl green">
+      <div class="hl-title">시각 장애가 있는 경우</div>
+      <ul class="dot green" style="font-size:12.5px">
+        <li>대화 시작 시 자신의 이름 소개</li>
+        <li>주변 환경 설명 (낯선 환경에 불안하지 않도록)</li>
+        <li>'저기·거기·이것' 등 지시 대명사 사용 금지</li>
+        <li>구체적인 사물의 이름 사용</li>
+        <li>점자·문자 해독기 익숙한 경우 활용</li>
+      </ul>
+    </div>
+    <div class="hl blue">
+      <div class="hl-title blue">청각 장애가 있는 경우</div>
+      <ul class="dot blue" style="font-size:12.5px">
+        <li>소음 제한 → 조용한 환경 조성</li>
+        <li>밝은 곳에서 같은 높이, 마주보고 앉기</li>
+        <li>대화 시 고음 피하고 천천히 분명하게 발음</li>
+        <li>필요 시 글로 써서 의사 표현</li>
+        <li>대화 중 얼굴에 손 대거나 껌 씹는 행동 삼가기</li>
+        <li>짧은 문장으로, 다음 문장 전에 약간 간격 두기</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">⑤ 인지 기능 장애가 있는 경우</div>
+  <div class="hl green">
+    <ul class="dot">
+      <li>시계·달력 같은 시각적 기구 활용</li>
+      <li>이름과 존칭 사용 → 주체성·정체성 강화</li>
+      <li>서두르지 않고 안정된 환경 유지</li>
+      <li>간단하고 익숙한 단어를 사용하고 정확하게 천천히 말함</li>
+      <li>주변의 불필요한 자극 제거</li>
+      <li>의사소통 중 배설·배고픔 등 기본욕구 불충족으로 인한 불안 여부 확인·해결</li>
+      <li>노인이 적절한 단어를 떠올리지 못할 경우 관련 단서 제공</li>
+      <li>노인이 한 말의 내용이 사실이 아니더라도 수용</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p4">
+  <div class="page-title">📌 Page 5 — 단원평가 해설·빈출 암기</div>
+
+  <div class="sec-title">① 단원평가 문항 해설</div>
+  <div class="card">
+    <table class="cmp-table">
+      <thead><tr><th style="width:50px">문항</th><th>내용</th><th class="sub1">정답</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="text-align:center;font-weight:700">01</td>
+          <td>노인 인구의 특성에 대한 설명으로 옳지 않은 것은?<br>① 다양한 형태의 여가 활동 ② 평균 수명 증가 ③ 노령화 지수·부양비 증가 ④ 서구보다 빠른 고령화 ⑤ 만성 질환 사망원인</td>
+          <td><em>① (노인 여가 활동은 단순·오락 위주)</em></td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:700">02</td>
+          <td>근골격계 변화 (가), 소화기계 변화 (나) 관련 옳은 것은?<br>ㄱ. 추간판 얇아져 키 줄어든다 ㄴ. 구내 건조증 발생 ㄷ. 손톱이 깨지거나 세로선 발달 (피부계)</td>
+          <td><em>④ ㄱ, ㄴ</em> (ㄷ은 피부계)</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:700">03</td>
+          <td>노화로 인한 신체 변화로 옳은 것<br>ㄱ. 골 흡수량&lt;골 생성량(오류) ㄴ. 심박출량 감소→체위성 저혈압 ㄷ. 흉곽 신장성 감소·잔기량 증가 ㄹ. 뇌 질량 유지·장기기억 증가(오류)</td>
+          <td><em>④ ㄴ, ㄷ</em></td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:700">04</td>
+          <td>노인의 심리·사회적 변화로 옳지 않은 것은?</td>
+          <td><em>③ 경제적 독립</em> (노년기에는 의존도 증가)</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:700">05</td>
+          <td>UN 고령화 사회 분류</td>
+          <td><em>① 고령화사회(7~14%) ② 고령사회(14~20%) ③ 초고령사회(20% 이상)</em></td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:700">06</td>
+          <td>감각 기관 변화에 따른 노인 간호로 옳은 것은?<br>①눈 건조→인공누액 ②고음으로 말하기(오류) ③온도감지 증가→온찜질(오류) ④냄새 맡게(오류) ⑤단맛 예민(오류)</td>
+          <td><em>① 눈이 건조하여 인공누액 공급</em></td>
+        </tr>
+        <tr>
+          <td style="text-align:center;font-weight:700">07</td>
+          <td>에릭슨의 노년기 발달 과업: (①)을 가진 사람은 성숙함을 보이며 (②)을 계속하면서 죽음 수용</td>
+          <td><em>① 통합성(integrity) ② 자아 실현</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-title">② 빈출 암기 포인트 🔥</div>
+  <div class="memo-box">
+    <div class="memo-title">✦ 핵심 암기</div>
+    <ul>
+      <li>한국 고령화 사회 진입: <strong>2000년</strong> / 고령사회: <strong>2017년</strong> / 초고령사회: <strong>2026년</strong></li>
+      <li>한국 고령화 소요 연수: 7→14% = <strong>17년</strong> / 14→20% = <strong>9년</strong> (세계 최빠른 수준)</li>
+      <li>노인 만성 질환 1위: <strong>고혈압(56.7%)</strong></li>
+      <li>노화: 골 흡수량 <strong>></strong> 골 생성량 → 골다공증 (반대로 기억하지 않도록!)</li>
+      <li>건반사: 감소하거나 소실 / 무릎 반사: <strong>유지</strong></li>
+      <li>청각 변화: <strong>2,000Hz 이상 고주파</strong>가 가장 먼저 소실</li>
+      <li>미각 변화: 혀 뒤쪽 쓴맛·신맛 기능 <strong>증가</strong> / 앞쪽 단맛 기능 <strong>감소</strong></li>
+      <li>소화기계: 대장 운동력 변화 <strong>없음</strong> (변비는 섬유소·수분·운동 부족 때문)</li>
+      <li>노인 타액: 성인의 약 <strong>1/3</strong> → 구내 건조증</li>
+      <li>수면 변화: REM 수면 <strong>유지</strong> / NREM 수면 <strong>감소</strong></li>
+      <li>노년기 성격: 조심성·경직성·우울성향·의존성 <strong>증가</strong></li>
+      <li>에릭슨 노년기 발달 과업 = <strong>통합성(integrity)</strong></li>
+    </ul>
+  </div>
+
+  <div class="sec-title">③ 자주 틀리는 선지 ⚠</div>
+  <div class="hl red">
+    <div class="hl-title red">틀리기 쉬운 것들</div>
+    <ul class="chk warn">
+      <li>노인 여가 활동은 다양함 → <em class="rd">✗</em> (단순하고 오락 위주)</li>
+      <li>골 흡수량 &lt; 골 생성량이어서 골다공증 → <em class="rd">✗</em> (골 흡수량 &gt; 골 생성량)</li>
+      <li>노화로 대장 운동력 변화 발생 → <em class="rd">✗</em> (대장 운동력 변화는 발생하지 않음)</li>
+      <li>REM 수면 시간이 짧아짐 → <em class="rd">✗</em> (REM은 유지, NREM이 짧아짐)</li>
+      <li>노년기에는 경제적 독립 달성 → <em class="rd">✗</em> (의존도 증가)</li>
+      <li>청각 저주파부터 소실 → <em class="rd">✗</em> (2,000Hz 이상 고주파부터)</li>
+      <li>노인 단맛 기능이 예민해짐 → <em class="rd">✗</em> (단맛 기능 감소, 쓴맛·신맛 증가)</li>
+      <li>손톱 세로선 발달은 근골격계 변화 → <em class="rd">✗</em> (피부계 변화)</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="site-footer">
+  대상자별 간호보조 III단원 · 노인 간호 보조 Part 1 학습자료 | 보건간호과 자율학습용
+</footer>
+<script>
+const tabs=document.querySelectorAll('.tab-btn');
+const pages=document.querySelectorAll('.page');
+const prog=document.getElementById('prog');
+const pct=[20,40,60,80,100];
+function show(i){
+  tabs.forEach((t,j)=>t.classList.toggle('active',i===j));
+  pages.forEach((p,j)=>p.classList.toggle('show',i===j));
+  prog.style.width=pct[i]+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>노인 간호 보조 Part 2 | 보건간호과</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:14px;color:#1a1a1a;background:#f4f0f8;word-break:keep-all;}
+.site-header{background:linear-gradient(135deg,#4a1d96 0%,#7c3aed 55%,#a78bfa 100%);color:#fff;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,0.18);}
+.site-header h1{font-size:20px;font-weight:700;}
+.site-header .sub{font-size:12px;opacity:.85;margin-top:3px;}
+.badge-wrap{display:flex;gap:8px;}
+.header-badge{font-size:11px;font-weight:700;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:4px 12px;color:#fff;}
+.tab-nav{display:flex;background:#fff;border-bottom:2px solid #7c3aed;padding:0 24px;overflow-x:auto;position:sticky;top:0;z-index:100;box-shadow:0 2px 6px rgba(0,0,0,0.07);scrollbar-width:thin;}
+.tab-btn{padding:13px 15px;font-size:13px;font-weight:500;font-family:inherit;color:#666;background:transparent;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;cursor:pointer;white-space:nowrap;transition:all .2s;}
+.tab-btn:hover{color:#7c3aed;background:#f5f3ff;}
+.tab-btn.active{color:#7c3aed;border-bottom-color:#7c3aed;font-weight:700;}
+.tab-btn .num{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;font-size:11px;font-weight:700;background:#7c3aed;color:#fff;border-radius:50%;margin-right:6px;}
+.tab-btn.active .num{background:#4a1d96;}
+.progress-bar{height:3px;background:#e5e7eb;position:sticky;top:48px;z-index:99;}
+.progress-fill{height:100%;background:#7c3aed;transition:width .3s;}
+.page{display:none;padding:20px 24px 40px;max-width:960px;margin:0 auto;}
+.page.show{display:block;}
+.page-title{font-size:17px;font-weight:700;color:#4a1d96;padding:10px 16px;margin-bottom:16px;background:linear-gradient(90deg,#f5f3ff,#fff);border-left:4px solid #a78bfa;border-radius:0 8px 8px 0;}
+.sec-title{font-size:14px;font-weight:700;color:#7c3aed;padding-left:10px;border-left:3px solid #7c3aed;margin:16px 0 8px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;}
+@media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px 16px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.card-title{font-size:13px;font-weight:700;color:#4a1d96;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid #ddd6fe;}
+.card-title.red{color:#991b1b;border-bottom-color:#fecaca;}
+.card-title.blue{color:#1e40af;border-bottom-color:#bfdbfe;}
+.card-title.green{color:#065f46;border-bottom-color:#a7f3d0;}
+.card-title.orange{color:#92400e;border-bottom-color:#fde68a;}
+.hl{border-radius:8px;padding:11px 14px;margin-bottom:10px;}
+.hl.purple{background:#f5f3ff;border:1px solid #ddd6fe;}
+.hl.red{background:#fff1f2;border:1px solid #fecaca;}
+.hl.blue{background:#eff6ff;border:1px solid #bfdbfe;}
+.hl.green{background:#f0fdf4;border:1px solid #a7f3d0;}
+.hl.yellow{background:#fefce8;border:1px solid #fde047;}
+.hl.gray{background:#f9fafb;border:1px solid #e5e7eb;}
+.hl.orange{background:#fff7ed;border:1px solid #fed7aa;}
+.hl-title{font-size:12px;font-weight:700;margin-bottom:6px;color:#4a1d96;}
+.hl-title.red{color:#991b1b;}
+.hl-title.blue{color:#1e40af;}
+.hl-title.green{color:#065f46;}
+.hl-title.orange{color:#92400e;}
+ul.dot{list-style:none;}
+ul.dot li{font-size:13px;line-height:1.85;padding-left:18px;position:relative;color:#222;}
+ul.dot li::before{content:'•';position:absolute;left:0;color:#7c3aed;font-weight:700;}
+ul.dot.red li::before{color:#dc2626;}
+ul.dot.blue li::before{color:#2563eb;}
+ul.dot.green li::before{color:#059669;}
+ul.dot.orange li::before{color:#d97706;}
+ul.chk{list-style:none;}
+ul.chk li{font-size:13px;line-height:1.85;padding-left:20px;position:relative;color:#222;}
+ul.chk li::before{content:'✓';position:absolute;left:0;color:#059669;font-weight:700;}
+ul.chk.warn li::before{content:'⚠';color:#dc2626;font-size:11px;}
+p.body{font-size:13px;line-height:1.85;color:#333;}
+.cmp-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:12px;}
+.cmp-table th{background:#4a1d96;color:#fff;padding:8px 10px;text-align:center;font-weight:700;}
+.cmp-table th.sub1{background:#7c3aed;}
+.cmp-table th.sub2{background:#1e40af;}
+.cmp-table th.sub3{background:#065f46;}
+.cmp-table th.sub4{background:#b45309;}
+.cmp-table td{padding:8px 10px;border:1px solid #e5e7eb;vertical-align:top;line-height:1.7;}
+.cmp-table tr:nth-child(even) td{background:#fafafa;}
+.cmp-table tr:hover td{background:#f5f3ff;}
+.cmp-table .row-hd{background:#ede9fe;font-weight:700;color:#4a1d96;text-align:center;width:100px;}
+.divider{border:none;border-top:1px solid #e5e7eb;margin:14px 0;}
+.full-card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px 18px;margin-bottom:12px;}
+.memo-box{background:linear-gradient(135deg,#4a1d96,#7c3aed);color:#fff;border-radius:10px;padding:14px 16px;margin-bottom:12px;}
+.memo-box .memo-title{font-size:13px;font-weight:700;margin-bottom:8px;opacity:.9;}
+.memo-box ul{list-style:none;}
+.memo-box ul li{font-size:13px;line-height:1.9;padding-left:16px;position:relative;}
+.memo-box ul li::before{content:'→';position:absolute;left:0;opacity:.8;}
+.site-footer{text-align:center;padding:20px;color:#9ca3af;font-size:12px;margin-top:20px;}
+em{font-style:normal;font-weight:700;color:#7c3aed;}
+em.rd{color:#dc2626;}
+em.bl{color:#1d4ed8;}
+em.gr{color:#059669;}
+em.or{color:#d97706;}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div>
+    <h1>👵 노인 간호 보조 학습자료 Part 2</h1>
+    <div class="sub">보건간호과 · 대상자별 간호보조 III단원 | 2022 개정 교육과정</div>
+  </div>
+  <div class="badge-wrap">
+    <div class="header-badge">5 PAGES</div>
+    <div class="header-badge">자율학습용</div>
+  </div>
+</header>
+<div class="progress-bar"><div class="progress-fill" id="prog" style="width:20%"></div></div>
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="show(0)"><span class="num">1</span>영양·안전·운동·수면</button>
+  <button class="tab-btn" onclick="show(1)"><span class="num">2</span>약물·학대·우울·의사소통</button>
+  <button class="tab-btn" onclick="show(2)"><span class="num">3</span>골절·대사증후군·치매</button>
+  <button class="tab-btn" onclick="show(3)"><span class="num">4</span>욕창·망막질환·장기요양</button>
+  <button class="tab-btn" onclick="show(4)"><span class="num">5</span>죽음·단원정리·빈출 암기</button>
+</nav>
+
+<!-- PAGE 1 -->
+<div class="page show" id="p0">
+  <div class="page-title">📌 Page 1 — 영양·안전·운동·수면</div>
+
+  <div class="sec-title">① 노인의 영양 권장량</div>
+  <div class="grid3">
+    <div class="card">
+      <div class="card-title">탄수화물</div>
+      <ul class="dot">
+        <li>총 에너지의 <em>55~65%</em></li>
+        <li>단당류보다 <em>복합 탄수화물</em> 권장 (과일, 야채, 현미)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">단백질</div>
+      <ul class="dot">
+        <li>총 에너지의 <em>7~20%</em></li>
+        <li>소화율은 감퇴, 흡수율은 청장년과 큰 차이 없음</li>
+        <li>과다 섭취 → 칼슘 배설 증가 → <em>골격 손실</em></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">지방</div>
+      <ul class="dot">
+        <li>에너지 섭취량의 <em>20%</em></li>
+        <li>과잉 → 동맥경화·심혈관 질환 발생 증가</li>
+        <li>비타민·무기질: 노년기에도 큰 변화 없음</li>
+        <li>폐경기 이후 여성·남성 노인의 <em>철분 요구량 같음</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">② 영양 문제와 간호 보조</div>
+  <div class="card">
+    <table class="cmp-table">
+      <thead><tr><th style="width:90px">문제</th><th>원인</th><th class="sub1">간호 보조</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="row-hd">연하 곤란</td>
+          <td>식도 운동 변화, 뇌졸중, 침 분비 감소, 의치, 불안</td>
+          <td>묽은 액체보다 <em>농도가 진한 음식</em> 제공 / 소량씩 자주 / 식사 전후 <em>15~30분간 앉기</em> / 편마비 시 마비 <em>없는 쪽</em>으로 음식 넣어줌 / 식사 중 말하지 않도록</td>
+        </tr>
+        <tr>
+          <td class="row-hd">체액 불균형 (탈수)</td>
+          <td>콩팥 기능 저하, 갈증 덜 느낌, 요실금 두려움</td>
+          <td>하루 <em>6~8잔</em> 물 마시기 / 차·주스·우유 등 음료 / 수프·아이스크림·과일 등 수분 많은 음식</td>
+        </tr>
+        <tr>
+          <td class="row-hd">비만</td>
+          <td>65세 이상: 표준체중 20% 초과 또는 BMI ≥ 29</td>
+          <td>식이 제한 + 적당한 운동 병행</td>
+        </tr>
+        <tr>
+          <td class="row-hd">영양 결핍</td>
+          <td>질환, 투약, 알코올, 구강 건강 문제, 식욕 부진, 재정 문제</td>
+          <td>전문가 의뢰, 사회화 증진, 영양 교육, 구강 건조 예방</td>
+        </tr>
+        <tr>
+          <td class="row-hd">변비</td>
+          <td>섬유소·수분 부족, 운동 부족</td>
+          <td>하루 <em>1,500~3,000mL</em> 수분 / 아침 식전 물·과일 주스 / 섬유질 풍부 식품 / TV 시청 줄이고 운동 / 규칙적 배변 습관</td>
+        </tr>
+        <tr>
+          <td class="row-hd">골다공증</td>
+          <td>칼슘 섭취 부족, 흡수율 감소, 칼슘 배설 증가 / 여성: 노화·에스트로겐 부족</td>
+          <td>양질의 단백질 식품 / 폐경기 후 여성 칼슘 권장량 <em>800mg/일</em> / 체중 부하 운동</td>
+        </tr>
+        <tr>
+          <td class="row-hd">심리적 영양 불량증 (FTT)</td>
+          <td>살아야겠다는 의지 감소 + 영양 장애</td>
+          <td>생리적·사회심리적·영적인 면 분석 / 걱정 표현하도록 경청 / 삶에 대한 긍정적 평가 / 자가 간호 동기 유발 / 사회 단체 서비스 연결</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-title">③ 낙상 예방·운동</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title red">낙상 원인</div>
+      <ul class="dot red" style="font-size:12.5px">
+        <li>노화: 시력 감소, 백내장, 보행·조절 기능 장애, 잦은 화장실 출입</li>
+        <li>부적절한 기동성 보장구 사용</li>
+        <li>약물: 항고혈압제·진정제·이뇨제 등 → 현훈·체위성 저혈압·실금</li>
+        <li>잘 맞지 않는 신발·헐거운 의복</li>
+        <li>체위성 저혈압, 허약, 뼈 약화, 운동 실조증</li>
+        <li>젖은 바닥, 어지럽게 널린 물건, 희미한 조명</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title green">운동의 종류</div>
+      <ul class="dot green" style="font-size:12.5px">
+        <li><em class="gr">유산소 운동</em>: 걷기, 자전거 타기, 평영으로 수영 / 걷기 = 심장 부하가 <em>가장 적은</em> 운동</li>
+        <li><em class="gr">근력 강화 운동</em>: 골밀도 높이고 근골격계 기능 개선 / 팔굽혀 펴기, 선 자세로 다리굽혀 펴기, 고정식 자전거 타기, 수중 걷기</li>
+        <li><em class="gr">유연성 운동</em>: 스트레칭 → 유연성 향상, 통증 예방·치료</li>
+        <li><em class="gr">균형 운동</em>: 낙상 예방 / 한 발로 서기, 눈 감고 서기, 태극권, 균형대 운동</li>
+        <li>운동 강도: 개인 최대 능력의 <em>40~85%</em> / 매주 <em>3~5회</em> / 매회 <em>30~40분</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">④ 노인 수면 관리</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">노인 수면 특징</div>
+      <ul class="dot">
+        <li>일찍 자고 일찍 일어남</li>
+        <li>수면량 줄어들고, 총 침상 시간은 길어짐</li>
+        <li>수면 중 자주 깨어남, 잠 들기까지 시간 오래 걸림</li>
+        <li>노화에 따라 <em>REM 수면 감소</em></li>
+        <li>NREM 수면: <em>1단계 증가</em>, 3·4단계 <em>감소</em></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">수면 관리</div>
+      <ul class="chk" style="font-size:12.5px">
+        <li>아침 기상 시간을 <em>일정하게</em></li>
+        <li>카페인 음료(커피·녹차·홍차) 오후 금지</li>
+        <li>금주, 금연</li>
+        <li>저녁의 과식은 숙면 방해</li>
+        <li>공복감 시 따뜻한 우유</li>
+        <li>수면제·진정제 <em>장기 복용 금지</em></li>
+        <li>매일 규칙적·적절한 운동</li>
+        <li>낮잠을 많이 자면 밤잠 설침 → <em>낮잠 삼가기</em></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p1">
+  <div class="page-title">📌 Page 2 — 약물 관리·노인 학대·우울증·의사소통</div>
+
+  <div class="sec-title">① 약물 관리</div>
+  <div class="card">
+    <ul class="dot">
+      <li>노인 인구 대부분은 만성 질환 1가지 이상 → 복용 약 종류 많음 → <em>약물 상호 작용·부작용</em> 위험 증가</li>
+      <li>노화에 따른 신장 기능 저하, 간 기능 감소 → 약의 <em>흡수·분포·대사·배설</em> 신중히 고려</li>
+      <li>동일 약물이라도 청장년과 <em>다른 약리 작용·부작용</em> 나타날 수 있음</li>
+      <li>노인의 기억력 감소 → 약물 복용 시간·방법·보관 등 <em>오용 위험</em></li>
+    </ul>
+    <hr class="divider">
+    <div class="card-title" style="margin-top:4px">노인의 약물 이행을 높이는 방법</div>
+    <ul class="chk" style="font-size:12.5px">
+      <li>약물 복용 횟수를 <em>하루 1회 또는 2회</em>로 처방</li>
+      <li>복용 시간을 <em>식사 후 또는 잠자기 전</em> 등 일상생활에 맞춤</li>
+      <li>보호자에게 약물 이름·부작용 설명</li>
+      <li>약을 담는 용기, 설명서, 약 복용 달력 제공</li>
+      <li>약물 복용의 필요성을 지속적으로 교육</li>
+      <li>의사 처방 없이 살 수 있는 <em>일반 의약품</em> 복용 가능성 고려</li>
+      <li>치매 및 우울증 등 인지 기능 문제에 대해 정기적으로 평가</li>
+    </ul>
+  </div>
+
+  <div class="sec-title">② 노인 학대</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title red">학대 유형 (7가지)</div>
+      <table class="cmp-table" style="margin-top:6px">
+        <thead><tr><th>유형</th><th class="sub1">예시</th></tr></thead>
+        <tbody>
+          <tr><td>신체적 학대</td><td>때림, 꼬집기, 물건 집어던지기, 신체적 구속·감금, 화상 입힘</td></tr>
+          <tr><td>정서적 학대</td><td>욕설·고함, 무시, 비웃거나 조롱, 외출시키지 않기</td></tr>
+          <tr><td>성적 학대</td><td>성 관련 언어 표현·행위, 강제적 성행위</td></tr>
+          <tr><td>경제적 학대</td><td>유언장 허위 작성, 허락 없이 재산 매매·계좌 해약</td></tr>
+          <tr><td>방임</td><td>필요한 의료 처치 받게 하지 않음, 생계비 지원 안 함</td></tr>
+          <tr><td>자기 방임</td><td>노인 스스로 치료 행위 거부, 의·식·주 관련 행위 거부</td></tr>
+          <tr><td>유기</td><td>낯선 장소에 버림, 시설에 맡기고 연락 안 함</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">학대 예방·신고</div>
+      <ul class="dot">
+        <li>노인복지법 — <em>누구든지</em> 노인 학대를 알게 된 때 신고 의무</li>
+        <li>신고 기관: <em>노인 보호 전문 기관</em> 또는 수사 기관</li>
+        <li>미신고 시: <em>300만 원 이하 과태료</em></li>
+        <li>세계 노인 학대 인식의 날: 매년 <em>6월 15일</em></li>
+        <li>한국: KINPEA 조직·활동</li>
+      </ul>
+      <hr class="divider">
+      <div class="card-title" style="margin-top:4px">예방을 위한 접근</div>
+      <ul class="dot">
+        <li><em>노인 개인</em>: 의존성 줄이고 자립심 증대</li>
+        <li><em>가족</em>: 돌봄 부담 경감 지원, 노인 특성 이해</li>
+        <li><em>사회</em>: 법적·제도적·사회복지 서비스 연계</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">③ 우울증 관리</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">우울증 원인·특성</div>
+      <ul class="dot">
+        <li>노인 자살의 <em>주 원인</em></li>
+        <li>남성에 비해 <em>여성</em>이 많음</li>
+        <li>소득이 낮은 사람들, 독거노인: 우울증 위험 높음</li>
+        <li>원인: 신체 기능 저하에 따른 허무감, 역할 감소, 빈곤, 배우자 사망, 고독감</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title green">치료 및 간호</div>
+      <ul class="chk">
+        <li>평소 건강검진 때 우울증 사정</li>
+        <li>즉각적인 치료로 회복 빠를 수 있음</li>
+        <li>정신치료·항우울제: 다양한 정도의 우울증 완화</li>
+        <li>전기 경련 요법: 다른 치료에 반응하지 않는 심각한 우울증에 효과적</li>
+        <li>적절한 영양·규칙적인 운동</li>
+        <li>독거·사회적 고립·열악한 주거·경제적 빈곤·학대·방임 등에 적극 개입</li>
+        <li>사회적 지지 자원·프로그램 참여 연계</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">④ 효과적인 의사소통</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">언어적 의사소통</div>
+      <ul class="dot" style="font-size:12.5px">
+        <li>기술: 경청, 질문, 반영, 공감, 설명, 자기 주장, 유머</li>
+        <li>노인의 관심에 집중, 생각·감정 충분히 듣고 느끼기</li>
+        <li>"아, 예." "그렇군요." 지지적 언어 반응 / 고개 끄덕이기</li>
+        <li>질문 후 생각할 수 있는 시간을 주고 <em>느긋하게</em> 반응 기다림</li>
+        <li>상담 시 질문: 구체적·간결하게, <em>개방적 질문</em> 선택</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">비언어적 의사소통</div>
+      <ul class="dot" style="font-size:12.5px">
+        <li>인지·감각 기능 저하 노인의 비언어적 메시지는 언어적 메시지보다 더 많은 정보 제공</li>
+        <li>적절한 <em>눈 맞춤</em>: 자기 표현 원활 / 과도한 눈 맞춤은 불편감</li>
+        <li>노인 이야기는 대개 반복적·길어지는 경향 → 분산된 초점 요약하고 일관된 방향으로 유도</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p2">
+  <div class="page-title">📌 Page 3 — 골절·대사증후군·치매</div>
+
+  <div class="sec-title">① 골절 (fracture)</div>
+  <div class="card">
+    <div class="grid2">
+      <div>
+        <ul class="dot">
+          <li>외부의 힘에 의해 뼈의 연속성이 완전·불완전하게 소실된 상태</li>
+          <li>노인 골절: <em>낮은 강도의 외상</em>으로 발생, 주로 <em>실내</em>에서 발생</li>
+          <li>취약한 이유: 골다공증으로 뼈 약화, 균형 감각 저하, 낙상 시 보호 반사 기능 두드러지게 약화</li>
+          <li>여성 노인: 골밀도 낮아 주로 <em>대퇴골 근위부</em> 골절 많이 발생</li>
+          <li>고관절 골절 장기 부동 → 폐렴, 뇌졸중, 욕창, 영양 실조 → <em>사망률 크게 증가</em></li>
+        </ul>
+      </div>
+      <div>
+        <div class="card-title green" style="margin-bottom:6px">간호 보조</div>
+        <ul class="chk green" style="font-size:12.5px">
+          <li>주기적으로 골절 부위 피부 상태 살펴 욕창 조기 파악·치료</li>
+          <li>조명 밝게, 걸려 넘어질 물건 치우기, 욕실 손잡이 설치, 매트 깔기, 계단 이동 시 난간 잡기</li>
+          <li>자전거 타기, 걷기, 스트레칭 등 규칙적 운동</li>
+          <li>석고 붕대: 사지 <em>24~48시간</em> 상승 → 부종 예방 / 손가락·발가락 자주 움직여 정맥 귀환 촉진</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-title">② 대사 증후군 (metabolic syndrome)</div>
+  <div class="full-card">
+    <p class="body" style="margin-bottom:8px"><em>복부 비만, 인슐린 저항성</em>으로 인한 혈당 상승, 고혈압, 고지혈증 등 심혈관 질환의 주요 위험인자를 동시에 가진 질환군</p>
+    <div class="card-title" style="margin-bottom:8px">대사 증후군 진단 기준 (5개 항목 중 복부 비만 필수 + 2개 이상)</div>
+    <table class="cmp-table">
+      <thead><tr><th>항목</th><th class="sub1">기준</th></tr></thead>
+      <tbody>
+        <tr><td><em>복부 비만</em> (필수)</td><td>남성: 허리 둘레 36인치(90cm) 이상 / 여성: 34인치(85cm) 이상</td></tr>
+        <tr><td>고중성 지방 혈증</td><td>중성 지방 150mg/dL 이상 또는 치료제 복용</td></tr>
+        <tr><td>낮은 HDL-콜레스테롤</td><td>남성: 40mg/dL 미만 / 여성: 50mg/dL 미만 또는 치료제 복용</td></tr>
+        <tr><td>고혈압</td><td>수축기/이완기 혈압 130/80mmHg 이상 또는 고혈압 약물 복용</td></tr>
+        <tr><td>고혈당</td><td>공복 시 혈당 100mg/dL 이상 또는 당뇨 약물 복용</td></tr>
+      </tbody>
+    </table>
+    <div class="card-title" style="margin-bottom:6px;margin-top:8px">치료 및 간호 보조</div>
+    <div class="grid2">
+      <ul class="chk" style="font-size:12.5px">
+        <li>지방: 총 칼로리의 <em>25%</em> / 포화지방·트랜스지방 줄이기 / 불포화지방 적당히 유지</li>
+        <li>콜레스테롤 <em>200mg 이하</em></li>
+        <li>혈압 조절 위해 <em>염분 제한</em></li>
+      </ul>
+      <ul class="chk" style="font-size:12.5px">
+        <li>혈당 조절 위해 단당류 대신 <em>복합 탄수화물(다당류)</em></li>
+        <li>운동 및 신체 활동 증가 (심혈관 질환 있으면 운동 전 검사)</li>
+        <li>하루 <em>2잔 이상</em> 음주 금지 / 반드시 금연</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">③ 치매 (dementia)</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">정의·원인·증상</div>
+      <ul class="dot">
+        <li>여러 가지 원인의 뇌 손상에 의해 인지 기능을 상실하여 일상생활 수행 불능</li>
+        <li><em>의식은 흐려지지 않는 것</em>이 특징</li>
+        <li><em>알츠하이머 병</em>: 원인 미상의 신경 퇴행성 질환 → <em>50~60%</em></li>
+        <li><em>혈관성 치매</em>: 뇌 혈액 순환 장애 → <em>20~30%</em></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">알츠하이머 vs 혈관성 치매</div>
+      <table class="cmp-table">
+        <thead><tr><th></th><th class="sub1">알츠하이머</th><th class="sub2">혈관성 치매</th></tr></thead>
+        <tbody>
+          <tr><td class="row-hd">발병·악화</td><td><em>점진적</em></td><td>급작스러운 발병, 계단식 악화</td></tr>
+          <tr><td class="row-hd">초기 증상</td><td><em>기억력 장애</em>가 두드러짐</td><td>인지 기능의 심한 장애 (실행 기능, 언어 장애)</td></tr>
+          <tr><td class="row-hd">신경학적 이상</td><td>병이 상당히 진행한 후</td><td><em>초기부터 동반</em> (걸음걸이 불안정, 요실금)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">치매 환자 돌봄 · 의사소통</div>
+    <div class="grid2">
+      <div>
+        <ul class="chk" style="font-size:12.5px">
+          <li>대상자의 안전을 위협하는 요인 확인·제거</li>
+          <li>안전하고 익숙하며 단순한 환경 조성</li>
+          <li>일과표 만들어 일관되고 반복적인 생활</li>
+          <li>일상생활에서 잔존 기능 최대한 활용</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="chk" style="font-size:12.5px">
+          <li>칭찬·격려, 자존심 건드리지 않기</li>
+          <li>천천히 치매 환자 속도에 맞추기</li>
+          <li>쉬운 단어, 짧은 문장, 명확하게</li>
+          <li>틀렸다고 지적하지 않음 / 한번에 하나씩</li>
+          <li>대답 충분히 기다리기</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p3">
+  <div class="page-title">📌 Page 4 — 욕창·망막질환·장기요양 서비스</div>
+
+  <div class="sec-title">① 욕창 (pressure sore)</div>
+  <div class="card">
+    <p class="body" style="margin-bottom:8px">오랫동안 뼈 돌출 부위와 침대·의자 간에 압박을 받아 생긴 <em>국소적인 연조직 괴사</em></p>
+    <div class="card-title" style="margin-bottom:8px">원인</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+      <span style="background:#ede9fe;color:#4a1d96;font-size:12px;font-weight:700;padding:3px 10px;border-radius:12px">부동</span>
+      <span style="background:#ede9fe;color:#4a1d96;font-size:12px;font-weight:700;padding:3px 10px;border-radius:12px">영양 불량</span>
+      <span style="background:#ede9fe;color:#4a1d96;font-size:12px;font-weight:700;padding:3px 10px;border-radius:12px">습기</span>
+      <span style="background:#ede9fe;color:#4a1d96;font-size:12px;font-weight:700;padding:3px 10px;border-radius:12px">마찰력</span>
+      <span style="background:#ede9fe;color:#4a1d96;font-size:12px;font-weight:700;padding:3px 10px;border-radius:12px">응전력</span>
+      <span style="background:#ede9fe;color:#4a1d96;font-size:12px;font-weight:700;padding:3px 10px;border-radius:12px">지각 감각 손상</span>
+    </div>
+    <table class="cmp-table">
+      <thead><tr><th style="width:60px">단계</th><th class="sub1">특성</th><th class="sub2">욕창 관리</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="row-hd">1단계</td>
+          <td>상피층에 국한된 급성 염증, 불규칙한 홍반·표재성 궤양, 주로 뼈 튀어나온 부위</td>
+          <td>압력·습기 피하기 / 국소 피부 관리 집중</td>
+        </tr>
+        <tr>
+          <td class="row-hd">2단계</td>
+          <td>진피층까지 확산, 수포·박리 또는 얕은 궤양, 초기 섬유화·변색</td>
+          <td>상처가 심해지지 않게 / 국소 피부 관리</td>
+        </tr>
+        <tr>
+          <td class="row-hd">3단계</td>
+          <td>피하 지방까지 침범하는 피부 전층, 피부가 아래로 잠식, 괴사 조직·악취</td>
+          <td>괴사 조직 제거 / 상처 깨끗이 보호 / 필요 시 세균 배양 검사·국소 항생제</td>
+        </tr>
+        <tr>
+          <td class="row-hd">4단계</td>
+          <td>근막을 지나 확대되어 뼈가 보임, 골수염·패혈성 관절염 가능</td>
+          <td>조직 생검 / 봉와직염·골수염에 전신 항생제 / 수술적 치료 고려</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="card-title" style="margin-top:8px;margin-bottom:6px">욕창 예방 관리 핵심</div>
+    <div class="grid2">
+      <ul class="chk" style="font-size:12.5px">
+        <li>뼈 돌출 부위가 바닥에 직접 닿지 않게</li>
+        <li>발뒤꿈치 베개나 쿠션으로 올리기</li>
+        <li>침대 머리 부분 최소한으로 올리기 (응전력 감소)</li>
+        <li><em>1~2시간마다 체위 변경</em></li>
+      </ul>
+      <ul class="chk warn" style="font-size:12.5px">
+        <li><em class="rd">도넛형 쿠션 사용 금지</em> (정맥충혈·부종 유발 → 욕창 위험)</li>
+        <li>뜨거운 물·과도한 피부 마찰 금지</li>
+        <li><em class="rd">뼈 돌출 부위 마사지 금지</em></li>
+        <li>요실금 시 즉시 세척, 수분 차단 크림, 흡수 패드 사용</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">② 망막 질환 3가지</div>
+  <div class="grid3">
+    <div class="card">
+      <div class="card-title">노인성 황반 변성</div>
+      <ul class="dot" style="font-size:12.5px">
+        <li>황반 기능 저하 → 시력 저하·상실</li>
+        <li><em>여성</em>에게 더 많이 발생</li>
+        <li>65세 이상 시력 소실의 가장 흔한 원인</li>
+        <li>종류: <em>건성</em>(90%, 서서히 진행) / <em>습성</em>(빠르고 심각)</li>
+        <li>증상: 변색증(물체 색 이상), 변시증(굽어 보임), 시야 가운데 흐림</li>
+        <li>고농도 황산화제·아연 음식 → 진행 늦출 수 있음 (회복 안 됨)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">당뇨성 망막 병증</div>
+      <ul class="dot" style="font-size:12.5px">
+        <li>당뇨로 망막 미세 혈관 손상</li>
+        <li>비정상적인 망막 혈관의 증식</li>
+        <li>증상: 초기 증상 없음 → 중심 시력 손상 진행 → 망막 박리 → <em>실명</em></li>
+        <li>조기 발견이 중요</li>
+        <li>당뇨 진단 환자: 매년 <em>안과·내과 검진</em></li>
+        <li>치료: 혈당·혈압 조절, 금연, 레이저 광응고술</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">망막 박리</div>
+      <ul class="dot" style="font-size:12.5px">
+        <li>노화로 유리체가 망막으로부터 밀려나고 위축 → 망막 찢어짐 → 분리</li>
+        <li>원인: 노화, 외상, 고도근시, 당뇨병, 고혈압</li>
+        <li>증상: 통증 없음 / 광시증(빛 번쩍) / 비문증·날파리증 / 시야 그림자·커튼</li>
+        <li>치료: 약물, 레이저, 수술 (대부분 수술 필수)</li>
+        <li>수술: 냉응고술, 레이저 광응고술, 망막 수술</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title">③ 장기 요양 서비스</div>
+  <div class="card">
+    <p class="body" style="margin-bottom:8px">고령이나 노인성 질병(치매·뇌혈관 질환·파킨슨병 등)으로 6개월 이상 다른 사람의 도움 없이 일상생활이 어려운 대상자에게 제공</p>
+    <div class="grid2">
+      <div>
+        <ul class="dot">
+          <li><em>시설 급여</em> (본인 부담금 20%): 노인 요양 시설, 노인 요양 공동 생활 가정</li>
+          <li><em>재가 급여</em> (본인 부담금 15%): 방문 요양, 방문 간호, 방문 목욕, 주·야간 보호, 단기 보호</li>
+          <li><em>가족 요양비</em>: 매월 15만 원 지급</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="dot">
+          <li>이용 대상: 장기 요양이 필요한 <em>만 65세 이상</em> 또는 65세 미만 노인성 질병 보유자</li>
+          <li>등급 판정: <em>1~5등급</em></li>
+          <li>신청: 국민건강보험공단 지역별 지사</li>
+          <li>문의: ☏ 1577-1000 / 치매 상담 ☏ 1899-9988</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p4">
+  <div class="page-title">📌 Page 5 — 죽음·단원정리·빈출 암기</div>
+
+  <div class="sec-title">① 퀴블러 로스의 죽음 5단계</div>
+  <div class="card">
+    <table class="cmp-table">
+      <thead><tr><th style="width:60px">단계</th><th class="sub1">특징</th><th class="sub2">간호 중재</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="row-hd">1. 부정</td>
+          <td>자신의 죽음이 임박했다는 사실 부인 / 오진이라고 생각 / 사실을 의논하기 원하면서도 현실 부정 반복</td>
+          <td>개인의 반응 수용 / 열린 마음으로 정직하게 / 개방된 분위기 제공 / 정보 내면화·방어 시간 허용</td>
+        </tr>
+        <tr>
+          <td class="row-hd">2. 분노</td>
+          <td>주위 사람이 분노의 대상이 됨 / "모두 옳지 않다"는 표현</td>
+          <td>환자·가족 불편감 완화 / 환자 행동 이해 돕기 / 분노에 화내거나 모욕적으로 반응하지 않기 / 감정 표출을 당연한 과정으로 수용</td>
+        </tr>
+        <tr>
+          <td class="row-hd">3. 타협</td>
+          <td>생의 연장과 관련, 비밀리에 신과 이루어지거나 기도를 통해 표현</td>
+          <td>타협이 무시될 경우 실망·죄의식 느낄 수 있음을 간과하지 않기</td>
+        </tr>
+        <tr>
+          <td class="row-hd">4. 우울</td>
+          <td>기능 상실·증상 악화 경험 / 노인은 여러 상실 경험으로 우울에 잘 빠짐</td>
+          <td>손을 잡고 말없이 앉아 있기 (활발한 대화보다 의미 있음) / 조용하게 명상하도록 함께 / 환자가 우울 극복하여 수용·평온 상태에서 죽음에 다가갈 수 있도록</td>
+        </tr>
+        <tr>
+          <td class="row-hd">5. 수용</td>
+          <td>안정을 찾고 죽음이라는 용어 사용 / 평화로워 보임 (행복한 상태 아님)</td>
+          <td>비언어적 의사 소통이 유용 (단순한 접촉, 위로, 함께 있기) / 희망은 임종 과정 모든 단계에 나타날 수 있음</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="hl yellow" style="font-size:12.5px">
+      <em>생애 말기</em>: 현대 의학으로 통상의 치료를 해도 치유되지 않고 <em>6개월 이내</em>에 죽음이 다가올 것으로 예상되는 상태<br>
+      <em>사전 연명 의료 의향서(ACD)</em>: 환자가 미리 작성한 서면 진술서 (장점: 환자 권리 보호, 가족 결정 부담 감소, 만족도 향상)
+    </div>
+  </div>
+
+  <div class="sec-title">② 단원평가 해설</div>
+  <div class="card">
+    <table class="cmp-table">
+      <thead><tr><th>문항</th><th>내용</th><th class="sub1">정답</th></tr></thead>
+      <tbody>
+        <tr><td>01</td><td>퀴블러 로스 5단계 (부정 → ? → 타협): 가) 단계</td><td><em>② ㄴ (우울): 말이 없어지고 슬퍼서 울기도 함</em></td></tr>
+        <tr><td>02</td><td>간병인이 욕설·고함·무시·대답 안 해줌 → 노인 학대 유형</td><td><em>⑤ 정서적 학대</em></td></tr>
+        <tr><td>03</td><td>노인의 영양 관리로 옳은 것은?</td><td><em>⑤ 기초 대사량이 낮아서 젊은이보다 총 섭취 열량을 줄인다</em></td></tr>
+        <tr><td>04</td><td>낙상 예방을 위한 간호 보조로 옳은 것은?</td><td><em>④ 바닥에 흘린 물을 즉시 닦는다</em></td></tr>
+        <tr><td>05</td><td>노인의 수면 관리로 옳은 것은?</td><td><em>① 아침 기상 시간을 일정하게 한다</em></td></tr>
+        <tr><td>06</td><td>골밀도 높이고 근골격계 기능 개선 — 적합하지 않은 운동은?</td><td><em>① 눈 감고 서기</em> (균형 운동에 해당, 근력 강화 운동이 아님)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-title">③ 빈출 암기 포인트 🔥</div>
+  <div class="memo-box">
+    <div class="memo-title">✦ 핵심 암기</div>
+    <ul>
+      <li>노인 탄수화물 권장: 총 에너지의 <strong>55~65%</strong> / 지방: <strong>20%</strong> / 단백질: <strong>7~20%</strong></li>
+      <li>연하 곤란: 묽은 것보다 <strong>농도가 진한 음식</strong> / 식사 전후 <strong>15~30분 앉기</strong></li>
+      <li>노인 변비 수분: 하루 <strong>1,500~3,000mL</strong></li>
+      <li>골다공증 폐경 후 여성 칼슘: <strong>800mg/일</strong></li>
+      <li>노인 비만: 표준체중 <strong>20%</strong> 초과 또는 BMI ≥ <strong>29</strong></li>
+      <li>욕창 체위 변경: <strong>1~2시간</strong>마다 / 도넛형 쿠션 <strong>금지</strong></li>
+      <li>욕창 석고 붕대 사지 상승: <strong>24~48시간</strong></li>
+      <li>노인 학대 미신고 과태료: <strong>300만 원 이하</strong></li>
+      <li>세계 노인 학대 인식의 날: 매년 <strong>6월 15일</strong></li>
+      <li>대사 증후군: 복부 비만(필수) + 나머지 4개 항목 중 <strong>2개 이상</strong></li>
+      <li>알츠하이머 초기 = <strong>기억력 장애</strong> / 혈관성 치매 초기 = <strong>인지 기능 장애 + 신경학적 이상</strong></li>
+      <li>퀴블러 로스 5단계: <strong>부정→분노→타협→우울→수용</strong></li>
+      <li>생애 말기 = <strong>6개월 이내</strong> 사망 예상</li>
+      <li>장기 요양 시설 급여 본인 부담금: <strong>20%</strong> / 재가 급여: <strong>15%</strong></li>
+    </ul>
+  </div>
+
+  <div class="sec-title">④ 자주 틀리는 선지 ⚠</div>
+  <div class="hl red">
+    <div class="hl-title red">틀리기 쉬운 것들</div>
+    <ul class="chk warn">
+      <li>도넛형 쿠션 욕창 예방에 효과적 → <em class="rd">✗</em> (정맥충혈·부종 유발 → 욕창 위험 커짐)</li>
+      <li>욕창 시 뼈 돌출 부위 마사지 → <em class="rd">✗</em> (마사지 금지)</li>
+      <li>노인 연하 곤란: 묽은 액체 음식 제공 → <em class="rd">✗</em> (농도가 진한 음식 제공)</li>
+      <li>노인은 총 수면 시간이 늘어남 → <em class="rd">✗</em> (수면량은 줄어들고 총 침상 시간은 길어짐)</li>
+      <li>퀴블러 로스 타협 단계 = 우울한 상태 → <em class="rd">✗</em> (생의 연장을 기원하는 단계)</li>
+      <li>수용 = 행복한 상태 → <em class="rd">✗</em> (평화로워 보이지만 행복한 상태를 의미하지 않음)</li>
+      <li>눈 감고 서기 = 근력 강화 운동 → <em class="rd">✗</em> (균형 운동에 해당)</li>
+      <li>알츠하이머 초기에 신경학적 이상 동반 → <em class="rd">✗</em> (혈관성 치매가 초기부터 동반)</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="site-footer">
+  대상자별 간호보조 III단원 · 노인 간호 보조 Part 2 학습자료 | 보건간호과 자율학습용
+</footer>
+<script>
+const tabs=document.querySelectorAll('.tab-btn');
+const pages=document.querySelectorAll('.page');
+const prog=document.getElementById('prog');
+const pct=[20,40,60,80,100];
+function show(i){
+  tabs.forEach((t,j)=>t.classList.toggle('active',i===j));
+  pages.forEach((p,j)=>p.classList.toggle('show',i===j));
+  prog.style.width=pct[i]+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
